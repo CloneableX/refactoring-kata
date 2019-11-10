@@ -14,8 +14,8 @@ public class Item {
         this.quality = quality;
     }
 
-   @Override
-   public String toString() {
+    @Override
+    public String toString() {
         return this.name + ", " + this.sellIn + ", " + this.quality;
     }
 
@@ -31,24 +31,12 @@ public class Item {
         return false;
     }
 
-    void updateQualityAfterSellIn() {
-        if (sellIn < 0) {
-            if (!isArgedBrie()) {
-                if (!isBackstagePasses()) {
-                    if (quality > 0) {
-                        if (!isSulfuras()) {
-                            quality = quality - 1;
-                        }
-                    }
-                } else {
-                    quality = 0;
-                }
-            } else {
-                if (quality < 50) {
-                    quality = quality + 1;
-                }
-            }
+    protected void updateQualityAfterSellIn() {
+        if (quality <= 0) {
+            return;
         }
+
+        quality = quality - 1;
     }
 
     void updateQuality() {
@@ -80,9 +68,7 @@ public class Item {
         }
     }
 
-    void updateSellIn() {
-        if (!isSulfuras()) {
-            sellIn = sellIn - 1;
-        }
+    protected void updateSellIn() {
+        sellIn = sellIn - 1;
     }
 }

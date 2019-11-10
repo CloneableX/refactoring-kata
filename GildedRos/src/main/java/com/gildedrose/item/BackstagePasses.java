@@ -11,4 +11,9 @@ public class BackstagePasses extends Item {
     protected boolean isBackstagePasses() {
         return true;
     }
+
+    @Override
+    protected void updateQualityAfterSellIn() {
+        quality = 0;
+    }
 }

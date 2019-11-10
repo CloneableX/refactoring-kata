@@ -11,7 +11,10 @@ class GildedRose {
         for (Item item : items) {
             item.updateQuality();
             item.updateSellIn();
-            item.updateQualityAfterSellIn();
+
+            if (item.sellIn < 0) {
+                item.updateQualityAfterSellIn();
+            }
         }
     }
 

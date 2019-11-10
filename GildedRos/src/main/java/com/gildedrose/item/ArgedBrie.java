@@ -11,4 +11,11 @@ public class ArgedBrie extends Item {
     protected boolean isArgedBrie() {
         return true;
     }
+
+    @Override
+    protected void updateQualityAfterSellIn() {
+        if (quality < 50) {
+            quality = quality + 1;
+        }
+    }
 }
