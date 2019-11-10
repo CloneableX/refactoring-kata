@@ -30,6 +30,5 @@ public class BackstagePasses extends Item {
                 quality = quality + 1;
             }
         }
-        return;
     }
 }
