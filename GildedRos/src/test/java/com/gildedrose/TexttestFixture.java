@@ -1,5 +1,8 @@
 package com.gildedrose;
 
+import com.gildedrose.item.ArgedBrie;
+import com.gildedrose.item.BackstagePasses;
+import com.gildedrose.item.Sulfuras;
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
 import java.io.PrintStream;
@@ -15,17 +18,17 @@ public class TexttestFixture {
         PrintStream printStream = new PrintStream(out);
         printStream.println("OMGHAI!");
 
-        Item[] items = new Item[] {
+        Item[] items = new Item[]{
                 new Item("+5 Dexterity Vest", 10, 20), //
-                new Item("Aged Brie", 2, 0), //
+                new ArgedBrie(2, 0), //
                 new Item("Elixir of the Mongoose", 5, 7), //
-                new Item("Sulfuras, Hand of Ragnaros", 0, 80), //
-                new Item("Sulfuras, Hand of Ragnaros", -1, 80),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 15, 20),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 10, 49),
-                new Item("Backstage passes to a TAFKAL80ETC concert", 5, 49),
+                new Sulfuras(0, 80), //
+                new Sulfuras(-1, 80),
+                new BackstagePasses(15, 20),
+                new BackstagePasses(10, 49),
+                new BackstagePasses(5, 49),
                 // this conjured item does not work properly yet
-                new Item("Conjured Mana Cake", 3, 6) };
+                new Item("Conjured Mana Cake", 3, 6)};
 
         GildedRose app = new GildedRose(items);
 
