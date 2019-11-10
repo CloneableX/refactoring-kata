@@ -8,12 +8,28 @@ public class BackstagePasses extends Item {
     }
 
     @Override
-    protected boolean isBackstagePasses() {
-        return true;
+    protected void updateQualityAfterSellIn() {
+        quality = 0;
     }
 
     @Override
-    protected void updateQualityAfterSellIn() {
-        quality = 0;
+    protected void updateQuality() {
+        if (quality >= 50) {
+            return;
+        }
+        quality = quality + 1;
+
+        if (sellIn < 11) {
+            if (quality < 50) {
+                quality = quality + 1;
+            }
+        }
+
+        if (sellIn < 6) {
+            if (quality < 50) {
+                quality = quality + 1;
+            }
+        }
+        return;
     }
 }
