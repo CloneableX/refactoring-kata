@@ -9,12 +9,16 @@ class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            item.updateQuality();
-            item.updateSellIn();
+            updateItem(item);
+        }
+    }
 
-            if (item.sellIn < 0) {
-                item.updateQualityAfterSellIn();
-            }
+    private void updateItem(Item item) {
+        item.updateQuality();
+        item.updateSellIn();
+
+        if (item.sellIn < 0) {
+            item.updateQualityAfterSellIn();
         }
     }
 
