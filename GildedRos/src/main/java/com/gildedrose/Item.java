@@ -20,22 +20,26 @@ public class Item {
     }
 
     protected void updateQualityAfterSellIn() {
-        if (quality > 0) {
-            decrementQuality();
-        }
+        decrementQuality();
     }
 
     private void decrementQuality() {
-        quality = quality - 1;
+        if (quality > 0) {
+            quality = quality - 1;
+        }
     }
 
     protected void updateQuality() {
-        if (quality > 0) {
-            decrementQuality();
-        }
+        decrementQuality();
     }
 
     protected void updateSellIn() {
         sellIn = sellIn - 1;
+    }
+
+    protected void incrementQuality() {
+        if (quality < 50) {
+            quality = quality + 1;
+        }
     }
 }

@@ -9,16 +9,12 @@ public class ArgedBrie extends Item {
 
     @Override
     protected void updateQualityAfterSellIn() {
-        if (quality < 50) {
-            quality = quality + 1;
-        }
+        incrementQuality();
     }
 
     @Override
     protected void updateQuality() {
-        if (quality >= 50) {
-            return;
-        }
-        quality = quality + 1;
+        incrementQuality();
     }
+
 }
