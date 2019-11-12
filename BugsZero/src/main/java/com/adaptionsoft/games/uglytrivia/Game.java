@@ -13,8 +13,6 @@ public class Game {
 
     ArrayList<String> players = new ArrayList<>();
     Player[] newPlayers = new Player[6];
-    int[] purses = new int[6];
-    boolean[] inPenaltyBox = new boolean[6];
 
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
@@ -44,18 +42,17 @@ public class Game {
     public void initPlayer(String playerName) {
         players.add(playerName);
         newPlayers[howManyPlayers()] = new Player();
-        purses[howManyPlayers()] = 0;
 
         System.out.println(playerName + " was added");
-        System.out.println("They are player number " + players.size());
+        System.out.println("They are player number " + getPlayerSize());
     }
 
     public int howManyPlayers() {
-        return players.size();
+        return getPlayerSize();
     }
 
     public void roll(int roll) {
-        System.out.println(players.get(currentPlayer) + " is the current player");
+        System.out.println(getCurrentPlayer() + " is the current player");
         System.out.println("They have rolled a " + roll);
 
         if (!inPenaltyBox()) {
@@ -64,13 +61,13 @@ public class Game {
         }
 
         if (roll % 2 == 0) {
-            System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
+            System.out.println(getCurrentPlayer() + " is not getting out of the penalty box");
             isGettingOutOfPenaltyBox = false;
             return;
         }
         isGettingOutOfPenaltyBox = true;
 
-        System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
+        System.out.println(getCurrentPlayer() + " is getting out of the penalty box");
         movePlayerAndAskQuestion(roll);
     }
 
@@ -81,7 +78,7 @@ public class Game {
 
     private void movePlayer(int roll) {
         newPlayers[currentPlayer].move(roll);
-        System.out.println(players.get(currentPlayer)
+        System.out.println(getCurrentPlayer()
                 + "'s new location is "
                 + getCurrentPlace());
     }
@@ -127,10 +124,10 @@ public class Game {
     public boolean wasCorrectlyAnswered() {
         if (!inPenaltyBox()) {
             System.out.println("Answer was corrent!!!!");
-            purses[currentPlayer]++;
-            System.out.println(players.get(currentPlayer)
+            incrementPurse();
+            System.out.println(getCurrentPlayer()
                     + " now has "
-                    + purses[currentPlayer]
+                    + getCurrentPurse()
                     + " Gold Coins.");
 
             boolean winner = didPlayerWin();
@@ -149,10 +146,10 @@ public class Game {
         System.out.println("Answer was correct!!!!");
         currentPlayer++;
         initCurrentPlayer();
-        purses[currentPlayer]++;
-        System.out.println(players.get(currentPlayer)
+        incrementPurse();
+        System.out.println(getCurrentPlayer()
                 + " now has "
-                + purses[currentPlayer]
+                + getCurrentPurse()
                 + " Gold Coins.");
 
         return didPlayerWin();
@@ -160,8 +157,7 @@ public class Game {
 
     public boolean wrongAnswer() {
         System.out.println("Question was incorrectly answered");
-        System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
-        inPenaltyBox[currentPlayer] = true;
+        System.out.println(getCurrentPlayer() + " was sent to the penalty box");
         newPlayers[currentPlayer].inPenaltyBox = true;
 
         currentPlayer++;
@@ -171,11 +167,11 @@ public class Game {
 
 
     private boolean didPlayerWin() {
-        return !(purses[currentPlayer] == 6);
+        return !(getCurrentPurse() == 6);
     }
 
     private void initCurrentPlayer() {
-        if (currentPlayer == players.size()) currentPlayer = 0;
+        if (currentPlayer == getPlayerSize()) currentPlayer = 0;
     }
 
     private String createSportsQuestion(int index) {
@@ -200,5 +196,21 @@ public class Game {
 
     private boolean inPenaltyBox() {
         return newPlayers[currentPlayer].inPenaltyBox;
+    }
+
+    private int getCurrentPurse() {
+        return newPlayers[currentPlayer].purse;
+    }
+
+    private void incrementPurse() {
+        newPlayers[currentPlayer].purse = getCurrentPurse() + 1;
+    }
+
+    private String getCurrentPlayer() {
+        return players.get(currentPlayer);
+    }
+
+    private int getPlayerSize() {
+        return players.size();
     }
 }
