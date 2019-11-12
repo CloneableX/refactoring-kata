@@ -12,7 +12,7 @@ public class Game {
     public static final String rock = "Rock";
 
     int playerCounter = 0;
-    ArrayList<Player> playerList = new ArrayList<>();
+    ArrayList<Player> players = new ArrayList<>();
 
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
@@ -31,7 +31,7 @@ public class Game {
         }
 
         for (int i = 0; i < 6; i++) {
-            playerList.add(new Player(""));
+            players.add(new Player(""));
         }
     }
 
@@ -40,7 +40,7 @@ public class Game {
     }
 
     public void initPlayer(String playerName) {
-        playerList.set(getPlayersSize(), new Player(playerName));
+        players.set(getPlayersSize(), new Player(playerName));
         playerCounter++;
 
         System.out.println(playerName + " was added");
@@ -64,6 +64,7 @@ public class Game {
         isGettingOutOfPenaltyBox = true;
 
         System.out.println(getCurrentPlayerName() + " is getting out of the penalty box");
+
         movePlayerAndAskQuestion(roll);
     }
 
@@ -165,7 +166,7 @@ public class Game {
     }
 
     private String getCurrentPlayerName() {
-        return playerList.get(currentPlayer).name;
+        return players.get(currentPlayer).name;
     }
 
     private int getPlayersSize() {
@@ -177,6 +178,6 @@ public class Game {
     }
 
     private Player getCurrentPlayer() {
-        return playerList.get(currentPlayer);
+        return players.get(currentPlayer);
     }
 }
