@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
-    private final String pop = "Pop";
-    private final String science = "Science";
-    private final String sports = "Sports";
-    private final String rock = "Rock";
+    public static final String pop = "Pop";
+    public static final String science = "Science";
+    public static final String sports = "Sports";
+    public static final String rock = "Rock";
 
     ArrayList<Player> players = new ArrayList<>();
     ArrayList<Player> playerList = new ArrayList<>();

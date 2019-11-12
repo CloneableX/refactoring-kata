@@ -1,6 +1,6 @@
 package com.adaptionsoft.games.trivia;
 
-import static com.adaptionsoft.games.question.Question.*;
+import static com.adaptionsoft.games.uglytrivia.Game.*;
 
 public class Player {
     private int place = 0;
