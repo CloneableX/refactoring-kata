@@ -55,7 +55,7 @@ public class Game {
         System.out.println(getCurrentPlayerName() + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (!inPenaltyBox()) {
+        if (!getCurrentPlayer().inPenaltyBox()) {
             movePlayerAndAskQuestion(roll);
             return;
         }
@@ -93,7 +93,7 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
-        if (!inPenaltyBox()) {
+        if (!getCurrentPlayer().inPenaltyBox()) {
             System.out.println("Answer was corrent!!!!");
             incrementPurse();
             System.out.println(getCurrentPlayerName()
@@ -129,7 +129,7 @@ public class Game {
     public boolean wrongAnswer() {
         System.out.println("Question was incorrectly answered");
         System.out.println(getCurrentPlayerName() + " was sent to the penalty box");
-        intoPenaltyBox();
+        getCurrentPlayer().intoPenaltyBox();
 
         incrementCurrentPlayer();
         rebackCurrentPlayer();
@@ -160,10 +160,6 @@ public class Game {
         return "Rock Question " + index;
     }
 
-    private boolean inPenaltyBox() {
-        return getCurrentPlayer().inPenaltyBox;
-    }
-
     private int getCurrentPurse() {
         return getCurrentPlayer().purse;
     }
@@ -182,10 +178,6 @@ public class Game {
 
     private int incrementCurrentPlayer() {
         return currentPlayer++;
-    }
-
-    private void intoPenaltyBox() {
-        getCurrentPlayer().inPenaltyBox = true;
     }
 
     private Player getCurrentPlayer() {

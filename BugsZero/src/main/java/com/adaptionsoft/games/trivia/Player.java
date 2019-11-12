@@ -4,7 +4,7 @@ import static com.adaptionsoft.games.question.Question.*;
 
 public class Player {
     private int place = 0;
-    public boolean inPenaltyBox = false;
+    private boolean inPenaltyBox = false;
     public int purse = 0;
     public String name;
 
@@ -47,5 +47,13 @@ public class Player {
 
         System.out.println("The category is " + category);
         return category;
+    }
+
+    public boolean inPenaltyBox() {
+        return inPenaltyBox;
+    }
+
+    public void intoPenaltyBox() {
+        inPenaltyBox = true;
     }
 }
