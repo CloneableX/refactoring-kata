@@ -11,7 +11,7 @@ public class Game {
     public static final String sports = "Sports";
     public static final String rock = "Rock";
 
-    ArrayList<Player> players = new ArrayList<>();
+    int playerCounter = 0;
     ArrayList<Player> playerList = new ArrayList<>();
 
     LinkedList<String> popQuestions = new LinkedList<>();
@@ -36,19 +36,15 @@ public class Game {
     }
 
     public boolean isPlayable() {
-        return (howManyPlayers() >= 2);
+        return (getPlayersSize() >= 2);
     }
 
     public void initPlayer(String playerName) {
-        playerList.set(howManyPlayers(), new Player(playerName));
-        players.add(new Player(playerName));
+        playerList.set(getPlayersSize(), new Player(playerName));
+        playerCounter++;
 
         System.out.println(playerName + " was added");
-        System.out.println("They are player number " + getPlayerSize());
-    }
-
-    public int howManyPlayers() {
-        return getPlayerSize();
+        System.out.println("They are player number " + getPlayersSize());
     }
 
     public void roll(int roll) {
@@ -141,7 +137,7 @@ public class Game {
     }
 
     private void rebackCurrentPlayer() {
-        if (currentPlayer == getPlayerSize()) currentPlayer = 0;
+        if (currentPlayer == getPlayersSize()) currentPlayer = 0;
     }
 
     private String createSportsQuestion(int index) {
@@ -169,11 +165,11 @@ public class Game {
     }
 
     private String getCurrentPlayerName() {
-        return players.get(currentPlayer).name;
+        return playerList.get(currentPlayer).name;
     }
 
-    private int getPlayerSize() {
-        return players.size();
+    private int getPlayersSize() {
+        return playerCounter;
     }
 
     private int incrementCurrentPlayer() {
