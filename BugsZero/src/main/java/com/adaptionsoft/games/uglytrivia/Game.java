@@ -1,5 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import com.adaptionsoft.games.trivia.Player;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -10,11 +12,11 @@ public class Game {
     private final String rock = "Rock";
 
     ArrayList<String> players = new ArrayList<>();
-    int[] places = new int[6];
+    Player[] newPlayers = new Player[6];
     int[] purses = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
 
-    LinkedList<String> popQuestions = new LinkedList<String>();
+    LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
     LinkedList<String> sportsQuestions = new LinkedList<>();
     LinkedList<String> rockQuestions = new LinkedList<>();
@@ -29,22 +31,10 @@ public class Game {
             sportsQuestions.addLast(createSportsQuestion(i));
             rockQuestions.addLast(createRockQuestion(i));
         }
-    }
 
-    private String createSportsQuestion(int index) {
-        return "Sports Question " + index;
-    }
-
-    private String createScienceQuestion(int index) {
-        return "Science Question " + index;
-    }
-
-    private String createPopQuestion(int index) {
-        return "Pop Question " + index;
-    }
-
-    private String createRockQuestion(int index) {
-        return "Rock Question " + index;
+        for (int i = 0; i < newPlayers.length; i++) {
+            newPlayers[i] = new Player();
+        }
     }
 
     public boolean isPlayable() {
@@ -55,7 +45,7 @@ public class Game {
 
 
         players.add(playerName);
-        places[howManyPlayers()] = 0;
+        newPlayers[howManyPlayers()] = new Player();
         purses[howManyPlayers()] = 0;
         inPenaltyBox[howManyPlayers()] = false;
 
@@ -88,14 +78,22 @@ public class Game {
     }
 
     private void movePlayerAndAskQuestion(int roll) {
-        places[currentPlayer] = places[currentPlayer] + roll;
-        if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+        movePlayer(roll);
 
         System.out.println(players.get(currentPlayer)
                 + "'s new location is "
-                + places[currentPlayer]);
+                + getCurrentPlace());
         System.out.println("The category is " + currentCategory());
         askQuestion();
+    }
+
+    private void movePlayer(int roll) {
+        newPlayers[currentPlayer].place = getCurrentPlace() + roll;
+        if (getCurrentPlace() > 11) newPlayers[currentPlayer].place = getCurrentPlace() - 12;
+    }
+
+    private int getCurrentPlace() {
+        return newPlayers[currentPlayer].place;
     }
 
     private void askQuestion() {
@@ -117,8 +115,7 @@ public class Game {
 
 
     private String currentCategory() {
-        int place = places[currentPlayer];
-        switch (place) {
+        switch (getCurrentPlace()) {
             case 0:
             case 4:
             case 8:
@@ -191,5 +188,21 @@ public class Game {
 
     private void initCurrentPlayer() {
         if (currentPlayer == players.size()) currentPlayer = 0;
+    }
+
+    private String createSportsQuestion(int index) {
+        return "Sports Question " + index;
+    }
+
+    private String createScienceQuestion(int index) {
+        return "Science Question " + index;
+    }
+
+    private String createPopQuestion(int index) {
+        return "Pop Question " + index;
+    }
+
+    private String createRockQuestion(int index) {
+        return "Rock Question " + index;
     }
 }
