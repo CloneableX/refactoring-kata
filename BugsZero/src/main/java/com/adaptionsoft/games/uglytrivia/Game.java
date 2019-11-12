@@ -80,16 +80,16 @@ public class Game {
     private void movePlayerAndAskQuestion(int roll) {
         movePlayer(roll);
 
-        System.out.println(players.get(currentPlayer)
-                + "'s new location is "
-                + getCurrentPlace());
+
         System.out.println("The category is " + currentCategory());
         askQuestion();
     }
 
     private void movePlayer(int roll) {
-        newPlayers[currentPlayer].place = getCurrentPlace() + roll;
-        if (getCurrentPlace() > 11) newPlayers[currentPlayer].place = getCurrentPlace() - 12;
+        newPlayers[currentPlayer].move(roll);
+        System.out.println(players.get(currentPlayer)
+                + "'s new location is "
+                + getCurrentPlace());
     }
 
     private int getCurrentPlace() {
