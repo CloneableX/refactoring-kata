@@ -42,12 +42,9 @@ public class Game {
     }
 
     public void initPlayer(String playerName) {
-
-
         players.add(playerName);
         newPlayers[howManyPlayers()] = new Player();
         purses[howManyPlayers()] = 0;
-        inPenaltyBox[howManyPlayers()] = false;
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
@@ -79,9 +76,6 @@ public class Game {
 
     private void movePlayerAndAskQuestion(int roll) {
         movePlayer(roll);
-
-
-        System.out.println("The category is " + currentCategory());
         askQuestion();
     }
 
@@ -92,12 +86,9 @@ public class Game {
                 + getCurrentPlace());
     }
 
-    private int getCurrentPlace() {
-        return newPlayers[currentPlayer].place;
-    }
-
     private void askQuestion() {
         String currentCategory = currentCategory();
+        System.out.println("The category is " + currentCategory);
         switch (currentCategory) {
             case pop:
                 System.out.println(popQuestions.removeFirst());
@@ -171,6 +162,7 @@ public class Game {
         System.out.println("Question was incorrectly answered");
         System.out.println(players.get(currentPlayer) + " was sent to the penalty box");
         inPenaltyBox[currentPlayer] = true;
+        newPlayers[currentPlayer].inPenaltyBox = true;
 
         currentPlayer++;
         initCurrentPlayer();
@@ -180,10 +172,6 @@ public class Game {
 
     private boolean didPlayerWin() {
         return !(purses[currentPlayer] == 6);
-    }
-
-    private boolean inPenaltyBox() {
-        return inPenaltyBox[currentPlayer];
     }
 
     private void initCurrentPlayer() {
@@ -204,5 +192,13 @@ public class Game {
 
     private String createRockQuestion(int index) {
         return "Rock Question " + index;
+    }
+
+    private int getCurrentPlace() {
+        return newPlayers[currentPlayer].place;
+    }
+
+    private boolean inPenaltyBox() {
+        return newPlayers[currentPlayer].inPenaltyBox;
     }
 }
