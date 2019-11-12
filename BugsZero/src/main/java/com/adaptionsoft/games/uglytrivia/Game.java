@@ -11,7 +11,7 @@ public class Game {
     private final String sports = "Sports";
     private final String rock = "Rock";
 
-    ArrayList<String> players = new ArrayList<>();
+    ArrayList<Player> players = new ArrayList<>();
     Player[] newPlayers = new Player[6];
 
     LinkedList<String> popQuestions = new LinkedList<>();
@@ -31,7 +31,7 @@ public class Game {
         }
 
         for (int i = 0; i < newPlayers.length; i++) {
-            newPlayers[i] = new Player();
+            newPlayers[i] = new Player("");
         }
     }
 
@@ -40,8 +40,8 @@ public class Game {
     }
 
     public void initPlayer(String playerName) {
-        players.add(playerName);
-        newPlayers[howManyPlayers()] = new Player();
+        newPlayers[howManyPlayers()] = new Player(playerName);
+        players.add(new Player(playerName));
 
         System.out.println(playerName + " was added");
         System.out.println("They are player number " + getPlayerSize());
@@ -207,7 +207,7 @@ public class Game {
     }
 
     private String getCurrentPlayer() {
-        return players.get(currentPlayer);
+        return players.get(currentPlayer).name;
     }
 
     private int getPlayerSize() {
