@@ -1,50 +1,32 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import com.adaptionsoft.games.question.*;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
-    private final String pop = "Pop";
-    private final String science = "Science";
-    private final String sports = "Sports";
-    private final String rock = "Rock";
 
     ArrayList<String> players = new ArrayList<>();
     int[] places = new int[6];
     int[] purses = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
 
-    LinkedList<String> popQuestions = new LinkedList<String>();
-    LinkedList<String> scienceQuestions = new LinkedList<>();
-    LinkedList<String> sportsQuestions = new LinkedList<>();
-    LinkedList<String> rockQuestions = new LinkedList<>();
+    LinkedList<Question> popQuestions = new LinkedList<>();
+    LinkedList<Question> scienceQuestions = new LinkedList<>();
+    LinkedList<Question> sportsQuestions = new LinkedList<>();
+    LinkedList<Question> rockQuestions = new LinkedList<>();
 
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
 
     public Game() {
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast(createPopQuestion(i));
-            scienceQuestions.addLast(createScienceQuestion(i));
-            sportsQuestions.addLast(createSportsQuestion(i));
-            rockQuestions.addLast(createRockQuestion(i));
+            popQuestions.addLast(new PopQuestion(i));
+            scienceQuestions.addLast(new ScienceQuestion(i));
+            sportsQuestions.addLast(new SportsQuestion(i));
+            rockQuestions.addLast(new RockQuestion(i));
         }
-    }
-
-    private String createSportsQuestion(int index) {
-        return "Sports Question " + index;
-    }
-
-    private String createScienceQuestion(int index) {
-        return "Science Question " + index;
-    }
-
-    private String createPopQuestion(int index) {
-        return "Pop Question " + index;
-    }
-
-    private String createRockQuestion(int index) {
-        return "Rock Question " + index;
     }
 
     public boolean isPlayable() {
@@ -94,45 +76,23 @@ public class Game {
         System.out.println(players.get(currentPlayer)
                 + "'s new location is "
                 + places[currentPlayer]);
-        System.out.println("The category is " + currentCategory());
-        askQuestion();
+        System.out.println("The category is " + Question.getCurrentCategory(places[currentPlayer]));
+        askQuestion(Question.getCurrentCategory(places[currentPlayer]));
     }
 
-    private void askQuestion() {
-        String currentCategory = currentCategory();
+    private void askQuestion(String currentCategory) {
         switch (currentCategory) {
-            case pop:
+            case Question.pop:
                 System.out.println(popQuestions.removeFirst());
                 break;
-            case science:
+            case Question.science:
                 System.out.println(scienceQuestions.removeFirst());
                 break;
-            case sports:
+            case Question.sports:
                 System.out.println(sportsQuestions.removeFirst());
                 break;
-            case rock:
+            case Question.rock:
                 System.out.println(rockQuestions.removeFirst());
-        }
-    }
-
-
-    private String currentCategory() {
-        int place = places[currentPlayer];
-        switch (place) {
-            case 0:
-            case 4:
-            case 8:
-                return pop;
-            case 1:
-            case 5:
-            case 9:
-                return science;
-            case 2:
-            case 6:
-            case 10:
-                return sports;
-            default:
-                return rock;
         }
     }
 
@@ -179,7 +139,6 @@ public class Game {
         initCurrentPlayer();
         return true;
     }
-
 
     private boolean didPlayerWin() {
         return !(purses[currentPlayer] == 6);
