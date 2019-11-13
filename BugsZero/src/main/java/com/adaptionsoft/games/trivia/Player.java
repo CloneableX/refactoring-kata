@@ -25,6 +25,29 @@ public class Player {
         purse++;
     }
 
+    public boolean inPenaltyBox() {
+        return inPenaltyBox;
+    }
+
+    public void intoPenaltyBox() {
+        inPenaltyBox = true;
+    }
+
+    public void answerWrong() {
+        System.out.println("Question was incorrectly answered");
+        System.out.println(name + " was sent to the penalty box");
+        intoPenaltyBox();
+    }
+
+    public void answerCorrect() {
+        System.out.println("Answer was corrent!!!!");
+        incrementPurse();
+        System.out.println(name
+                + " now has "
+                + purse
+                + " Gold Coins.");
+    }
+
     public String currentCategory() {
         String category = rock;
         switch (place) {
@@ -47,13 +70,5 @@ public class Player {
 
         System.out.println("The category is " + category);
         return category;
-    }
-
-    public boolean inPenaltyBox() {
-        return inPenaltyBox;
-    }
-
-    public void intoPenaltyBox() {
-        inPenaltyBox = true;
     }
 }

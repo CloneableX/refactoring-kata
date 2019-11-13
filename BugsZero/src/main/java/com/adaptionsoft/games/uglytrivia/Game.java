@@ -91,29 +91,20 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         if (!getCurrentPlayer().inPenaltyBox()) {
-            System.out.println("Answer was corrent!!!!");
-            incrementPurse();
-            System.out.println(getCurrentPlayerName()
-                    + " now has "
-                    + getCurrentPurse()
-                    + " Gold Coins.");
-
+            getCurrentPlayer().answerCorrect();
             boolean winner = didPlayerWin();
             incrementCurrentPlayer();
-            rebackCurrentPlayer();
 
             return winner;
         }
 
         if (!isGettingOutOfPenaltyBox) {
             incrementCurrentPlayer();
-            rebackCurrentPlayer();
             return true;
         }
 
-        System.out.println("Answer was correct!!!!");
         incrementCurrentPlayer();
-        rebackCurrentPlayer();
+        System.out.println("Answer was correct!!!!");
         incrementPurse();
         System.out.println(getCurrentPlayerName()
                 + " now has "
@@ -124,21 +115,13 @@ public class Game {
     }
 
     public boolean wrongAnswer() {
-        System.out.println("Question was incorrectly answered");
-        System.out.println(getCurrentPlayerName() + " was sent to the penalty box");
-        getCurrentPlayer().intoPenaltyBox();
-
+        getCurrentPlayer().answerWrong();
         incrementCurrentPlayer();
-        rebackCurrentPlayer();
         return true;
     }
 
     private boolean didPlayerWin() {
         return !(getCurrentPurse() == 6);
-    }
-
-    private void rebackCurrentPlayer() {
-        if (currentPlayer == getPlayersSize()) currentPlayer = 0;
     }
 
     private String createSportsQuestion(int index) {
@@ -173,8 +156,9 @@ public class Game {
         return playerCounter;
     }
 
-    private int incrementCurrentPlayer() {
-        return currentPlayer++;
+    private void incrementCurrentPlayer() {
+        currentPlayer++;
+        if (currentPlayer == getPlayersSize()) currentPlayer = 0;
     }
 
     private Player getCurrentPlayer() {
