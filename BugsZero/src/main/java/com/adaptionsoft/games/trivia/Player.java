@@ -40,7 +40,6 @@ public class Player {
     }
 
     public void answerCorrect() {
-        System.out.println("Answer was corrent!!!!");
         incrementPurse();
         System.out.println(name
                 + " now has "

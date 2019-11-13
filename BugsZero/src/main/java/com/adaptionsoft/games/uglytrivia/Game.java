@@ -56,15 +56,18 @@ public class Game {
             return;
         }
 
+        goOutPenaltyBox(roll);
+    }
+
+    private void goOutPenaltyBox(int roll) {
         if (roll % 2 == 0) {
             System.out.println(getCurrentPlayerName() + " is not getting out of the penalty box");
             isGettingOutOfPenaltyBox = false;
             return;
         }
+
         isGettingOutOfPenaltyBox = true;
-
         System.out.println(getCurrentPlayerName() + " is getting out of the penalty box");
-
         movePlayerAndAskQuestion(roll);
     }
 
@@ -91,6 +94,7 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         if (!getCurrentPlayer().inPenaltyBox()) {
+            System.out.println("Answer was corrent!!!!");
             getCurrentPlayer().answerCorrect();
             boolean winner = didPlayerWin();
             incrementCurrentPlayer();
@@ -105,11 +109,7 @@ public class Game {
 
         incrementCurrentPlayer();
         System.out.println("Answer was correct!!!!");
-        incrementPurse();
-        System.out.println(getCurrentPlayerName()
-                + " now has "
-                + getCurrentPurse()
-                + " Gold Coins.");
+        getCurrentPlayer().answerCorrect();
 
         return didPlayerWin();
     }
