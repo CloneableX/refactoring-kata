@@ -1,8 +1,8 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import com.adaptionsoft.games.trivia.Player;
+import com.adaptionsoft.games.trivia.PlayerHandler;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
@@ -11,16 +11,13 @@ public class Game {
     public static final String sports = "Sports";
     public static final String rock = "Rock";
 
-    int playerCounter = 0;
-    ArrayList<Player> players = new ArrayList<>();
-
     LinkedList<String> popQuestions = new LinkedList<>();
     LinkedList<String> scienceQuestions = new LinkedList<>();
     LinkedList<String> sportsQuestions = new LinkedList<>();
     LinkedList<String> rockQuestions = new LinkedList<>();
 
-    int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
+    private PlayerHandler playerHandler;
 
     public Game() {
         for (int i = 0; i < 50; i++) {
@@ -30,21 +27,19 @@ public class Game {
             rockQuestions.addLast(createRockQuestion(i));
         }
 
-        for (int i = 0; i < 6; i++) {
-            players.add(new Player(""));
-        }
+
+        playerHandler = new PlayerHandler();
     }
 
     public boolean isPlayable() {
-        return (getPlayersSize() >= 2);
+        return (playerHandler.getPlayersSize() >= 2);
     }
 
     public void initPlayer(String playerName) {
-        players.set(getPlayersSize(), new Player(playerName));
-        playerCounter++;
+        playerHandler.createPlayer(playerName);
 
         System.out.println(playerName + " was added");
-        System.out.println("They are player number " + getPlayersSize());
+        System.out.println("They are player number " + playerHandler.getPlayersSize());
     }
 
     public void roll(int roll) {
@@ -97,17 +92,17 @@ public class Game {
             System.out.println("Answer was corrent!!!!");
             getCurrentPlayer().answerCorrect();
             boolean winner = didPlayerWin();
-            incrementCurrentPlayer();
+            playerHandler.nextPlayer();
 
             return winner;
         }
 
         if (!isGettingOutOfPenaltyBox) {
-            incrementCurrentPlayer();
+            playerHandler.nextPlayer();
             return true;
         }
 
-        incrementCurrentPlayer();
+        playerHandler.nextPlayer();
         System.out.println("Answer was correct!!!!");
         getCurrentPlayer().answerCorrect();
 
@@ -116,7 +111,7 @@ public class Game {
 
     public boolean wrongAnswer() {
         getCurrentPlayer().answerWrong();
-        incrementCurrentPlayer();
+        playerHandler.nextPlayer();
         return true;
     }
 
@@ -144,24 +139,11 @@ public class Game {
         return getCurrentPlayer().purse;
     }
 
-    private void incrementPurse() {
-        getCurrentPlayer().incrementPurse();
-    }
-
     private String getCurrentPlayerName() {
-        return players.get(currentPlayer).name;
-    }
-
-    private int getPlayersSize() {
-        return playerCounter;
-    }
-
-    private void incrementCurrentPlayer() {
-        currentPlayer++;
-        if (currentPlayer == getPlayersSize()) currentPlayer = 0;
+        return getCurrentPlayer().name;
     }
 
     private Player getCurrentPlayer() {
-        return players.get(currentPlayer);
+        return playerHandler.getCurrentPlayer();
     }
 }

@@ -12,6 +12,10 @@ public class Player {
         this.name = name;
     }
 
+    public Player() {
+
+    }
+
     public void move(int roll) {
         place = place + roll;
         if (place > 11) place = place - 12;
