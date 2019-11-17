@@ -16,6 +16,9 @@ public class PlayerHandler {
     public void createPlayer(String playerName) {
         players.set(getPlayersSize(), new Player(playerName));
         playerCounter++;
+
+        System.out.println(playerName + " was added");
+        System.out.println("They are player number " + getPlayersSize());
     }
 
     public int getPlayersSize() {
@@ -29,5 +32,9 @@ public class PlayerHandler {
 
     public Player getCurrentPlayer() {
         return players.get(currentPlayer);
+    }
+
+    public boolean didPlayerWin() {
+        return !(getCurrentPlayer().purse == 6);
     }
 }

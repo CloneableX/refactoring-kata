@@ -37,9 +37,6 @@ public class Game {
 
     public void initPlayer(String playerName) {
         playerHandler.createPlayer(playerName);
-
-        System.out.println(playerName + " was added");
-        System.out.println("They are player number " + playerHandler.getPlayersSize());
     }
 
     public void roll(int roll) {
@@ -91,7 +88,7 @@ public class Game {
         if (!getCurrentPlayer().inPenaltyBox()) {
             System.out.println("Answer was corrent!!!!");
             getCurrentPlayer().answerCorrect();
-            boolean winner = didPlayerWin();
+            boolean winner = playerHandler.didPlayerWin();
             playerHandler.nextPlayer();
 
             return winner;
@@ -106,17 +103,13 @@ public class Game {
         System.out.println("Answer was correct!!!!");
         getCurrentPlayer().answerCorrect();
 
-        return didPlayerWin();
+        return playerHandler.didPlayerWin();
     }
 
     public boolean wrongAnswer() {
         getCurrentPlayer().answerWrong();
         playerHandler.nextPlayer();
         return true;
-    }
-
-    private boolean didPlayerWin() {
-        return !(getCurrentPurse() == 6);
     }
 
     private String createSportsQuestion(int index) {
@@ -133,10 +126,6 @@ public class Game {
 
     private String createRockQuestion(int index) {
         return "Rock Question " + index;
-    }
-
-    private int getCurrentPurse() {
-        return getCurrentPlayer().purse;
     }
 
     private String getCurrentPlayerName() {
