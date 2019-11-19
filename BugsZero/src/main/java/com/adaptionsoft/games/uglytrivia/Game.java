@@ -69,7 +69,9 @@ public class Game {
     }
 
     private void askQuestion() {
-        switch (getCurrentPlayer().currentCategory()) {
+        String category = currentCategory(getCurrentPlayer().place);
+        System.out.println("The category is " + category);
+        switch (category) {
             case pop:
                 System.out.println(popQuestions.removeFirst());
                 break;
@@ -81,6 +83,25 @@ public class Game {
                 break;
             case rock:
                 System.out.println(rockQuestions.removeFirst());
+        }
+    }
+
+    private String currentCategory(int place) {
+        switch (place) {
+            case 0:
+            case 4:
+            case 8:
+                return pop;
+            case 1:
+            case 5:
+            case 9:
+                return science;
+            case 2:
+            case 6:
+            case 10:
+                return sports;
+            default:
+                return rock;
         }
     }
 

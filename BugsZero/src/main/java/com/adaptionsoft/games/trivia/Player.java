@@ -1,9 +1,7 @@
 package com.adaptionsoft.games.trivia;
 
-import static com.adaptionsoft.games.uglytrivia.Game.*;
-
 public class Player {
-    private int place = 0;
+    public int place = 0;
     private boolean inPenaltyBox = false;
     public int purse = 0;
     public String name;
@@ -51,27 +49,4 @@ public class Player {
                 + " Gold Coins.");
     }
 
-    public String currentCategory() {
-        String category = rock;
-        switch (place) {
-            case 0:
-            case 4:
-            case 8:
-                category = pop;
-                break;
-            case 1:
-            case 5:
-            case 9:
-                category = science;
-                break;
-            case 2:
-            case 6:
-            case 10:
-                category = sports;
-                break;
-        }
-
-        System.out.println("The category is " + category);
-        return category;
-    }
 }
