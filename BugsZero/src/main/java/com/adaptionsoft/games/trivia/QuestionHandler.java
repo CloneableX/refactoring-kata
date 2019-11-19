@@ -38,19 +38,36 @@ public class QuestionHandler {
         return "Rock Question " + index;
     }
 
-    public void askPopQuestion() {
+    private void askPopQuestion() {
         System.out.println(popQuestions.removeFirst());
     }
 
-    public void askScienceQuestion() {
+    private void askScienceQuestion() {
         System.out.println(scienceQuestions.removeFirst());
     }
 
-    public void askSportsQuestion() {
+    private void askSportsQuestion() {
         System.out.println(sportsQuestions.removeFirst());
     }
 
-    public void askRockQuestion() {
+    private void askRockQuestion() {
         System.out.println(rockQuestions.removeFirst());
+    }
+
+    public void askQuestion(String category) {
+        System.out.println("The category is " + category);
+        switch (category) {
+            case QuestionHandler.pop:
+                askPopQuestion();
+                break;
+            case QuestionHandler.science:
+                askScienceQuestion();
+                break;
+            case QuestionHandler.sports:
+                askSportsQuestion();
+                break;
+            case QuestionHandler.rock:
+                askRockQuestion();
+        }
     }
 }

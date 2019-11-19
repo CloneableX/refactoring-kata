@@ -53,20 +53,7 @@ public class Game {
 
     private void askQuestion() {
         String category = currentCategory(getCurrentPlayer().place);
-        System.out.println("The category is " + category);
-        switch (category) {
-            case QuestionHandler.pop:
-                questionHandler.askPopQuestion();
-                break;
-            case QuestionHandler.science:
-                questionHandler.askScienceQuestion();
-                break;
-            case QuestionHandler.sports:
-                questionHandler.askSportsQuestion();
-                break;
-            case QuestionHandler.rock:
-                questionHandler.askRockQuestion();
-        }
+        questionHandler.askQuestion(category);
     }
 
     private String currentCategory(int place) {
@@ -114,22 +101,6 @@ public class Game {
         getCurrentPlayer().answerWrong();
         playerHandler.nextPlayer();
         return true;
-    }
-
-    private String createSportsQuestion(int index) {
-        return "Sports Question " + index;
-    }
-
-    private String createScienceQuestion(int index) {
-        return "Science Question " + index;
-    }
-
-    private String createPopQuestion(int index) {
-        return "Pop Question " + index;
-    }
-
-    private String createRockQuestion(int index) {
-        return "Rock Question " + index;
     }
 
     private String getCurrentPlayerName() {
