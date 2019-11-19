@@ -2,32 +2,15 @@ package com.adaptionsoft.games.uglytrivia;
 
 import com.adaptionsoft.games.trivia.Player;
 import com.adaptionsoft.games.trivia.PlayerHandler;
-
-import java.util.LinkedList;
+import com.adaptionsoft.games.trivia.QuestionHandler;
 
 public class Game {
-    public static final String pop = "Pop";
-    public static final String science = "Science";
-    public static final String sports = "Sports";
-    public static final String rock = "Rock";
-
-    LinkedList<String> popQuestions = new LinkedList<>();
-    LinkedList<String> scienceQuestions = new LinkedList<>();
-    LinkedList<String> sportsQuestions = new LinkedList<>();
-    LinkedList<String> rockQuestions = new LinkedList<>();
-
     boolean isGettingOutOfPenaltyBox;
     private PlayerHandler playerHandler;
+    private QuestionHandler questionHandler;
 
     public Game() {
-        for (int i = 0; i < 50; i++) {
-            popQuestions.addLast(createPopQuestion(i));
-            scienceQuestions.addLast(createScienceQuestion(i));
-            sportsQuestions.addLast(createSportsQuestion(i));
-            rockQuestions.addLast(createRockQuestion(i));
-        }
-
-
+        questionHandler = new QuestionHandler();
         playerHandler = new PlayerHandler();
     }
 
@@ -72,17 +55,17 @@ public class Game {
         String category = currentCategory(getCurrentPlayer().place);
         System.out.println("The category is " + category);
         switch (category) {
-            case pop:
-                System.out.println(popQuestions.removeFirst());
+            case QuestionHandler.pop:
+                questionHandler.askPopQuestion();
                 break;
-            case science:
-                System.out.println(scienceQuestions.removeFirst());
+            case QuestionHandler.science:
+                questionHandler.askScienceQuestion();
                 break;
-            case sports:
-                System.out.println(sportsQuestions.removeFirst());
+            case QuestionHandler.sports:
+                questionHandler.askSportsQuestion();
                 break;
-            case rock:
-                System.out.println(rockQuestions.removeFirst());
+            case QuestionHandler.rock:
+                questionHandler.askRockQuestion();
         }
     }
 
@@ -91,17 +74,17 @@ public class Game {
             case 0:
             case 4:
             case 8:
-                return pop;
+                return QuestionHandler.pop;
             case 1:
             case 5:
             case 9:
-                return science;
+                return QuestionHandler.science;
             case 2:
             case 6:
             case 10:
-                return sports;
+                return QuestionHandler.sports;
             default:
-                return rock;
+                return QuestionHandler.rock;
         }
     }
 
