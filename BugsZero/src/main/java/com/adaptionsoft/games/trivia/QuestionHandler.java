@@ -15,27 +15,27 @@ public class QuestionHandler {
 
     public QuestionHandler() {
         for (int i = 0; i < 50; i++) {
-            popQuestions.addLast(createPopQuestion(i));
-            scienceQuestions.addLast(createScienceQuestion(i));
-            sportsQuestions.addLast(createSportsQuestion(i));
-            rockQuestions.addLast(createRockQuestion(i));
+            createPopQuestion(i);
+            createScienceQuestion(i);
+            createSportsQuestion(i);
+            createRockQuestion(i);
         }
     }
 
-    private String createSportsQuestion(int index) {
-        return "Sports Question " + index;
+    private void createSportsQuestion(int index) {
+        sportsQuestions.addLast("Sports Question " + index);
     }
 
-    private String createScienceQuestion(int index) {
-        return "Science Question " + index;
+    private void createScienceQuestion(int index) {
+        scienceQuestions.addLast("Science Question " + index);
     }
 
-    private String createPopQuestion(int index) {
-        return "Pop Question " + index;
+    private void createPopQuestion(int index) {
+        popQuestions.addLast("Pop Question " + index);
     }
 
-    private String createRockQuestion(int index) {
-        return "Rock Question " + index;
+    private void createRockQuestion(int index) {
+        rockQuestions.addLast("Rock Question " + index);
     }
 
     private void askPopQuestion() {
