@@ -1,17 +1,19 @@
 package com.adaptionsoft.games.trivia;
 
+import com.adaptionsoft.games.trivia.question.Question;
+
 import java.util.LinkedList;
 
 public class QuestionHandler {
-    public static final String pop = "Pop";
-    public static final String science = "Science";
-    public static final String sports = "Sports";
-    public static final String rock = "Rock";
+    private static final String pop = "Pop";
+    private static final String science = "Science";
+    private static final String sports = "Sports";
+    private static final String rock = "Rock";
 
-    LinkedList<String> popQuestions = new LinkedList<>();
-    LinkedList<String> scienceQuestions = new LinkedList<>();
-    LinkedList<String> sportsQuestions = new LinkedList<>();
-    LinkedList<String> rockQuestions = new LinkedList<>();
+    private LinkedList<Question> popQuestions = new LinkedList<Question>();
+    private LinkedList<Question> scienceQuestions = new LinkedList<>();
+    private LinkedList<Question> sportsQuestions = new LinkedList<>();
+    private LinkedList<Question> rockQuestions = new LinkedList<Question>();
 
     public QuestionHandler() {
         for (int i = 0; i < 50; i++) {
@@ -23,19 +25,19 @@ public class QuestionHandler {
     }
 
     private void createSportsQuestion(int index) {
-        sportsQuestions.addLast("Sports Question " + index);
+        sportsQuestions.addLast(new Question("Sports Question " + index));
     }
 
     private void createScienceQuestion(int index) {
-        scienceQuestions.addLast("Science Question " + index);
+        scienceQuestions.addLast(new Question("Science Question " + index));
     }
 
     private void createPopQuestion(int index) {
-        popQuestions.addLast("Pop Question " + index);
+        popQuestions.addLast(new Question("Pop Question " + index));
     }
 
     private void createRockQuestion(int index) {
-        rockQuestions.addLast("Rock Question " + index);
+        rockQuestions.addLast(new Question("Rock Question " + index));
     }
 
     private void askPopQuestion() {
