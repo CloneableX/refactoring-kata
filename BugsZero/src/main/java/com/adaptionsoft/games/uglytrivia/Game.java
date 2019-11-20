@@ -48,31 +48,7 @@ public class Game {
 
     private void movePlayerAndAskQuestion(int roll) {
         getCurrentPlayer().move(roll);
-        askQuestion();
-    }
-
-    private void askQuestion() {
-        String category = currentCategory(getCurrentPlayer().place);
-        questionHandler.askQuestion(category);
-    }
-
-    private String currentCategory(int place) {
-        switch (place) {
-            case 0:
-            case 4:
-            case 8:
-                return QuestionHandler.pop;
-            case 1:
-            case 5:
-            case 9:
-                return QuestionHandler.science;
-            case 2:
-            case 6:
-            case 10:
-                return QuestionHandler.sports;
-            default:
-                return QuestionHandler.rock;
-        }
+        questionHandler.askQuestion(getCurrentPlayer().place);
     }
 
     public boolean wasCorrectlyAnswered() {

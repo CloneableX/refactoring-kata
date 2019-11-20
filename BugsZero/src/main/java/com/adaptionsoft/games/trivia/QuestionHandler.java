@@ -54,7 +54,8 @@ public class QuestionHandler {
         System.out.println(rockQuestions.removeFirst());
     }
 
-    public void askQuestion(String category) {
+    public void askQuestion(int place) {
+        String category = currentCategory(place);
         System.out.println("The category is " + category);
         switch (category) {
             case QuestionHandler.pop:
@@ -68,6 +69,26 @@ public class QuestionHandler {
                 break;
             case QuestionHandler.rock:
                 askRockQuestion();
+        }
+
+    }
+
+    private String currentCategory(int place) {
+        switch (place) {
+            case 0:
+            case 4:
+            case 8:
+                return QuestionHandler.pop;
+            case 1:
+            case 5:
+            case 9:
+                return QuestionHandler.science;
+            case 2:
+            case 6:
+            case 10:
+                return QuestionHandler.sports;
+            default:
+                return QuestionHandler.rock;
         }
     }
 }
