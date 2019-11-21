@@ -37,4 +37,10 @@ public class PlayerHandler {
     public boolean didPlayerWin() {
         return !(getCurrentPlayer().purse == 6);
     }
+
+    public boolean wrongAnswer() {
+        getCurrentPlayer().answerWrong();
+        nextPlayer();
+        return true;
+    }
 }

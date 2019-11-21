@@ -74,9 +74,7 @@ public class Game {
     }
 
     public boolean wrongAnswer() {
-        getCurrentPlayer().answerWrong();
-        playerHandler.nextPlayer();
-        return true;
+        return playerHandler.wrongAnswer();
     }
 
     private String getCurrentPlayerName() {
