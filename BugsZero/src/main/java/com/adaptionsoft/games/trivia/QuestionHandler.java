@@ -10,10 +10,10 @@ public class QuestionHandler {
     private static final String sports = "Sports";
     private static final String rock = "Rock";
 
-    private LinkedList<Question> popQuestions = new LinkedList<Question>();
+    private LinkedList<Question> popQuestions = new LinkedList<>();
     private LinkedList<Question> scienceQuestions = new LinkedList<>();
     private LinkedList<Question> sportsQuestions = new LinkedList<>();
-    private LinkedList<Question> rockQuestions = new LinkedList<Question>();
+    private LinkedList<Question> rockQuestions = new LinkedList<>();
 
     public QuestionHandler() {
         for (int i = 0; i < 50; i++) {
@@ -25,19 +25,19 @@ public class QuestionHandler {
     }
 
     private void createSportsQuestion(int index) {
-        sportsQuestions.addLast(new Question("Sports Question " + index));
+        sportsQuestions.addLast(new Question(sports, index));
     }
 
     private void createScienceQuestion(int index) {
-        scienceQuestions.addLast(new Question("Science Question " + index));
+        scienceQuestions.addLast(new Question(science, index));
     }
 
     private void createPopQuestion(int index) {
-        popQuestions.addLast(new Question("Pop Question " + index));
+        popQuestions.addLast(new Question(pop, index));
     }
 
     private void createRockQuestion(int index) {
-        rockQuestions.addLast(new Question("Rock Question " + index));
+        rockQuestions.addLast(new Question(rock, index));
     }
 
     private void askPopQuestion() {
