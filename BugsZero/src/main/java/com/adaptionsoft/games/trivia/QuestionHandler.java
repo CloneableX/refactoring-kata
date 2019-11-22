@@ -1,6 +1,6 @@
 package com.adaptionsoft.games.trivia;
 
-import com.adaptionsoft.games.trivia.question.Question;
+import com.adaptionsoft.games.trivia.question.*;
 
 import java.util.LinkedList;
 
@@ -25,19 +25,19 @@ public class QuestionHandler {
     }
 
     private void createSportsQuestion(int index) {
-        sportsQuestions.addLast(new Question(sports, index));
+        sportsQuestions.addLast(new SportsQuestion(index));
     }
 
     private void createScienceQuestion(int index) {
-        scienceQuestions.addLast(new Question(science, index));
+        scienceQuestions.addLast(new ScienceQuestion(index));
     }
 
     private void createPopQuestion(int index) {
-        popQuestions.addLast(new Question(pop, index));
+        popQuestions.addLast(new PopQuestion(index));
     }
 
     private void createRockQuestion(int index) {
-        rockQuestions.addLast(new Question(rock, index));
+        rockQuestions.addLast(new RockQuestion(index));
     }
 
     private void askPopQuestion() {

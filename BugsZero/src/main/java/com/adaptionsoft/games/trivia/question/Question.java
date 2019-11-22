@@ -1,8 +1,8 @@
 package com.adaptionsoft.games.trivia.question;
 
 public class Question {
-    private String category;
-    private int index;
+    protected String category;
+    protected int index;
 
     public Question(String category, int index) {
         this.category = category;
