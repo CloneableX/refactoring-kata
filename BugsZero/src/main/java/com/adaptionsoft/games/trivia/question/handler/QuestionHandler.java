@@ -1,6 +1,8 @@
 package com.adaptionsoft.games.trivia.question.handler;
 
-import com.adaptionsoft.games.trivia.question.*;
+import com.adaptionsoft.games.trivia.question.Question;
+import com.adaptionsoft.games.trivia.question.RockQuestion;
+import com.adaptionsoft.games.trivia.question.SportsQuestion;
 
 import java.util.LinkedList;
 
@@ -10,16 +12,16 @@ public class QuestionHandler {
     private static final String sports = "Sports";
     private static final String rock = "Rock";
 
-    private LinkedList<Question> scienceQuestions = new LinkedList<>();
     private LinkedList<Question> sportsQuestions = new LinkedList<>();
     private LinkedList<Question> rockQuestions = new LinkedList<>();
 
     private PopQuestionHandler popQuestionHandler = new PopQuestionHandler();
+    private ScienceQuestionHandler scienceQuestionHandler = new ScienceQuestionHandler();
 
     public QuestionHandler() {
         for (int i = 0; i < 50; i++) {
             popQuestionHandler.createPopQuestion(i);
-            createScienceQuestion(i);
+            scienceQuestionHandler.createScienceQuestion(i);
             createSportsQuestion(i);
             createRockQuestion(i);
         }
@@ -29,16 +31,8 @@ public class QuestionHandler {
         sportsQuestions.addLast(new SportsQuestion(index));
     }
 
-    private void createScienceQuestion(int index) {
-        scienceQuestions.addLast(new ScienceQuestion(index));
-    }
-
     private void createRockQuestion(int index) {
         rockQuestions.addLast(new RockQuestion(index));
-    }
-
-    private void askScienceQuestion() {
-        System.out.println(scienceQuestions.removeFirst());
     }
 
     private void askSportsQuestion() {
@@ -57,7 +51,7 @@ public class QuestionHandler {
                 popQuestionHandler.askQuestion();
                 break;
             case QuestionHandler.science:
-                askScienceQuestion();
+                scienceQuestionHandler.askQuestion();
                 break;
             case QuestionHandler.sports:
                 askSportsQuestion();
