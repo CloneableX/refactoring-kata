@@ -1,4 +1,4 @@
-package com.adaptionsoft.games.trivia;
+package com.adaptionsoft.games.trivia.question.handler;
 
 import com.adaptionsoft.games.trivia.question.*;
 
@@ -10,14 +10,15 @@ public class QuestionHandler {
     private static final String sports = "Sports";
     private static final String rock = "Rock";
 
-    private LinkedList<Question> popQuestions = new LinkedList<>();
     private LinkedList<Question> scienceQuestions = new LinkedList<>();
     private LinkedList<Question> sportsQuestions = new LinkedList<>();
     private LinkedList<Question> rockQuestions = new LinkedList<>();
 
+    private PopQuestionHandler popQuestionHandler = new PopQuestionHandler();
+
     public QuestionHandler() {
         for (int i = 0; i < 50; i++) {
-            createPopQuestion(i);
+            popQuestionHandler.createPopQuestion(i);
             createScienceQuestion(i);
             createSportsQuestion(i);
             createRockQuestion(i);
@@ -32,16 +33,8 @@ public class QuestionHandler {
         scienceQuestions.addLast(new ScienceQuestion(index));
     }
 
-    private void createPopQuestion(int index) {
-        popQuestions.addLast(new PopQuestion(index));
-    }
-
     private void createRockQuestion(int index) {
         rockQuestions.addLast(new RockQuestion(index));
-    }
-
-    private void askPopQuestion() {
-        System.out.println(popQuestions.removeFirst());
     }
 
     private void askScienceQuestion() {
@@ -61,7 +54,7 @@ public class QuestionHandler {
         System.out.println("The category is " + category);
         switch (category) {
             case QuestionHandler.pop:
-                askPopQuestion();
+                popQuestionHandler.askQuestion();
                 break;
             case QuestionHandler.science:
                 askScienceQuestion();

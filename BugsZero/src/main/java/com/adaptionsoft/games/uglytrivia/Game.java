@@ -2,7 +2,7 @@ package com.adaptionsoft.games.uglytrivia;
 
 import com.adaptionsoft.games.trivia.Player;
 import com.adaptionsoft.games.trivia.PlayerHandler;
-import com.adaptionsoft.games.trivia.QuestionHandler;
+import com.adaptionsoft.games.trivia.question.handler.QuestionHandler;
 
 public class Game {
     boolean isGettingOutOfPenaltyBox;
