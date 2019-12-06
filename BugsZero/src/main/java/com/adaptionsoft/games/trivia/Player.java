@@ -3,14 +3,14 @@ package com.adaptionsoft.games.trivia;
 public class Player {
     public int place = 0;
     private boolean inPenaltyBox = false;
-    public int purse = 0;
+    int purse = 0;
     public String name;
 
-    public Player(String name) {
+    Player(String name) {
         this.name = name;
     }
 
-    public Player() {
+    Player() {
 
     }
 
@@ -23,7 +23,7 @@ public class Player {
                 + place);
     }
 
-    public void incrementPurse() {
+    private void incrementPurse() {
         purse++;
     }
 
@@ -31,17 +31,18 @@ public class Player {
         return inPenaltyBox;
     }
 
-    public void intoPenaltyBox() {
+    private void intoPenaltyBox() {
         inPenaltyBox = true;
     }
 
-    public void answerWrong() {
+    void answerWrong() {
         System.out.println("Question was incorrectly answered");
         System.out.println(name + " was sent to the penalty box");
         intoPenaltyBox();
     }
 
     public void answerCorrect() {
+        System.out.println("Answer was correct!!!!");
         incrementPurse();
         System.out.println(name
                 + " now has "
