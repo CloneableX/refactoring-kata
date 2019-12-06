@@ -32,22 +32,11 @@ public class Game {
             return;
         }
 
-        if (goOutPenaltyBox(roll)) {
+        isGettingOutOfPenaltyBox = playerHandler.goOutPenaltyBox(roll);
+        if (isGettingOutOfPenaltyBox) {
             getCurrentPlayer().move(roll);
             questionHandler.askQuestion(getCurrentPlayer().place);
         }
-    }
-
-    private boolean goOutPenaltyBox(int roll) {
-        if (roll % 2 == 0) {
-            System.out.println(getCurrentPlayerName() + " is not getting out of the penalty box");
-            isGettingOutOfPenaltyBox = false;
-            return isGettingOutOfPenaltyBox;
-        }
-
-        isGettingOutOfPenaltyBox = true;
-        System.out.println(getCurrentPlayerName() + " is getting out of the penalty box");
-        return isGettingOutOfPenaltyBox;
     }
 
     public boolean wasCorrectlyAnswered() {
