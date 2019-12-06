@@ -5,7 +5,7 @@ import com.adaptionsoft.games.trivia.PlayerHandler;
 import com.adaptionsoft.games.trivia.question.handler.QuestionHandler;
 
 public class Game {
-    boolean isGettingOutOfPenaltyBox;
+    private boolean isGettingOutOfPenaltyBox;
     private PlayerHandler playerHandler;
     private QuestionHandler questionHandler;
 
@@ -27,28 +27,27 @@ public class Game {
         System.out.println("They have rolled a " + roll);
 
         if (!getCurrentPlayer().inPenaltyBox()) {
-            movePlayerAndAskQuestion(roll);
+            getCurrentPlayer().move(roll);
+            questionHandler.askQuestion(getCurrentPlayer().place);
             return;
         }
 
-        goOutPenaltyBox(roll);
+        if (goOutPenaltyBox(roll)) {
+            getCurrentPlayer().move(roll);
+            questionHandler.askQuestion(getCurrentPlayer().place);
+        }
     }
 
-    private void goOutPenaltyBox(int roll) {
+    private boolean goOutPenaltyBox(int roll) {
         if (roll % 2 == 0) {
             System.out.println(getCurrentPlayerName() + " is not getting out of the penalty box");
             isGettingOutOfPenaltyBox = false;
-            return;
+            return isGettingOutOfPenaltyBox;
         }
 
         isGettingOutOfPenaltyBox = true;
         System.out.println(getCurrentPlayerName() + " is getting out of the penalty box");
-        movePlayerAndAskQuestion(roll);
-    }
-
-    private void movePlayerAndAskQuestion(int roll) {
-        getCurrentPlayer().move(roll);
-        questionHandler.askQuestion(getCurrentPlayer().place);
+        return isGettingOutOfPenaltyBox;
     }
 
     public boolean wasCorrectlyAnswered() {
