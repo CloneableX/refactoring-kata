@@ -52,7 +52,7 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         if (!getCurrentPlayer().inPenaltyBox()) {
-            System.out.println("Answer was corrent!!!!");
+            System.out.println("Answer was correct!!!!");
             getCurrentPlayer().answerCorrect();
             boolean winner = playerHandler.didPlayerWin();
             playerHandler.nextPlayer();
