@@ -44,16 +44,15 @@ public class PlayerHandler {
         return true;
     }
 
-    public boolean goOutPenaltyBox(int roll) {
+    public void goOutPenaltyBox(int roll) {
         if (roll % 2 == 0) {
             System.out.println(getCurrentPlayerName() + " is not getting out of the penalty box");
             getCurrentPlayer().goInPenaltyBox();
-            return false;
+            return;
         }
 
         System.out.println(getCurrentPlayerName() + " is getting out of the penalty box");
         getCurrentPlayer().goOutPenaltyBox();
-        return true;
     }
 
     private String getCurrentPlayerName() {
