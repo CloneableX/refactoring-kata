@@ -5,7 +5,6 @@ import com.adaptionsoft.games.trivia.PlayerHandler;
 import com.adaptionsoft.games.trivia.question.handler.QuestionHandler;
 
 public class Game {
-    private boolean isGettingOutOfPenaltyBox;
     private PlayerHandler playerHandler;
     private QuestionHandler questionHandler;
 
@@ -32,8 +31,8 @@ public class Game {
             return;
         }
 
-        isGettingOutOfPenaltyBox = playerHandler.goOutPenaltyBox(roll);
-        if (isGettingOutOfPenaltyBox) {
+        playerHandler.goOutPenaltyBox(roll);
+        if (getCurrentPlayer().isGettingOutOfPenaltyBox()) {
             getCurrentPlayer().move(roll);
             questionHandler.askQuestion(getCurrentPlayer().place);
         }
@@ -48,7 +47,7 @@ public class Game {
             return winner;
         }
 
-        if (!isGettingOutOfPenaltyBox) {
+        if (!getCurrentPlayer().isGettingOutOfPenaltyBox()) {
             playerHandler.nextPlayer();
             return true;
         }

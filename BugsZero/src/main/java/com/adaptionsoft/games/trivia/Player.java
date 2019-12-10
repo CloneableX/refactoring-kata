@@ -5,6 +5,7 @@ public class Player {
     private boolean inPenaltyBox = false;
     int purse = 0;
     public String name;
+    private boolean isGettingOutOfPenaltyBox = false;
 
     Player(String name) {
         this.name = name;
@@ -50,4 +51,15 @@ public class Player {
                 + " Gold Coins.");
     }
 
+    public void goInPenaltyBox() {
+        isGettingOutOfPenaltyBox = false;
+    }
+
+    public void goOutPenaltyBox() {
+        isGettingOutOfPenaltyBox = true;
+    }
+
+    public boolean isGettingOutOfPenaltyBox() {
+        return isGettingOutOfPenaltyBox;
+    }
 }
