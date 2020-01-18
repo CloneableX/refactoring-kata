@@ -12,31 +12,36 @@ public class Length {
 
     public Length as(String u) {
         Length len = this;
-        if (this.unit.equals(UNIT_F)) {
-            if (u.equals(UNIT_YARD)) {
+
+        if (checkUnitType(this.unit, UNIT_F)) {
+            if (checkUnitType(u, UNIT_YARD)) {
                 len = new Length(this.value / 3, u);
-            } else if (u.equals(UNIT_INCH)) {
+            } else if (checkUnitType(u, UNIT_INCH)) {
                 len = new Length(this.value * 12, u);
             }
         }
 
-        if (this.unit.equals(UNIT_YARD)) {
-            if (u.equals(UNIT_INCH)) {
+        if (checkUnitType(this.unit, UNIT_YARD)) {
+            if (checkUnitType(u, UNIT_INCH)) {
                 len = new Length(this.value * 36, u);
-            } else if (u.equals(UNIT_F)){
+            } else if (checkUnitType(u, UNIT_F)){
                 len = new Length(this.value * 3, u);
             }
         }
 
-        if (this.unit.equals(UNIT_INCH)) {
-            if (u.equals(UNIT_F)) {
+        if (checkUnitType(this.unit, UNIT_INCH)) {
+            if (checkUnitType(u, UNIT_F)) {
                 len = new Length(this.value / 12, u);
-            } else if (u.equals(UNIT_YARD)) {
+            } else if (checkUnitType(u, UNIT_YARD)) {
                 len = new Length(this.value / 36, u);
             }
         }
 
         return len;
+    }
+
+    private boolean checkUnitType(String srcUnit, String unitType) {
+        return srcUnit.equals(unitType);
     }
 
     public double getVal() {
