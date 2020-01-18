@@ -45,11 +45,7 @@ public class Length {
     }
 
     private boolean checkConversionWay(String u, String unitF, String unitYard) {
-        return unitEquals(this.unit, unitF) && unitEquals(u, unitYard);
-    }
-
-    private boolean unitEquals(String srcUnit, String tarUnit) {
-        return srcUnit.equals(tarUnit);
+        return Unit.unitEquals(this.unit, unitF) && Unit.unitEquals(u, unitYard);
     }
 
     public double getVal() {
