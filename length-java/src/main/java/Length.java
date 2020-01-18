@@ -28,12 +28,12 @@ public class Length {
             len = new Length(this.value * 3, u);
         }
 
-        if (checkUnitType(this.unit, UNIT_INCH)) {
-            if (checkUnitType(u, UNIT_F)) {
-                len = new Length(this.value / 12, u);
-            } else if (checkUnitType(u, UNIT_YARD)) {
-                len = new Length(this.value / 36, u);
-            }
+        if (checkUnitType(this.unit, UNIT_INCH) && checkUnitType(u, UNIT_F)) {
+            len = new Length(this.value / 12, u);
+        }
+
+        if (checkUnitType(this.unit, UNIT_INCH) && checkUnitType(u, UNIT_YARD)) {
+            len = new Length(this.value / 36, u);
         }
 
         return len;
