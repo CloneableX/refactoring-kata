@@ -8,31 +8,34 @@ public class Length {
     }
 
     public Length as(String u) {
+        return convertUnit(u);
+    }
+
+    private Length convertUnit(String unit) {
         Length len = this;
-        if (checkConversionWay(u, Unit.UNIT_F, Unit.UNIT_YARD)) {
-            len = new Length(this.value / 3, u);
+        if (checkConversionWay(unit, Unit.UNIT_F, Unit.UNIT_YARD)) {
+            len = new Length(this.value / 3, unit);
         }
 
-        if (checkConversionWay(u, Unit.UNIT_F, Unit.UNIT_INCH)) {
-            len = new Length(this.value * 12, u);
+        if (checkConversionWay(unit, Unit.UNIT_F, Unit.UNIT_INCH)) {
+            len = new Length(this.value * 12, unit);
         }
 
-        if (checkConversionWay(u, Unit.UNIT_YARD, Unit.UNIT_INCH)) {
-            len = new Length(this.value * 36, u);
+        if (checkConversionWay(unit, Unit.UNIT_YARD, Unit.UNIT_INCH)) {
+            len = new Length(this.value * 36, unit);
         }
 
-        if (checkConversionWay(u, Unit.UNIT_YARD, Unit.UNIT_F)) {
-            len = new Length(this.value * 3, u);
+        if (checkConversionWay(unit, Unit.UNIT_YARD, Unit.UNIT_F)) {
+            len = new Length(this.value * 3, unit);
         }
 
-        if (checkConversionWay(u, Unit.UNIT_INCH, Unit.UNIT_F)) {
-            len = new Length(this.value / 12, u);
+        if (checkConversionWay(unit, Unit.UNIT_INCH, Unit.UNIT_F)) {
+            len = new Length(this.value / 12, unit);
         }
 
-        if (checkConversionWay(u, Unit.UNIT_INCH, Unit.UNIT_YARD)) {
-            len = new Length(this.value / 36, u);
+        if (checkConversionWay(unit, Unit.UNIT_INCH, Unit.UNIT_YARD)) {
+            len = new Length(this.value / 36, unit);
         }
-
         return len;
     }
 
