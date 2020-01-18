@@ -7,34 +7,36 @@ public class Unit {
         return srcUnit.equals(tarUnit);
     }
 
-    static boolean checkConversionWay(Length length, String u, String unitF, String unitYard) {
-        return unitEquals(length.getUnit(), unitF) && unitEquals(u, unitYard);
+    static boolean checkConversionWay(String srcUnit, String srcUnitType, String tarUnit, String tarUnitType) {
+        return unitEquals(srcUnit, srcUnitType) && unitEquals(tarUnit, tarUnitType);
     }
 
-    public static Length convertUnit(Length length, String unit, double value) {
+    public static Length convertUnit(Length length, String tarUnit) {
         Length len = null;
-        if (checkConversionWay(length, unit, UNIT_F, UNIT_YARD)) {
-            len = new Length(value / 3, unit);
+        double value = length.getVal();
+        String srcUnit = length.getUnit();
+        if (checkConversionWay(srcUnit, UNIT_F, tarUnit, UNIT_YARD)) {
+            len = new Length(value / 3, tarUnit);
         }
 
-        if (checkConversionWay(length, unit, UNIT_F, UNIT_INCH)) {
-            len = new Length(value * 12, unit);
+        if (checkConversionWay(srcUnit, UNIT_F, tarUnit, UNIT_INCH)) {
+            len = new Length(value * 12, tarUnit);
         }
 
-        if (checkConversionWay(length, unit, UNIT_YARD, UNIT_INCH)) {
-            len = new Length(value * 36, unit);
+        if (checkConversionWay(srcUnit, UNIT_YARD, tarUnit, UNIT_INCH)) {
+            len = new Length(value * 36, tarUnit);
         }
 
-        if (checkConversionWay(length, unit, UNIT_YARD, UNIT_F)) {
-            len = new Length(value * 3, unit);
+        if (checkConversionWay(srcUnit, UNIT_YARD, tarUnit, UNIT_F)) {
+            len = new Length(value * 3, tarUnit);
         }
 
-        if (checkConversionWay(length, unit, UNIT_INCH, UNIT_F)) {
-            len = new Length(value / 12, unit);
+        if (checkConversionWay(srcUnit, UNIT_INCH, tarUnit, UNIT_F)) {
+            len = new Length(value / 12, tarUnit);
         }
 
-        if (checkConversionWay(length, unit, UNIT_INCH, UNIT_YARD)) {
-            len = new Length(value / 36, unit);
+        if (checkConversionWay(srcUnit, UNIT_INCH, tarUnit, UNIT_YARD)) {
+            len = new Length(value / 36, tarUnit);
         }
         return len;
     }
