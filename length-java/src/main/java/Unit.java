@@ -2,6 +2,11 @@ public class Unit {
     public static final String UNIT_YARD = "yard";
     public static final String UNIT_INCH = "inch";
     public static final String UNIT_F = "f";
+    private String type;
+
+    public Unit(String type) {
+        this.type = type;
+    }
 
     static boolean unitEquals(String srcUnit, String tarUnit) {
         return srcUnit.equals(tarUnit);
@@ -11,7 +16,7 @@ public class Unit {
         return unitEquals(srcUnit, srcUnitType) && unitEquals(tarUnit, tarUnitType);
     }
 
-    public static Length convertUnit(Length length, String tarUnit) {
+    public static Length convert(Length length, String tarUnit) {
         double value = length.getVal();
         String srcUnit = length.getUnit();
         if (checkConversionWay(srcUnit, UNIT_F, tarUnit, UNIT_YARD)) {
@@ -39,5 +44,9 @@ public class Unit {
         }
 
         return null;
+    }
+
+    public String getType() {
+        return type;
     }
 }
