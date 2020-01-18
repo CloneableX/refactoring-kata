@@ -6,4 +6,8 @@ public class Unit {
     static boolean unitEquals(String srcUnit, String tarUnit) {
         return srcUnit.equals(tarUnit);
     }
+
+    static boolean checkConversionWay(Length length, String u, String unitF, String unitYard) {
+        return unitEquals(length.getUnit(), unitF) && unitEquals(u, unitYard);
+    }
 }
