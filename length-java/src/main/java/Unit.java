@@ -12,32 +12,32 @@ public class Unit {
     }
 
     public static Length convertUnit(Length length, String tarUnit) {
-        Length len = null;
         double value = length.getVal();
         String srcUnit = length.getUnit();
         if (checkConversionWay(srcUnit, UNIT_F, tarUnit, UNIT_YARD)) {
-            len = new Length(value / 3, tarUnit);
+            return new Length(value / 3, tarUnit);
         }
 
         if (checkConversionWay(srcUnit, UNIT_F, tarUnit, UNIT_INCH)) {
-            len = new Length(value * 12, tarUnit);
+            return new Length(value * 12, tarUnit);
         }
 
         if (checkConversionWay(srcUnit, UNIT_YARD, tarUnit, UNIT_INCH)) {
-            len = new Length(value * 36, tarUnit);
+            return new Length(value * 36, tarUnit);
         }
 
         if (checkConversionWay(srcUnit, UNIT_YARD, tarUnit, UNIT_F)) {
-            len = new Length(value * 3, tarUnit);
+            return new Length(value * 3, tarUnit);
         }
 
         if (checkConversionWay(srcUnit, UNIT_INCH, tarUnit, UNIT_F)) {
-            len = new Length(value / 12, tarUnit);
+            return new Length(value / 12, tarUnit);
         }
 
         if (checkConversionWay(srcUnit, UNIT_INCH, tarUnit, UNIT_YARD)) {
-            len = new Length(value / 36, tarUnit);
+            return new Length(value / 36, tarUnit);
         }
-        return len;
+
+        return null;
     }
 }
