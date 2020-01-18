@@ -8,7 +8,7 @@ public class Length {
     }
 
     public Length as(String u) {
-        Length len = unit.convert(this, u);
+        Length len = unit.convert(u, value);
         if (len != null) {
             return len;
         }

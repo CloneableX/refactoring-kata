@@ -12,34 +12,32 @@ public class Unit {
         return srcUnit.equals(tarUnit);
     }
 
-    static boolean checkConversionWay(String srcUnit, String srcUnitType, String tarUnit, String tarUnitType) {
-        return unitEquals(srcUnit, srcUnitType) && unitEquals(tarUnit, tarUnitType);
+    boolean checkConversionWay(String srcUnitType, String tarUnit, String tarUnitType) {
+        return unitEquals(type, srcUnitType) && unitEquals(tarUnit, tarUnitType);
     }
 
-    public static Length convert(Length length, String tarUnit) {
-        double value = length.getVal();
-        String srcUnit = length.getUnit();
-        if (checkConversionWay(srcUnit, UNIT_F, tarUnit, UNIT_YARD)) {
+    public Length convert(String tarUnit, double value) {
+        if (checkConversionWay(UNIT_F, tarUnit, UNIT_YARD)) {
             return new Length(value / 3, tarUnit);
         }
 
-        if (checkConversionWay(srcUnit, UNIT_F, tarUnit, UNIT_INCH)) {
+        if (checkConversionWay(UNIT_F, tarUnit, UNIT_INCH)) {
             return new Length(value * 12, tarUnit);
         }
 
-        if (checkConversionWay(srcUnit, UNIT_YARD, tarUnit, UNIT_INCH)) {
+        if (checkConversionWay(UNIT_YARD, tarUnit, UNIT_INCH)) {
             return new Length(value * 36, tarUnit);
         }
 
-        if (checkConversionWay(srcUnit, UNIT_YARD, tarUnit, UNIT_F)) {
+        if (checkConversionWay(UNIT_YARD, tarUnit, UNIT_F)) {
             return new Length(value * 3, tarUnit);
         }
 
-        if (checkConversionWay(srcUnit, UNIT_INCH, tarUnit, UNIT_F)) {
+        if (checkConversionWay(UNIT_INCH, tarUnit, UNIT_F)) {
             return new Length(value / 12, tarUnit);
         }
 
-        if (checkConversionWay(srcUnit, UNIT_INCH, tarUnit, UNIT_YARD)) {
+        if (checkConversionWay(UNIT_INCH, tarUnit, UNIT_YARD)) {
             return new Length(value / 36, tarUnit);
         }
 
