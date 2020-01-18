@@ -8,33 +8,38 @@ public class Length {
     }
 
     public Length as(String u) {
-        return convertUnit(u);
+        Length len = convertUnit(u, this.value);
+        if (len != null) {
+            return len;
+        }
+
+        return this;
     }
 
-    private Length convertUnit(String unit) {
-        Length len = this;
+    public Length convertUnit(String unit, double value) {
+        Length len = null;
         if (checkConversionWay(unit, Unit.UNIT_F, Unit.UNIT_YARD)) {
-            len = new Length(this.value / 3, unit);
+            len = new Length(value / 3, unit);
         }
 
         if (checkConversionWay(unit, Unit.UNIT_F, Unit.UNIT_INCH)) {
-            len = new Length(this.value * 12, unit);
+            len = new Length(value * 12, unit);
         }
 
         if (checkConversionWay(unit, Unit.UNIT_YARD, Unit.UNIT_INCH)) {
-            len = new Length(this.value * 36, unit);
+            len = new Length(value * 36, unit);
         }
 
         if (checkConversionWay(unit, Unit.UNIT_YARD, Unit.UNIT_F)) {
-            len = new Length(this.value * 3, unit);
+            len = new Length(value * 3, unit);
         }
 
         if (checkConversionWay(unit, Unit.UNIT_INCH, Unit.UNIT_F)) {
-            len = new Length(this.value / 12, unit);
+            len = new Length(value / 12, unit);
         }
 
         if (checkConversionWay(unit, Unit.UNIT_INCH, Unit.UNIT_YARD)) {
-            len = new Length(this.value / 36, unit);
+            len = new Length(value / 36, unit);
         }
         return len;
     }
