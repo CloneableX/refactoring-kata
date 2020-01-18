@@ -12,19 +12,18 @@ public class Length {
 
     public Length as(String u) {
         Length len = this;
+        if (checkUnitType(this.unit, UNIT_F) && checkUnitType(u, UNIT_YARD)) {
+            len = new Length(this.value / 3, u);
+        }
 
-        if (checkUnitType(this.unit, UNIT_F)) {
-            if (checkUnitType(u, UNIT_YARD)) {
-                len = new Length(this.value / 3, u);
-            } else if (checkUnitType(u, UNIT_INCH)) {
-                len = new Length(this.value * 12, u);
-            }
+        if (checkUnitType(this.unit, UNIT_F) && checkUnitType(u, UNIT_INCH)) {
+            len = new Length(this.value * 12, u);
         }
 
         if (checkUnitType(this.unit, UNIT_YARD)) {
             if (checkUnitType(u, UNIT_INCH)) {
                 len = new Length(this.value * 36, u);
-            } else if (checkUnitType(u, UNIT_F)){
+            } else if (checkUnitType(u, UNIT_F)) {
                 len = new Length(this.value * 3, u);
             }
         }
