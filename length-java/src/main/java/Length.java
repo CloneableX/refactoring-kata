@@ -12,35 +12,39 @@ public class Length {
 
     public Length as(String u) {
         Length len = this;
-        if (checkUnitType(this.unit, UNIT_F) && checkUnitType(u, UNIT_YARD)) {
+        if (checkConversionWay(u, UNIT_F, UNIT_YARD)) {
             len = new Length(this.value / 3, u);
         }
 
-        if (checkUnitType(this.unit, UNIT_F) && checkUnitType(u, UNIT_INCH)) {
+        if (checkConversionWay(u, UNIT_F, UNIT_INCH)) {
             len = new Length(this.value * 12, u);
         }
 
-        if (checkUnitType(this.unit, UNIT_YARD) && checkUnitType(u, UNIT_INCH)) {
+        if (checkConversionWay(u, UNIT_YARD, UNIT_INCH)) {
             len = new Length(this.value * 36, u);
         }
 
-        if (checkUnitType(this.unit, UNIT_YARD) && checkUnitType(u, UNIT_F)) {
+        if (checkConversionWay(u, UNIT_YARD, UNIT_F)) {
             len = new Length(this.value * 3, u);
         }
 
-        if (checkUnitType(this.unit, UNIT_INCH) && checkUnitType(u, UNIT_F)) {
+        if (checkConversionWay(u, UNIT_INCH, UNIT_F)) {
             len = new Length(this.value / 12, u);
         }
 
-        if (checkUnitType(this.unit, UNIT_INCH) && checkUnitType(u, UNIT_YARD)) {
+        if (checkConversionWay(u, UNIT_INCH, UNIT_YARD)) {
             len = new Length(this.value / 36, u);
         }
 
         return len;
     }
 
-    private boolean checkUnitType(String srcUnit, String unitType) {
-        return srcUnit.equals(unitType);
+    private boolean checkConversionWay(String u, String unitF, String unitYard) {
+        return unitEquals(this.unit, unitF) && unitEquals(u, unitYard);
+    }
+
+    private boolean unitEquals(String srcUnit, String tarUnit) {
+        return srcUnit.equals(tarUnit);
     }
 
     public double getVal() {
