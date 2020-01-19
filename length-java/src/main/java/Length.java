@@ -2,14 +2,13 @@ public class Length {
     private final double value;
     private Unit unit;
 
-    public Length(double val, Unit unitEnum) {
+    public Length(double val, Unit unit) {
         this.value = val;
-        this.unit = unitEnum;
+        this.unit = unit;
     }
 
     public Length as(Unit tarUnit) {
-        Double convertVal = unit.convert(tarUnit, value);
-        return new Length(convertVal, tarUnit);
+        return new Length(unit.convert(tarUnit, value), tarUnit);
     }
 
     public double getVal() {
