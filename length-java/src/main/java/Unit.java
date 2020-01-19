@@ -21,5 +21,5 @@ public abstract class Unit {
         return new Foot();
     }
 
-    public abstract Double convertTemp(String tarUnit, double value);
+    public abstract Double convert(String tarUnit, double value);
 }

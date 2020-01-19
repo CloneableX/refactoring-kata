@@ -4,7 +4,7 @@ public class Foot extends Unit {
     }
 
     @Override
-    public Double convertTemp(String tarUnit, double value) {
+    public Double convert(String tarUnit, double value) {
         if (unitEquals(tarUnit, UNIT_YARD)) {
             return value / 3;
         }
