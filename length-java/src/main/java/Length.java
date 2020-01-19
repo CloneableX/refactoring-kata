@@ -1,9 +1,11 @@
+import java.util.Objects;
+
 public class Length {
     private final double value;
     private Unit unit;
 
-    public Length(double val, Unit unit) {
-        this.value = val;
+    public Length(double value, Unit unit) {
+        this.value = value;
         this.unit = unit;
     }
 
@@ -11,11 +13,17 @@ public class Length {
         return new Length(unit.convert(tarUnit, value), tarUnit);
     }
 
-    public double getVal() {
-        return this.value;
+    @Override
+    public boolean equals(Object otherObject) {
+        if (this == otherObject) return true;
+        if (otherObject == null || getClass() != otherObject.getClass()) return false;
+        Length length = (Length) otherObject;
+        return Double.compare(length.value, value) == 0 &&
+                unit == length.unit;
     }
 
-    public Unit getUnit() {
-        return this.unit;
+    @Override
+    public int hashCode() {
+        return Objects.hash(value, unit);
     }
 }
