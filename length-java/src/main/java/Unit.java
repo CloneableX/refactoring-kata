@@ -22,8 +22,6 @@ public abstract class Unit {
         return new Foot();
     }
 
-    public abstract Double convert(String tarUnit, double value);
-
     public Double convert(Unit unit, double value) {
         return new InterUnit(this).convert(unit, value);
     }

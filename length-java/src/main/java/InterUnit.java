@@ -7,7 +7,7 @@ public class InterUnit {
 
     public Double convert(Unit tarUnit, double value) {
         if (tarUnit.getRatio() == 0d) {
-            return 0d;
+            return value;
         }
         return (value * unit.getRatio()) / tarUnit.getRatio();
     }
