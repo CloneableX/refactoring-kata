@@ -1,32 +1,22 @@
 public class Length {
     private final double value;
-    private final String unit;
+    private UnitEnum unitEnum;
 
-    public Length(double val, String unit) {
+    public Length(double val, UnitEnum unitEnum) {
         this.value = val;
-        this.unit = unit;
+        this.unitEnum = unitEnum;
     }
 
     public Length as(UnitEnum tarUnit) {
-        Double convertVal = new InterUnit(Unit.create(this.unit)).convert(tarUnit, value);
-        return new Length(convertVal, tarUnit.type);
-    }
-
-    public Length as(String u) {
-        if (Unit.UNIT_YARD.equals(u))
-            return as(UnitEnum.YARD);
-
-        if (Unit.UNIT_INCH.equals(u))
-            return as(UnitEnum.Inch);
-
-        return as(UnitEnum.Foot);
+        Double convertVal = new InterUnit(Unit.create(unitEnum.type)).convert(tarUnit, value);
+        return new Length(convertVal, tarUnit);
     }
 
     public double getVal() {
         return this.value;
     }
 
-    public String getUnit() {
-        return this.unit;
+    public UnitEnum getUnit() {
+        return this.unitEnum;
     }
 }
