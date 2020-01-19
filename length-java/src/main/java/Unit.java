@@ -21,6 +21,11 @@ public abstract class Unit {
         return new Foot();
     }
 
-    public abstract Length convert(String tarUnit, double value);
+    public Length convert(String tarUnit, double value) {
+        return null;
+    }
 
+    public Double convertTemp(String tarUnit, double value) {
+        return 0d;
+    }
 }
