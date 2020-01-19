@@ -1,24 +1,10 @@
-public abstract class Unit {
-    public static final String UNIT_INCH = "inch";
-    public static final String UNIT_FOOT = "f";
-    public static final String UNIT_YARD = "yard";
-    private double ratio;
+public enum Unit {
+    YARD("yard", 36), Inch("inch", 1), Foot("f", 12);
+    public final String type;
+    public final double ratio;
 
-    protected Unit(double ratio) {
+    Unit(String type, double ratio) {
+        this.type = type;
         this.ratio = ratio;
-    }
-
-    public static Unit create(String type) {
-        if (UNIT_YARD.equals(type))
-            return new Yard();
-
-        if (UNIT_INCH.equals(type))
-            return new Inch();
-
-        return new Foot();
-    }
-
-    public double getRatio() {
-        return this.ratio;
     }
 }

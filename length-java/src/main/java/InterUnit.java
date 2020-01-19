@@ -1,15 +1,15 @@
 public class InterUnit {
-    private Unit unit;
+    private Unit unitEnum;
 
-    public InterUnit(Unit unit) {
-        this.unit = unit;
+    public InterUnit(Unit unitEnum) {
+        this.unitEnum = unitEnum;
     }
 
-    public Double convert(UnitEnum tarUnit, double value) {
+    public Double convert(Unit tarUnit, double value) {
         double ratio = tarUnit.ratio;
         if (ratio == 0d) {
             return value;
         }
-        return (value * unit.getRatio()) / ratio;
+        return (value * unitEnum.ratio) / ratio;
     }
 }
