@@ -4,7 +4,7 @@ public class Length {
 
     public Length(double val, String unit) {
         this.value = val;
-        this.unit = new Unit(unit);
+        this.unit = Unit.create(unit);
     }
 
     public Length as(String u) {
