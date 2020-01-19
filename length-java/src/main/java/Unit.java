@@ -8,10 +8,6 @@ public class Unit {
         this.type = type;
     }
 
-    protected Unit() {
-
-    }
-
     static boolean unitEquals(String srcUnit, String tarUnit) {
         return srcUnit.equals(tarUnit);
     }
@@ -19,6 +15,10 @@ public class Unit {
     public static Unit create(String type) {
         if (UNIT_YARD.equals(type))
             return new Yard();
+
+        if (UNIT_INCH.equals(type))
+            return new Inch();
+
         return new Unit(type);
     }
 
@@ -33,14 +33,6 @@ public class Unit {
 
         if (checkConversionWay(UNIT_F, tarUnit, UNIT_INCH)) {
             return new Length(value * 12, tarUnit);
-        }
-
-        if (checkConversionWay(UNIT_INCH, tarUnit, UNIT_F)) {
-            return new Length(value / 12, tarUnit);
-        }
-
-        if (checkConversionWay(UNIT_INCH, tarUnit, UNIT_YARD)) {
-            return new Length(value / 36, tarUnit);
         }
 
         return null;
