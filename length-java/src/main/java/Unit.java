@@ -9,10 +9,6 @@ public enum Unit {
     }
 
     public Double convert(Unit tarUnit, double value) {
-        double ratio = tarUnit.ratio;
-        if (ratio == 0d) {
-            return value;
-        }
-        return (value * this.ratio) / ratio;
+        return (value * this.ratio) / tarUnit.ratio;
     }
 }
