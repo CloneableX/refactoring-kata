@@ -22,4 +22,9 @@ public abstract class Unit {
     }
 
     public abstract Double convert(String tarUnit, double value);
+
+    public Double convert(Unit unit, double value) {
+        return 0d;
+    }
+
 }

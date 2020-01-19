@@ -8,7 +8,12 @@ public class Length {
     }
 
     public Length as(String u) {
-        return new Length(Unit.create(this.unit).convert(u, value), u);
+        Unit unit = Unit.create(this.unit);
+        Double convertVal = unit.convert(Unit.create(u), value);
+        if (convertVal == 0) {
+            convertVal = unit.convert(u, value);
+        }
+        return new Length(convertVal, u);
     }
 
     public double getVal() {
