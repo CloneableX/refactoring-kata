@@ -5,7 +5,7 @@ public class Yard extends Unit {
 
     @Override
     public Length convert(String tarUnit, double value) {
-        if (unitEquals(tarUnit, UNIT_F)) {
+        if (unitEquals(tarUnit, UNIT_FOOT)) {
             return new Length(value * 3, tarUnit);
         }
 

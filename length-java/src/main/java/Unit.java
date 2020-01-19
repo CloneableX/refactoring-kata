@@ -1,6 +1,6 @@
 public abstract class Unit {
     public static final String UNIT_INCH = "inch";
-    public static final String UNIT_F = "f";
+    public static final String UNIT_FOOT = "f";
     public static final String UNIT_YARD = "yard";
 
     public Unit() {
