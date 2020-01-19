@@ -8,10 +8,6 @@ public abstract class Unit {
         this.ratio = ratio;
     }
 
-    static boolean unitEquals(String srcUnit, String tarUnit) {
-        return srcUnit.equals(tarUnit);
-    }
-
     public static Unit create(String type) {
         if (UNIT_YARD.equals(type))
             return new Yard();
@@ -20,10 +16,6 @@ public abstract class Unit {
             return new Inch();
 
         return new Foot();
-    }
-
-    public Double convert(Unit unit, double value) {
-        return new InterUnit(this).convert(unit, value);
     }
 
     public double getRatio() {

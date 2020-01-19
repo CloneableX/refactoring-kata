@@ -8,8 +8,8 @@ public class Length {
     }
 
     public Length as(String u) {
-        Unit srcUnit = Unit.create(this.unit);
-        return new Length(srcUnit.convert(Unit.create(u), value), u);
+        Double convertVal = new InterUnit(Unit.create(this.unit)).convert(Unit.create(u), value);
+        return new Length(convertVal, u);
     }
 
     public double getVal() {
