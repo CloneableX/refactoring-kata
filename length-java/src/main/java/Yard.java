@@ -13,6 +13,6 @@ public class Yard extends Unit {
             return new Length(value * 36, tarUnit);
         }
 
-        return null;
+        return new Length(value, UNIT_YARD);
     }
 }

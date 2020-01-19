@@ -13,6 +13,6 @@ public class Foot extends Unit {
             return new Length(value * 12, tarUnit);
         }
 
-        return null;
+        return new Length(value, UNIT_FOOT);
     }
 }
