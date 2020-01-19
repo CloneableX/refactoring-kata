@@ -2,10 +2,9 @@ public abstract class Unit {
     public static final String UNIT_INCH = "inch";
     public static final String UNIT_F = "f";
     public static final String UNIT_YARD = "yard";
-    private String type;
 
-    public Unit(String type) {
-        this.type = type;
+    public Unit() {
+
     }
 
     static boolean unitEquals(String srcUnit, String tarUnit) {
@@ -24,7 +23,4 @@ public abstract class Unit {
 
     public abstract Length convert(String tarUnit, double value);
 
-    public String getType() {
-        return type;
-    }
 }

@@ -1,6 +1,6 @@
 public class Inch extends Unit {
     public Inch() {
-        super(UNIT_INCH);
+        super();
     }
 
     @Override

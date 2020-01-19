@@ -1,6 +1,6 @@
 public class Yard extends Unit {
     public Yard() {
-        super(UNIT_YARD);
+        super();
     }
 
     @Override

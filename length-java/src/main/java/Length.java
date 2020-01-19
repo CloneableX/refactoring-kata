@@ -1,9 +1,11 @@
 public class Length {
     private final double value;
     private final Unit unit;
+    private final String unitType;
 
     public Length(double val, String unit) {
         this.value = val;
+        this.unitType = unit;
         this.unit = Unit.create(unit);
     }
 
@@ -21,6 +23,6 @@ public class Length {
     }
 
     public String getUnit() {
-        return this.unit.getType();
+        return this.unitType;
     }
 }
