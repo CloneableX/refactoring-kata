@@ -1,6 +1,6 @@
 public class Foot extends Unit {
     public Foot() {
-        super();
+        super(12);
     }
 
     @Override

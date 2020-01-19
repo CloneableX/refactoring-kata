@@ -2,9 +2,10 @@ public abstract class Unit {
     public static final String UNIT_INCH = "inch";
     public static final String UNIT_FOOT = "f";
     public static final String UNIT_YARD = "yard";
+    private double ratio;
 
-    public Unit() {
-
+    protected Unit(double ratio) {
+        this.ratio = ratio;
     }
 
     static boolean unitEquals(String srcUnit, String tarUnit) {
@@ -24,7 +25,10 @@ public abstract class Unit {
     public abstract Double convert(String tarUnit, double value);
 
     public Double convert(Unit unit, double value) {
-        return 0d;
+        return new InterUnit(this).convert(unit, value);
     }
 
+    public double getRatio() {
+        return this.ratio;
+    }
 }
