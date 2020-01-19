@@ -5,10 +5,11 @@ public class InterUnit {
         this.unit = unit;
     }
 
-    public Double convert(Unit tarUnit, double value) {
-        if (tarUnit.getRatio() == 0d) {
+    public Double convert(UnitEnum tarUnit, double value) {
+        double ratio = tarUnit.ratio;
+        if (ratio == 0d) {
             return value;
         }
-        return (value * unit.getRatio()) / tarUnit.getRatio();
+        return (value * unit.getRatio()) / ratio;
     }
 }

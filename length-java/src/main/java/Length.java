@@ -7,9 +7,9 @@ public class Length {
         this.unit = unit;
     }
 
-    public Length as(UnitEnum unit) {
-        Double convertVal = new InterUnit(Unit.create(this.unit)).convert(Unit.create(unit.type), value);
-        return new Length(convertVal, unit.type);
+    public Length as(UnitEnum tarUnit) {
+        Double convertVal = new InterUnit(Unit.create(this.unit)).convert(tarUnit, value);
+        return new Length(convertVal, tarUnit.type);
     }
 
     public Length as(String u) {
