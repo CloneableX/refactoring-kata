@@ -7,9 +7,19 @@ public class Length {
         this.unit = unit;
     }
 
+    public Length as(UnitEnum unit) {
+        Double convertVal = new InterUnit(Unit.create(this.unit)).convert(Unit.create(unit.type), value);
+        return new Length(convertVal, unit.type);
+    }
+
     public Length as(String u) {
-        Double convertVal = new InterUnit(Unit.create(this.unit)).convert(Unit.create(u), value);
-        return new Length(convertVal, u);
+        if (Unit.UNIT_YARD.equals(u))
+            return as(UnitEnum.YARD);
+
+        if (Unit.UNIT_INCH.equals(u))
+            return as(UnitEnum.Inch);
+
+        return as(UnitEnum.Foot);
     }
 
     public double getVal() {
