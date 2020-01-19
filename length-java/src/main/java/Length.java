@@ -1,15 +1,14 @@
 public class Length {
     private final double value;
-    private Unit unitEnum;
+    private Unit unit;
 
     public Length(double val, Unit unitEnum) {
         this.value = val;
-        this.unitEnum = unitEnum;
+        this.unit = unitEnum;
     }
 
     public Length as(Unit tarUnit) {
-        InterUnit interUnit = new InterUnit(unitEnum);
-        Double convertVal = interUnit.convert(tarUnit, value);
+        Double convertVal = unit.convert(tarUnit, value);
         return new Length(convertVal, tarUnit);
     }
 
@@ -18,6 +17,6 @@ public class Length {
     }
 
     public Unit getUnit() {
-        return this.unitEnum;
+        return this.unit;
     }
 }
