@@ -1,4 +1,4 @@
-public class Unit {
+public abstract class Unit {
     public static final String UNIT_INCH = "inch";
     public static final String UNIT_F = "f";
     public static final String UNIT_YARD = "yard";
@@ -19,24 +19,10 @@ public class Unit {
         if (UNIT_INCH.equals(type))
             return new Inch();
 
-        return new Unit(type);
+        return new Foot();
     }
 
-    boolean checkConversionWay(String srcUnitType, String tarUnit, String tarUnitType) {
-        return unitEquals(type, srcUnitType) && unitEquals(tarUnit, tarUnitType);
-    }
-
-    public Length convert(String tarUnit, double value) {
-        if (checkConversionWay(UNIT_F, tarUnit, UNIT_YARD)) {
-            return new Length(value / 3, tarUnit);
-        }
-
-        if (checkConversionWay(UNIT_F, tarUnit, UNIT_INCH)) {
-            return new Length(value * 12, tarUnit);
-        }
-
-        return null;
-    }
+    public abstract Length convert(String tarUnit, double value);
 
     public String getType() {
         return type;
