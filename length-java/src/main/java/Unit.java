@@ -1,10 +1,8 @@
 public enum Unit {
-    YARD("yard", 36), Inch("inch", 1), Foot("foot", 12);
-    public final String type;
+    YARD(36d), Inch(1d), Foot(12d);
     public final double ratio;
 
-    Unit(String type, double ratio) {
-        this.type = type;
+    Unit(double ratio) {
         this.ratio = ratio;
     }
 
