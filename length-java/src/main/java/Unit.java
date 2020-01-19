@@ -1,5 +1,5 @@
 public enum Unit {
-    YARD("yard", 36), Inch("inch", 1), Foot("f", 12);
+    YARD("yard", 36), Inch("inch", 1), Foot("foot", 12);
     public final String type;
     public final double ratio;
 
