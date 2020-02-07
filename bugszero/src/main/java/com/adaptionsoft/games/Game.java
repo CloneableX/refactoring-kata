@@ -1,31 +1,17 @@
 package com.adaptionsoft.games;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.*;
 
 import static com.adaptionsoft.games.Category.*;
 
 public class Game {
+    private final QuestionManager questionManager;
     ArrayList<Player> players = new ArrayList<Player>();
-
-    LinkedList<String> popQuestions = new LinkedList<>();
-    LinkedList<String> scienceQuestions = new LinkedList<>();
-    LinkedList<String> sportsQuestions = new LinkedList<>();
-    LinkedList<String> rockQuestions = new LinkedList<>();
 
     int currentPlayer = 0;
 
     public Game() {
-        for (int i = 0; i < 50; i++) {
-            popQuestions.addLast("Pop Question " + i);
-            scienceQuestions.addLast(("Science Question " + i));
-            sportsQuestions.addLast(("Sports Question " + i));
-            rockQuestions.addLast(createRockQuestion(i));
-        }
-    }
-
-    public String createRockQuestion(int index) {
-        return "Rock Question " + index;
+        questionManager = new QuestionManager();
     }
 
     public void addPlayer(String playerName) {
@@ -58,19 +44,7 @@ public class Game {
 
     private void movePlayerAndAskQuestion(int roll) {
         getCurrentPlayer().move(roll);
-        askQuestion();
-    }
-
-    private void askQuestion() {
-        Category category = getCategory(getCurrentPlace());
-        if (category == Pop)
-            System.out.println(popQuestions.removeFirst());
-        if (category == Science)
-            System.out.println(scienceQuestions.removeFirst());
-        if (category == Sports)
-            System.out.println(sportsQuestions.removeFirst());
-        if (category == Rock)
-            System.out.println(rockQuestions.removeFirst());
+        questionManager.askQuestion(getCategory(getCurrentPlace()));
     }
 
     public boolean wasCorrectlyAnswered() {
