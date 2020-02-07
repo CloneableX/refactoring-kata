@@ -1,3 +1,5 @@
-[GildedRos](https://github.com/CloneableX/refactoring-kata/tree/master/GildedRos)
+重构习题集
 
-[Description about Gilded Ros](https://kata-log.rocks/gilded-rose-kata)
+- length
+- gildedrose
+- bugszero

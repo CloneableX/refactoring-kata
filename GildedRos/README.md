@@ -1,0 +1,1 @@
+[Description about Gilded Ros](https://kata-log.rocks/gilded-rose-kata)
