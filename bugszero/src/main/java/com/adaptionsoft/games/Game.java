@@ -6,7 +6,6 @@ import java.util.LinkedList;
 public class Game {
     ArrayList<Player> players = new ArrayList<Player>();
     int[] places = new int[6];
-    int[] purses = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
 
     LinkedList<String> popQuestions = new LinkedList<>();
@@ -33,7 +32,6 @@ public class Game {
     public void add(String playerName) {
         players.add(new Player(playerName));
         places[howManyPlayers()] = 0;
-        purses[howManyPlayers()] = 0;
         inPenaltyBox[howManyPlayers()] = false;
 
         System.out.println(playerName + " was added");
@@ -108,7 +106,7 @@ public class Game {
                 System.out.println("Answer was correct!!!!");
                 currentPlayer++;
                 if (currentPlayer == players.size()) currentPlayer = 0;
-                purses[currentPlayer]++;
+                players.get(currentPlayer).increaseGoldCoin();
                 System.out.println(getCurrentPlayerName()
                         + " now has "
                         + getCurrentPurses()
@@ -125,7 +123,7 @@ public class Game {
         } else {
 
             System.out.println("Answer was corrent!!!!");
-            purses[currentPlayer]++;
+            players.get(currentPlayer).increaseGoldCoin();
             System.out.println(getCurrentPlayerName()
                     + " now has "
                     + getCurrentPurses()
@@ -158,7 +156,7 @@ public class Game {
     }
 
     private int getCurrentPurses() {
-        return purses[currentPlayer];
+        return players.get(currentPlayer).getGoldCoins();
     }
 
     private int getCurrentPlace() {
