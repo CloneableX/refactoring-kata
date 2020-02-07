@@ -8,6 +8,7 @@ public class Player {
 
     public Player(String name) {
         this.name = name;
+        System.out.println(name + " was added");
     }
 
     public String getName() {
@@ -50,5 +51,6 @@ public class Player {
 
     public void outFromPenaltyBox() {
         inPenaltyBox = false;
+        System.out.println(name + " is getting out of the penalty box");
     }
 }

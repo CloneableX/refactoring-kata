@@ -16,8 +16,6 @@ public class Game {
 
     public void addPlayer(String playerName) {
         players.add(new Player(playerName));
-
-        System.out.println(playerName + " was added");
         System.out.println("They are player number " + players.size());
     }
 
@@ -28,15 +26,12 @@ public class Game {
         if (isCurrentInPenaltyBox()) {
             if (roll % 2 != 0) {
                 getCurrentPlayer().outFromPenaltyBox();
-
-                System.out.println(getCurrentPlayerName() + " is getting out of the penalty box");
                 movePlayerAndAskQuestion(roll);
             } else {
                 System.out.println(getCurrentPlayerName() + " is not getting out of the penalty box");
             }
 
         } else {
-
             movePlayerAndAskQuestion(roll);
         }
 
