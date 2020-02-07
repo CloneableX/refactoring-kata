@@ -3,11 +3,9 @@ package com.adaptionsoft.games;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import static com.adaptionsoft.games.Category.*;
+
 public class Game {
-    public static final String POP = "Pop";
-    public static final String SCIENCE = "Science";
-    public static final String SPORTS = "Sports";
-    public static final String ROCK = "Rock";
     ArrayList<Player> players = new ArrayList<Player>();
 
     LinkedList<String> popQuestions = new LinkedList<>();
@@ -65,28 +63,28 @@ public class Game {
     }
 
     private void askQuestion() {
-        if (currentCategory().equals(POP))
+        if (currentCategory() == Pop)
             System.out.println(popQuestions.removeFirst());
-        if (currentCategory().equals(SCIENCE))
+        if (currentCategory() == Science)
             System.out.println(scienceQuestions.removeFirst());
-        if (currentCategory().equals(SPORTS))
+        if (currentCategory() == Sports)
             System.out.println(sportsQuestions.removeFirst());
-        if (currentCategory().equals(ROCK))
+        if (currentCategory() == Rock)
             System.out.println(rockQuestions.removeFirst());
     }
 
 
-    private String currentCategory() {
-        if (getCurrentPlace() == 0) return POP;
-        if (getCurrentPlace() == 4) return POP;
-        if (getCurrentPlace() == 8) return POP;
-        if (getCurrentPlace() == 1) return SCIENCE;
-        if (getCurrentPlace() == 5) return SCIENCE;
-        if (getCurrentPlace() == 9) return SCIENCE;
-        if (getCurrentPlace() == 2) return SPORTS;
-        if (getCurrentPlace() == 6) return SPORTS;
-        if (getCurrentPlace() == 10) return SPORTS;
-        return ROCK;
+    private Category currentCategory() {
+        if (getCurrentPlace() == 0) return Pop;
+        if (getCurrentPlace() == 4) return Pop;
+        if (getCurrentPlace() == 8) return Pop;
+        if (getCurrentPlace() == 1) return Science;
+        if (getCurrentPlace() == 5) return Science;
+        if (getCurrentPlace() == 9) return Science;
+        if (getCurrentPlace() == 2) return Sports;
+        if (getCurrentPlace() == 6) return Sports;
+        if (getCurrentPlace() == 10) return Sports;
+        return Rock;
     }
 
     public boolean wasCorrectlyAnswered() {
