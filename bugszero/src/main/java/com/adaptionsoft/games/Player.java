@@ -16,6 +16,10 @@ public class Player {
 
     public void increaseGoldCoin() {
         goldCoins++;
+        System.out.println(name
+                + " now has "
+                + goldCoins
+                + " Gold Coins.");
     }
 
     public void move(int roll) {

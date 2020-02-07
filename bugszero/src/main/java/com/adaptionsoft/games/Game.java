@@ -87,35 +87,24 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
         if (!isCurrentInPenaltyBox()) {
-            return answerCorrectly();
+            System.out.println("Answer was correct!!!!");
+            getCurrentPlayer().increaseGoldCoin();
+
+            boolean winner = didPlayerWin();
+            nextPlayer();
+
+            return winner;
         }
 
-        currentPlayer++;
-        if (currentPlayer == players.size()) currentPlayer = 0;
+        nextPlayer();
         return true;
-    }
-
-    private boolean answerCorrectly() {
-        System.out.println("Answer was correct!!!!");
-        getCurrentPlayer().increaseGoldCoin();
-        System.out.println(getCurrentPlayerName()
-                + " now has "
-                + getCurrentPurses()
-                + " Gold Coins.");
-
-        boolean winner = didPlayerWin();
-        currentPlayer++;
-        if (currentPlayer == players.size()) currentPlayer = 0;
-
-        return winner;
     }
 
     public boolean wrongAnswer() {
         System.out.println("Question was incorrectly answered");
         getCurrentPlayer().sendToPenaltyBox();
 
-        currentPlayer++;
-        if (currentPlayer == players.size()) currentPlayer = 0;
+        nextPlayer();
         return true;
     }
 
@@ -137,6 +126,11 @@ public class Game {
 
     private String getCurrentPlayerName() {
         return getCurrentPlayer().getName();
+    }
+
+    private void nextPlayer() {
+        currentPlayer++;
+        if (currentPlayer == players.size()) currentPlayer = 0;
     }
 
     Player getCurrentPlayer() {
