@@ -58,18 +58,18 @@ public class Game {
 
     private void movePlayerAndAskQuestion(int roll) {
         getCurrentPlayer().move(roll);
-        System.out.println("The category is " + getCategory(getCurrentPlace()));
         askQuestion();
     }
 
     private void askQuestion() {
-        if (getCategory(getCurrentPlace()) == Pop)
+        Category category = getCategory(getCurrentPlace());
+        if (category == Pop)
             System.out.println(popQuestions.removeFirst());
-        if (getCategory(getCurrentPlace()) == Science)
+        if (category == Science)
             System.out.println(scienceQuestions.removeFirst());
-        if (getCategory(getCurrentPlace()) == Sports)
+        if (category == Sports)
             System.out.println(sportsQuestions.removeFirst());
-        if (getCategory(getCurrentPlace()) == Rock)
+        if (category == Rock)
             System.out.println(rockQuestions.removeFirst());
     }
 
