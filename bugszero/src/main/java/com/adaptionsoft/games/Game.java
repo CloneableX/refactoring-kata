@@ -28,7 +28,7 @@ public class Game {
         return "Rock Question " + index;
     }
 
-    public void add(String playerName) {
+    public void addPlayer(String playerName) {
         players.add(new Player(playerName));
 
         System.out.println(playerName + " was added");
@@ -58,33 +58,19 @@ public class Game {
 
     private void movePlayerAndAskQuestion(int roll) {
         getCurrentPlayer().move(roll);
-        System.out.println("The category is " + currentCategory());
+        System.out.println("The category is " + getCategory(getCurrentPlace()));
         askQuestion();
     }
 
     private void askQuestion() {
-        if (currentCategory() == Pop)
+        if (getCategory(getCurrentPlace()) == Pop)
             System.out.println(popQuestions.removeFirst());
-        if (currentCategory() == Science)
+        if (getCategory(getCurrentPlace()) == Science)
             System.out.println(scienceQuestions.removeFirst());
-        if (currentCategory() == Sports)
+        if (getCategory(getCurrentPlace()) == Sports)
             System.out.println(sportsQuestions.removeFirst());
-        if (currentCategory() == Rock)
+        if (getCategory(getCurrentPlace()) == Rock)
             System.out.println(rockQuestions.removeFirst());
-    }
-
-
-    private Category currentCategory() {
-        if (getCurrentPlace() == 0) return Pop;
-        if (getCurrentPlace() == 4) return Pop;
-        if (getCurrentPlace() == 8) return Pop;
-        if (getCurrentPlace() == 1) return Science;
-        if (getCurrentPlace() == 5) return Science;
-        if (getCurrentPlace() == 9) return Science;
-        if (getCurrentPlace() == 2) return Sports;
-        if (getCurrentPlace() == 6) return Sports;
-        if (getCurrentPlace() == 10) return Sports;
-        return Rock;
     }
 
     public boolean wasCorrectlyAnswered() {
