@@ -4,6 +4,7 @@ public class Player {
     private String name;
     private int goldCoins = 0;
     private int place = 0;
+    private boolean inPenaltyBox = false;
 
     public Player(String name) {
         this.name = name;
@@ -26,11 +27,20 @@ public class Player {
                 + place);
     }
 
+    public void sendToPenaltyBox() {
+        System.out.println(name + " was sent to the penalty box");
+        inPenaltyBox = true;
+    }
+
     public int getGoldCoins() {
         return goldCoins;
     }
 
     public int getPlace() {
         return place;
+    }
+
+    public boolean isInPenaltyBox() {
+        return inPenaltyBox;
     }
 }
