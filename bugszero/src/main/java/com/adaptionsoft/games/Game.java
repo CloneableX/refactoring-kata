@@ -7,11 +7,29 @@ import static com.adaptionsoft.games.Category.*;
 public class Game {
     private final QuestionManager questionManager;
 
-    ArrayList<Player> players = new ArrayList<Player>();
-    int currentPlayer = 0;
+    private ArrayList<Player> players = new ArrayList<>();
+    private int currentPlayer = 0;
 
     public Game() {
         questionManager = new QuestionManager();
+    }
+
+    public void startGame(Random rand) {
+        boolean notAWinner;
+        do {
+
+            roll(rand.nextInt(5) + 1);
+
+            if (rand.nextInt(9) == 7) {
+                notAWinner = wrongAnswer();
+            } else {
+                notAWinner = answerCorrectly();
+            }
+
+            nextPlayer();
+
+        } while (notAWinner);
+
     }
 
     public void addPlayer(String playerName) {
@@ -19,7 +37,7 @@ public class Game {
         System.out.println("They are player number " + players.size());
     }
 
-    public void roll(int roll) {
+    private void roll(int roll) {
         String currentPlayerName = getCurrentPlayer().getName();
         System.out.println(currentPlayerName + " is the current player");
         System.out.println("They have rolled a " + roll);
@@ -43,7 +61,7 @@ public class Game {
         questionManager.askQuestion(getCategory(getCurrentPlayer().getPlace()));
     }
 
-    public boolean answerCorrectly() {
+    private boolean answerCorrectly() {
         if (getCurrentPlayer().isInPenaltyBox()) {
             return true;
         }
@@ -53,7 +71,7 @@ public class Game {
         return didPlayerWin();
     }
 
-    public boolean wrongAnswer() {
+    private boolean wrongAnswer() {
         System.out.println("Question was incorrectly answered");
         getCurrentPlayer().sendToPenaltyBox();
 
@@ -64,12 +82,12 @@ public class Game {
         return !(getCurrentPlayer().getGoldCoins() == 6);
     }
 
-    void nextPlayer() {
+    private void nextPlayer() {
         currentPlayer++;
         if (currentPlayer == players.size()) currentPlayer = 0;
     }
 
-    Player getCurrentPlayer() {
+    private Player getCurrentPlayer() {
         return players.get(currentPlayer);
     }
 }
