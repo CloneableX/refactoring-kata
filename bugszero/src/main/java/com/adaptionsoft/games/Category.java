@@ -1,7 +1,7 @@
 package com.adaptionsoft.games;
 
 public enum Category {
-    Pop, Science, Sports, Rock;
+    Pop, Science, Sports, Rock, Blues, History;
 
     static Category getCategory(int place) {
         Category[] categories = Category.values();
