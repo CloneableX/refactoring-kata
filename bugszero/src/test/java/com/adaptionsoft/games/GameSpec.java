@@ -13,7 +13,7 @@ public class GameSpec {
 
         Player playerCloneable = game.getCurrentPlayer();
         game.wrongAnswer();
-        game.wasCorrectlyAnswered();
+        game.answerCorrectly();
         game.roll(1);
 
         assertFalse(playerCloneable.isInPenaltyBox());

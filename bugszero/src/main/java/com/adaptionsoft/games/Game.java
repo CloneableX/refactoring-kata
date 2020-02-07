@@ -6,8 +6,8 @@ import static com.adaptionsoft.games.Category.*;
 
 public class Game {
     private final QuestionManager questionManager;
-    ArrayList<Player> players = new ArrayList<Player>();
 
+    ArrayList<Player> players = new ArrayList<Player>();
     int currentPlayer = 0;
 
     public Game() {
@@ -20,72 +20,51 @@ public class Game {
     }
 
     public void roll(int roll) {
-        System.out.println(getCurrentPlayerName() + " is the current player");
+        String currentPlayerName = getCurrentPlayer().getName();
+        System.out.println(currentPlayerName + " is the current player");
         System.out.println("They have rolled a " + roll);
 
-        if (isCurrentInPenaltyBox()) {
-            if (roll % 2 != 0) {
-                getCurrentPlayer().outFromPenaltyBox();
-                movePlayerAndAskQuestion(roll);
-            } else {
-                System.out.println(getCurrentPlayerName() + " is not getting out of the penalty box");
-            }
-
-        } else {
+        if (!getCurrentPlayer().isInPenaltyBox()) {
             movePlayerAndAskQuestion(roll);
+            return;
+        }
+
+        if (roll % 2 != 0) {
+            getCurrentPlayer().outFromPenaltyBox();
+            movePlayerAndAskQuestion(roll);
+        } else {
+            System.out.println(currentPlayerName + " is not getting out of the penalty box");
         }
 
     }
 
     private void movePlayerAndAskQuestion(int roll) {
         getCurrentPlayer().move(roll);
-        questionManager.askQuestion(getCategory(getCurrentPlace()));
+        questionManager.askQuestion(getCategory(getCurrentPlayer().getPlace()));
     }
 
-    public boolean wasCorrectlyAnswered() {
-        if (!isCurrentInPenaltyBox()) {
-            System.out.println("Answer was correct!!!!");
-            getCurrentPlayer().increaseGoldCoin();
-
-            boolean winner = didPlayerWin();
-            nextPlayer();
-
-            return winner;
+    public boolean answerCorrectly() {
+        if (getCurrentPlayer().isInPenaltyBox()) {
+            return true;
         }
+        System.out.println("Answer was correct!!!!");
+        getCurrentPlayer().increaseGoldCoin();
 
-        nextPlayer();
-        return true;
+        return didPlayerWin();
     }
 
     public boolean wrongAnswer() {
         System.out.println("Question was incorrectly answered");
         getCurrentPlayer().sendToPenaltyBox();
 
-        nextPlayer();
         return true;
     }
 
     private boolean didPlayerWin() {
-        return !(getCurrentPurses() == 6);
+        return !(getCurrentPlayer().getGoldCoins() == 6);
     }
 
-    private boolean isCurrentInPenaltyBox() {
-        return getCurrentPlayer().isInPenaltyBox();
-    }
-
-    private int getCurrentPurses() {
-        return getCurrentPlayer().getGoldCoins();
-    }
-
-    private int getCurrentPlace() {
-        return getCurrentPlayer().getPlace();
-    }
-
-    private String getCurrentPlayerName() {
-        return getCurrentPlayer().getName();
-    }
-
-    private void nextPlayer() {
+    void nextPlayer() {
         currentPlayer++;
         if (currentPlayer == players.size()) currentPlayer = 0;
     }
