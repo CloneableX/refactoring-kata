@@ -5,7 +5,6 @@ import java.util.LinkedList;
 
 public class Game {
     ArrayList<Player> players = new ArrayList<Player>();
-    int[] places = new int[6];
     boolean[] inPenaltyBox = new boolean[6];
 
     LinkedList<String> popQuestions = new LinkedList<>();
@@ -31,7 +30,6 @@ public class Game {
 
     public void add(String playerName) {
         players.add(new Player(playerName));
-        places[howManyPlayers()] = 0;
         inPenaltyBox[howManyPlayers()] = false;
 
         System.out.println(playerName + " was added");
@@ -65,12 +63,7 @@ public class Game {
     }
 
     private void movePlayerAndAskQuestion(int roll) {
-        places[currentPlayer] = getCurrentPlace() + roll;
-        if (getCurrentPlace() > 11) places[currentPlayer] = getCurrentPlace() - 12;
-
-        System.out.println(getCurrentPlayerName()
-                + "'s new location is "
-                + getCurrentPlace());
+        getCurrentPlayer().move(roll);
         System.out.println("The category is " + currentCategory());
         askQuestion();
     }
@@ -106,7 +99,7 @@ public class Game {
                 System.out.println("Answer was correct!!!!");
                 currentPlayer++;
                 if (currentPlayer == players.size()) currentPlayer = 0;
-                players.get(currentPlayer).increaseGoldCoin();
+                getCurrentPlayer().increaseGoldCoin();
                 System.out.println(getCurrentPlayerName()
                         + " now has "
                         + getCurrentPurses()
@@ -123,7 +116,7 @@ public class Game {
         } else {
 
             System.out.println("Answer was corrent!!!!");
-            players.get(currentPlayer).increaseGoldCoin();
+            getCurrentPlayer().increaseGoldCoin();
             System.out.println(getCurrentPlayerName()
                     + " now has "
                     + getCurrentPurses()
@@ -156,14 +149,18 @@ public class Game {
     }
 
     private int getCurrentPurses() {
-        return players.get(currentPlayer).getGoldCoins();
+        return getCurrentPlayer().getGoldCoins();
     }
 
     private int getCurrentPlace() {
-        return places[currentPlayer];
+        return getCurrentPlayer().getPlace();
     }
 
     private String getCurrentPlayerName() {
-        return players.get(currentPlayer).getName();
+        return getCurrentPlayer().getName();
+    }
+
+    private Player getCurrentPlayer() {
+        return players.get(currentPlayer);
     }
 }
