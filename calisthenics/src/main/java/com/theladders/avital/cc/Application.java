@@ -23,7 +23,7 @@ public class Application {
                 publishJob(employer.getName(), job.getName(), job.getType());
                 break;
             case "save": {
-                saveJob(employer.getName(), job.getName(), job.getType());
+                saveJob(employer, job);
                 break;
             }
             case "apply": {
@@ -63,14 +63,14 @@ public class Application {
         applied.put(jobSeeker.getName(), saved);
     }
 
-    private void saveJob(String employerName, String jobName, String jobType) {
-        List<List<String>> saved = jobs.getOrDefault(employerName, new ArrayList<>());
+    private void saveJob(Employer employer, Job job) {
+        List<List<String>> saved = jobs.getOrDefault(employer.getName(), new ArrayList<>());
 
         saved.add(new ArrayList<>() {{
-            add(jobName);
-            add(jobType);
+            add(job.getName());
+            add(job.getType());
         }});
-        jobs.put(employerName, saved);
+        jobs.put(employer.getName(), saved);
     }
 
     private void publishJob(String employerName, String jobName, String jobType) throws NotSupportedJobTypeException {
