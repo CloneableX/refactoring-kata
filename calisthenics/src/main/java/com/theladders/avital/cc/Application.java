@@ -20,7 +20,7 @@ public class Application {
                         JobApplication jobApplication) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         switch (command) {
             case "publish":
-                publishJob(employer.getName(), job.getName(), job.getType());
+                publishJob(employer, job);
                 break;
             case "save": {
                 saveJob(employer, job);
@@ -73,18 +73,18 @@ public class Application {
         jobs.put(employer.getName(), saved);
     }
 
-    private void publishJob(String employerName, String jobName, String jobType) throws NotSupportedJobTypeException {
-        if (!jobType.equals("JReq") && !jobType.equals("ATS")) {
+    private void publishJob(Employer employer, Job job) throws NotSupportedJobTypeException {
+        if (!job.getType().equals("JReq") && !job.getType().equals("ATS")) {
             throw new NotSupportedJobTypeException();
         }
 
-        List<List<String>> alreadyPublished = jobs.getOrDefault(employerName, new ArrayList<>());
+        List<List<String>> alreadyPublished = jobs.getOrDefault(employer.getName(), new ArrayList<>());
 
         alreadyPublished.add(new ArrayList<>() {{
-            add(jobName);
-            add(jobType);
+            add(job.getName());
+            add(job.getType());
         }});
-        jobs.put(employerName, alreadyPublished);
+        jobs.put(employer.getName(), alreadyPublished);
     }
 
     public List<List<String>> getJobs(String employerName, String type) {
