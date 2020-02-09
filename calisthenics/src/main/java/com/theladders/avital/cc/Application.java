@@ -12,17 +12,27 @@ public class Application {
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
 
-    public void execute(String command, String employerName, String jobName, String jobType, String jobSeekerName, String resumeApplicantName, LocalDate applicationTime) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void execute(String command,
+                        Employer employer,
+                        Job job,
+                        JobSeeker jobSeeker,
+                        Resume resume,
+                        JobApplication jobApplication) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         switch (command) {
             case "publish":
-                publishJob(employerName, jobName, jobType);
+                publishJob(employer.getName(), job.getName(), job.getType());
                 break;
             case "save": {
-                saveJob(employerName, jobName, jobType);
+                saveJob(employer.getName(), job.getName(), job.getType());
                 break;
             }
             case "apply": {
-                applyJob(employerName, jobName, jobType, jobSeekerName, resumeApplicantName, applicationTime);
+                applyJob(employer.getName(),
+                        job.getName(),
+                        job.getType(),
+                        jobSeeker.getName(),
+                        resume.getName(),
+                        jobApplication.getApplicationTime());
                 break;
             }
         }
