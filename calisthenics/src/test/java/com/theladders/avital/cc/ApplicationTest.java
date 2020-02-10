@@ -92,7 +92,7 @@ public class ApplicationTest {
         String jobSeekerName = "Jacky";
         String jobName = "高级Java开发";
         application.execute(Application.PUBLISH, new Employer(employerAlibaba), new Job(jobName, "JReq"), new JobSeeker(null), new Resume(null), new JobApplication(null));
-        application.execute("save", new Employer(jobSeekerName), new Job(jobName, "JReq"), new JobSeeker(null), new Resume(null), new JobApplication(null));
+        application.execute(Application.SAVE, new Employer(jobSeekerName), new Job(jobName, "JReq"), new JobSeeker(null), new Resume(null), new JobApplication(null));
         List<List<String>> savedJobs = application.getJobs(jobSeekerName, "published");
         List<List<String>> expected = new ArrayList<List<String>>() {{
             add(createNewJob("高级Java开发", "JReq"));

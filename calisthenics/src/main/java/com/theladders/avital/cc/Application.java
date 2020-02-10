@@ -9,6 +9,7 @@ import static java.util.Map.*;
 
 public class Application {
     public static final String PUBLISH = "publish";
+    public static final String SAVE = "save";
     private final HashMap<String, List<List<String>>> jobs = new HashMap<>();
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
@@ -23,7 +24,7 @@ public class Application {
             case PUBLISH:
                 publishJob(employer, job);
                 break;
-            case "save": {
+            case SAVE: {
                 saveJob(employer, job);
                 break;
             }
