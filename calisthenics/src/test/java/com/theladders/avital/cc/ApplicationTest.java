@@ -83,7 +83,7 @@ public class ApplicationTest {
         String employerAlibaba = "Alibaba";
         String seniorJavaDevJob = "高级Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, JobType.JREQ);
+        publishJob(employerAlibaba, seniorJavaDevJob, null);
     }
 
     @Test
@@ -93,7 +93,7 @@ public class ApplicationTest {
         String jobName = "高级Java开发";
         publishJob(employerAlibaba, jobName, JobType.JREQ);
         saveJob(jobSeekerName, jobName);
-        List<List<String>> savedJobs = application.getJobs(jobSeekerName, Command.PUBLISH);
+        List<List<String>> savedJobs = application.getJobs(jobSeekerName, Command.SAVE);
         List<List<String>> expected = new ArrayList<List<String>>() {{
             add(createNewJob("高级Java开发", JobType.JREQ.getName()));
         }};

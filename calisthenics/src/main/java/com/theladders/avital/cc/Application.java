@@ -12,6 +12,7 @@ public class Application {
     private final HashMap<String, List<List<String>>> jobs = new HashMap<>();
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
+    private Jobs jobsTemp = new Jobs();
 
     public void execute(Employer employer,
                         Job job,
@@ -25,7 +26,7 @@ public class Application {
         }
 
         if (command == SAVE) {
-            saveJob(employer, job);
+            jobsTemp.saveJob(employer, job);
             return;
         }
 
@@ -64,16 +65,6 @@ public class Application {
         applied.put(jobSeeker.getName(), saved);
     }
 
-    private void saveJob(Employer employer, Job job) {
-        List<List<String>> saved = jobs.getOrDefault(employer.getName(), new ArrayList<>());
-
-        saved.add(new ArrayList<>() {{
-            add(job.getName());
-            add(job.getTypeName());
-        }});
-        jobs.put(employer.getName(), saved);
-    }
-
     private void publishJob(Employer employer, Job job) throws NotSupportedJobTypeException {
         if (job.getType() != JobType.JREQ && job.getType() != JobType.ATS) {
             throw new NotSupportedJobTypeException();
@@ -92,6 +83,11 @@ public class Application {
         if (command == PUBLISH) {
             return jobs.get(employerName);
         }
+
+        if (command == SAVE) {
+            return jobsTemp.getJobs(employerName);
+        }
+
         return applied.get(employerName);
     }
 
