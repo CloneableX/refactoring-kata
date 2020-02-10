@@ -40,7 +40,7 @@ public class ApplicationTest {
         String employerName = "";
         String jobName = "高级前端开发";
         publishJob(employerName, jobName, JobType.JREQ);
-        List<List<String>> jobs = application.getJobs(employerName, "published");
+        List<List<String>> jobs = application.getJobs(employerName, Command.PUBLISH);
         List<List<String>> expected = new ArrayList<List<String>>() {{
             add(createNewJob("高级前端开发", JobType.JREQ.getName()));
         }};
@@ -56,7 +56,7 @@ public class ApplicationTest {
         String juniorJavaDevJob = "Java开发";
         publishJob(employerAlibaba, seniorJavaDevJob, JobType.JREQ);
         publishJob(employerTencent, juniorJavaDevJob, JobType.JREQ);
-        List<List<String>> jobs = application.getJobs(employerAlibaba, "published");
+        List<List<String>> jobs = application.getJobs(employerAlibaba, Command.PUBLISH);
         List<List<String>> expected = new ArrayList<List<String>>() {{
             add(createNewJob("高级Java开发", JobType.JREQ.getName()));
         }};
@@ -70,7 +70,7 @@ public class ApplicationTest {
         String seniorJavaDevJob = "高级Java开发";
 
         publishJob(employerAlibaba, seniorJavaDevJob, JobType.ATS);
-        List<List<String>> jobs = application.getJobs(employerAlibaba, "published");
+        List<List<String>> jobs = application.getJobs(employerAlibaba, Command.PUBLISH);
         List<List<String>> expected = new ArrayList<List<String>>() {{
             add(createNewJob("高级Java开发", JobType.ATS.getName()));
         }};
@@ -93,7 +93,7 @@ public class ApplicationTest {
         String jobName = "高级Java开发";
         publishJob(employerAlibaba, jobName, JobType.JREQ);
         saveJob(jobSeekerName, jobName);
-        List<List<String>> savedJobs = application.getJobs(jobSeekerName, "published");
+        List<List<String>> savedJobs = application.getJobs(jobSeekerName, Command.PUBLISH);
         List<List<String>> expected = new ArrayList<List<String>>() {{
             add(createNewJob("高级Java开发", JobType.JREQ.getName()));
         }};
@@ -112,7 +112,7 @@ public class ApplicationTest {
         publishJob(employerAlibaba, juniorJavaDevJob, JobType.ATS);
         applyJob(employerAlibaba, jobSeekerName, juniorJavaDevJob, JobType.ATS, null, LocalDate.parse("2020-01-01"));
         applyJob(employerAlibaba, jobSeekerName, seniorJavaDevJob, JobType.ATS, null, LocalDate.parse("2020-01-01"));
-        List<List<String>> appliedJobs = application.getJobs(jobSeekerName, "applied");
+        List<List<String>> appliedJobs = application.getJobs(jobSeekerName, Command.APPLY);
         List<List<String>> expected = new ArrayList<List<String>>() {{
             add(createNewJob("Java开发", JobType.ATS.getName(), "Alibaba", "2020-01-01"));
             add(createNewJob("高级Java开发", JobType.ATS.getName(), "Alibaba", "2020-01-01"));

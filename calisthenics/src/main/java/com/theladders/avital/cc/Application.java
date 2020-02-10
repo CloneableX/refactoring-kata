@@ -88,12 +88,11 @@ public class Application {
         jobs.put(employer.getName(), alreadyPublished);
     }
 
-    public List<List<String>> getJobs(String employerName, String type) {
-        if (type.equals("applied")) {
-            return applied.get(employerName);
+    public List<List<String>> getJobs(String employerName, Command command) {
+        if (command == PUBLISH) {
+            return jobs.get(employerName);
         }
-
-        return jobs.get(employerName);
+        return applied.get(employerName);
     }
 
     public List<String> findApplicants(String jobName) {
