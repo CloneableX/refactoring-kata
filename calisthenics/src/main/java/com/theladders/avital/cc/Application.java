@@ -8,29 +8,16 @@ import java.util.stream.Collectors;
 import static java.util.Map.*;
 
 public class Application {
-    public static final String APPLY = "apply";
     private final HashMap<String, List<List<String>>> jobs = new HashMap<>();
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
 
-    public void execute(String command,
-                        Employer employer,
+    public void execute(Employer employer,
                         Job job,
                         JobSeeker jobSeeker,
                         Resume resume,
-                        JobApplication jobApplication) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
-        if (APPLY.equals(command)) {
-            applyJob(employer, job, jobSeeker, resume, jobApplication);
-        }
-    }
-
-    public void executeTemp(String command,
-                            Employer employer,
-                            Job job,
-                            JobSeeker jobSeeker,
-                            Resume resume,
-                            JobApplication jobApplication,
-                            Command commandEnum) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+                        JobApplication jobApplication,
+                        Command commandEnum) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         if (commandEnum == Command.PUBLISH) {
             publishJob(employer, job);
             return;
@@ -40,7 +27,10 @@ public class Application {
             saveJob(employer, job);
             return;
         }
-        execute(command, employer, job, jobSeeker, resume, jobApplication);
+
+        if (commandEnum == Command.APPLY) {
+            applyJob(employer, job, jobSeeker, resume, jobApplication);
+        }
     }
 
     private void applyJob(Employer employer,
