@@ -41,7 +41,7 @@ public class Application {
                           JobSeeker jobSeeker,
                           Resume resume,
                           JobApplication jobApplication) throws RequiresResumeForJReqJobException, InvalidResumeException {
-        if (job.getType().equals(J_REQ) && resume.getName() == null) {
+        if (job.getJobType() == JobType.JREQ && resume.getName() == null) {
             List<String> failedApplication = new ArrayList<>() {{
                 add(job.getName());
                 add(job.getType());
@@ -52,7 +52,7 @@ public class Application {
             throw new RequiresResumeForJReqJobException();
         }
 
-        if (job.getType().equals(J_REQ) && !resume.getName().equals(jobSeeker.getName())) {
+        if (job.getJobType() == JobType.JREQ && !resume.getName().equals(jobSeeker.getName())) {
             throw new InvalidResumeException();
         }
         List<List<String>> saved = this.applied.getOrDefault(jobSeeker.getName(), new ArrayList<>());
