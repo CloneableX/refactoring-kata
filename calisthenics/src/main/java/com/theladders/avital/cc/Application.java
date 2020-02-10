@@ -12,6 +12,7 @@ public class Application {
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
     private JobManager jobManager = new JobManager();
+    private JobApplicationManager jobApplicationManager = new JobApplicationManager();
 
     public void execute(Employer employer,
                         Job job,
@@ -53,6 +54,11 @@ public class Application {
         if (job.getType() == JobType.JREQ && !resume.getName().equals(jobSeeker.getName())) {
             throw new InvalidResumeException();
         }
+
+        saveJobApplication(employer, job, jobSeeker, jobApplication);
+    }
+
+    private void saveJobApplication(Employer employer, Job job, JobSeeker jobSeeker, JobApplication jobApplication) {
         List<List<String>> saved = this.applied.getOrDefault(jobSeeker.getName(), new ArrayList<>());
 
         saved.add(new ArrayList<>() {{
@@ -62,6 +68,7 @@ public class Application {
             add(employer.getName());
         }});
         applied.put(jobSeeker.getName(), saved);
+        jobApplicationManager.applyJob(jobApplication);
     }
 
     public List<List<String>> getJobs(String employerName, Command command) {
