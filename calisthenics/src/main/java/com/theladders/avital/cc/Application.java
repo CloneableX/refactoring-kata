@@ -16,20 +16,19 @@ public class Application {
                         JobSeeker jobSeeker,
                         Resume resume,
                         JobApplication jobApplication,
-                        Command command) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
-        if (command == PUBLISH) {
-            jobs.publish(new Job(job.getName(), job.getType(), employer));
-            return;
-        }
-
+                        Command command) throws RequiresResumeForJReqJobException, InvalidResumeException {
         if (command == SAVE) {
-            jobs.save(new Job(job.getName(), job.getType(), employer));
+            jobs.save(job);
             return;
         }
 
         if (command == APPLY) {
             applyJob(employer, job, jobSeeker, resume, jobApplication);
         }
+    }
+
+    public void publishJob(Job job) throws EmptyJobTypeException {
+        jobs.publish(job);
     }
 
     private void applyJob(Employer employer,

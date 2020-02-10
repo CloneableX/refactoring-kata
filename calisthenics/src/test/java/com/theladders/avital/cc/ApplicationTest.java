@@ -431,11 +431,11 @@ public class ApplicationTest {
     }
 
     private void publishJob(String employerName, String jobName, JobType jobType) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
-        application.execute(new Employer(employerName), new Job(jobName, jobType), new JobSeeker(null), new Resume(null), new JobApplication(null), Command.PUBLISH);
+        application.publishJob(new Job(jobName, jobType, new Employer(employerName)));
     }
 
     private void saveJob(String jobSeekerName, String jobName) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
-        application.execute(new Employer(jobSeekerName), new Job(jobName, JobType.JREQ), new JobSeeker(null), new Resume(null), new JobApplication(null), Command.SAVE);
+        application.execute(new Employer(jobSeekerName), new Job(jobName, JobType.JREQ, new Employer(jobSeekerName)), new JobSeeker(null), new Resume(null), new JobApplication(null), Command.SAVE);
     }
 
     private void applyJob(String employer,
