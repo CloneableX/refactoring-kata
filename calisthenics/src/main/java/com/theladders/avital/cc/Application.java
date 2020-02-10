@@ -105,8 +105,7 @@ public class Application {
         }
 
         if (jobName == null) {
-            findJobApplicationsByDateRange(from, to, result);
-            return result;
+            return jobApplicationManager.findJobApplicationsByDateRange(from, to);
         }
 
         if (to != null) {
@@ -119,15 +118,6 @@ public class Application {
     private void isMatchJobApplication(List<String> result, String applicant, boolean isAppliedThisDate) {
         if (isAppliedThisDate) {
             result.add(applicant);
-        }
-    }
-
-    private void findJobApplicationsByDateRange(LocalDate from, LocalDate to, List<String> result) {
-        for (Entry<String, List<List<String>>> set : this.applied.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs = set.getValue();
-            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> !from.isAfter(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))) && !to.isBefore(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-            isMatchJobApplication(result, applicant, isAppliedThisDate);
         }
     }
 
