@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import static java.util.Map.*;
 
 public class Application {
-    public static final String PUBLISH = "publish";
     public static final String SAVE = "save";
     public static final String APPLY = "apply";
     private final HashMap<String, List<List<String>>> jobs = new HashMap<>();
@@ -22,9 +21,6 @@ public class Application {
                         Resume resume,
                         JobApplication jobApplication) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         switch (command) {
-            case PUBLISH:
-                publishJob(employer, job);
-                break;
             case SAVE: {
                 saveJob(employer, job);
                 break;
@@ -34,6 +30,20 @@ public class Application {
                 break;
             }
         }
+    }
+
+    public void executeTemp(String command,
+                            Employer employer,
+                            Job job,
+                            JobSeeker jobSeeker,
+                            Resume resume,
+                            JobApplication jobApplication,
+                            Command commandEnum) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+        if (commandEnum == Command.PUBLISH) {
+            publishJob(employer, job);
+            return;
+        }
+        execute(command, employer, job, jobSeeker, resume, jobApplication);
     }
 
     private void applyJob(Employer employer,
