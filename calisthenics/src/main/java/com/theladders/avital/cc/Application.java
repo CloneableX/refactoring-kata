@@ -3,7 +3,6 @@ package com.theladders.avital.cc;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.theladders.avital.cc.Command.*;
 import static java.util.Map.*;
@@ -114,29 +113,11 @@ public class Application {
     public String export(String type, LocalDate date) {
         if (type.equals("csv")) {
             String result = "Employer,Job,Job Type,Applicants,Date" + "\n";
-            result = buildCvsContent(date, result);
+            result = jobApplicationManager.buildCvsContent(date, result);
             return result;
         }
 
         return jobApplicationManager.exportHtml(date);
-    }
-
-    private String buildCvsContent(LocalDate date, String result) {
-        for (Entry<String, List<List<String>>> set : this.applied.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs1 = set.getValue();
-            List<List<String>> appliedOnDate = jobs1.stream().filter(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))).collect(Collectors.toList());
-
-            result = buildCvsItem(result, applicant, appliedOnDate);
-        }
-        return result;
-    }
-
-    private String buildCvsItem(String result, String applicant, List<List<String>> appliedOnDate) {
-        for (List<String> job : appliedOnDate) {
-            result = result.concat(job.get(3) + "," + job.get(0) + "," + job.get(1) + "," + applicant + "," + job.get(2) + "\n");
-        }
-        return result;
     }
 
     public int getSuccessfulApplications(String employerName, String jobName) {
