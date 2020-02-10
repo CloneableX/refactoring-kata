@@ -52,4 +52,8 @@ public class Job {
     public int hashCode() {
         return Objects.hash(name, type);
     }
+
+    public Employer getEmployer() {
+        return employer;
+    }
 }

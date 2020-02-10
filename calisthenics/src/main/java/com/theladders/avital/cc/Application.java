@@ -16,21 +16,17 @@ public class Application {
         jobs.publish(job);
     }
 
-    public void applyJob(Employer employer,
-                         Job job,
-                         JobSeeker jobSeeker,
-                         Resume resume,
-                         JobApplication jobApplication) throws RequiresResumeForJReqJobException, InvalidResumeException {
-        if (job.getType() == JobType.JREQ && resume.getName() == null) {
-            failedJobApplications.saveJobApplication(employer, job, jobApplication);
+    public void applyJob(Job job, JobApplication jobApplication) throws RequiresResumeForJReqJobException, InvalidResumeException {
+        if (job.getType() == JobType.JREQ && jobApplication.getResume().getName() == null) {
+            failedJobApplications.saveJobApplication(job.getEmployer(), job, jobApplication);
             throw new RequiresResumeForJReqJobException();
         }
 
-        if (job.getType() == JobType.JREQ && !resume.getName().equals(jobSeeker.getName())) {
+        if (job.getType() == JobType.JREQ && !jobApplication.getResume().getName().equals(jobApplication.getJobSeeker().getName())) {
             throw new InvalidResumeException();
         }
 
-        jobApplicationManager.applyJob(employer, job, jobSeeker, jobApplication);
+        jobApplicationManager.applyJob(job.getEmployer(), job, jobApplication.getJobSeeker(), jobApplication);
     }
 
     public List<Job> getJobs(String employerName) {
