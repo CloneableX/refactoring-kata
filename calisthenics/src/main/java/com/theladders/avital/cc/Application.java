@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import static java.util.Map.*;
 
 public class Application {
+    public static final String PUBLISH = "publish";
     private final HashMap<String, List<List<String>>> jobs = new HashMap<>();
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
@@ -19,7 +20,7 @@ public class Application {
                         Resume resume,
                         JobApplication jobApplication) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         switch (command) {
-            case "publish":
+            case PUBLISH:
                 publishJob(employer, job);
                 break;
             case "save": {
