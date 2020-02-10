@@ -9,8 +9,6 @@ import static com.theladders.avital.cc.Command.*;
 import static java.util.Map.*;
 
 public class Application {
-    public static final String J_REQ = "JReq";
-    public static final String ATS = "ATS";
     private final HashMap<String, List<List<String>>> jobs = new HashMap<>();
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
