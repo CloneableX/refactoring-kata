@@ -6,15 +6,17 @@ public class JobApplication {
     private LocalDate applicationTime;
     private JobSeeker jobSeeker;
     private Resume resume;
+    private Job job;
 
     public JobApplication(LocalDate applicationTime) {
         this.applicationTime = applicationTime;
     }
 
-    public JobApplication(LocalDate applicationTime, JobSeeker jobSeeker, Resume resume) {
+    public JobApplication(LocalDate applicationTime, JobSeeker jobSeeker, Resume resume, Job job) {
         this.applicationTime = applicationTime;
         this.jobSeeker = jobSeeker;
         this.resume = resume;
+        this.job = job;
     }
 
     public LocalDate getApplicationTime() {
@@ -27,5 +29,9 @@ public class JobApplication {
 
     public Resume getResume() {
         return resume;
+    }
+
+    public Job getJob() {
+        return job;
     }
 }

@@ -426,7 +426,7 @@ public class ApplicationTest {
         assertThat(application.getUnsuccessfulApplications(employerAlibaba, juniorJavaDevJob), is(0));
     }
 
-    private void publishJob(String employerName, String jobName, JobType jobType) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    private void publishJob(String employerName, String jobName, JobType jobType) throws EmptyJobTypeException {
         application.publishJob(new Job(jobName, jobType, new Employer(employerName)));
     }
 
@@ -437,7 +437,7 @@ public class ApplicationTest {
                           String resumeName,
                           LocalDate applicationDate) throws RequiresResumeForJReqJobException, InvalidResumeException {
 
-        application.applyJob(new Job(jobName, jobType, new Employer(employer)), new JobApplication(new JobApplication(applicationDate).getApplicationTime(), new JobSeeker(jobSeekerName), new Resume(resumeName)));
+        application.applyJob(new JobApplication(new JobApplication(applicationDate).getApplicationTime(), new JobSeeker(jobSeekerName), new Resume(resumeName), new Job(jobName, jobType, new Employer(employer))));
     }
 
     private void isSameJobs(String employerName, List<Job> expected) {
