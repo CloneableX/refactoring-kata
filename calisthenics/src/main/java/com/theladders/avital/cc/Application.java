@@ -7,7 +7,6 @@ import java.util.*;
 import static com.theladders.avital.cc.Command.*;
 
 public class Application {
-    private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
     private JobManager jobManager = new JobManager();
     JobApplicationManager jobApplicationManager = new JobApplicationManager();
@@ -53,19 +52,6 @@ public class Application {
             throw new InvalidResumeException();
         }
 
-        saveJobApplication(employer, job, jobSeeker, jobApplication);
-    }
-
-    private void saveJobApplication(Employer employer, Job job, JobSeeker jobSeeker, JobApplication jobApplication) {
-        List<List<String>> saved = this.applied.getOrDefault(jobSeeker.getName(), new ArrayList<>());
-
-        saved.add(new ArrayList<>() {{
-            add(job.getName());
-            add(job.getTypeName());
-            add(jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            add(employer.getName());
-        }});
-        applied.put(jobSeeker.getName(), saved);
         jobApplicationManager.applyJob(employer, job, jobSeeker, jobApplication);
     }
 
