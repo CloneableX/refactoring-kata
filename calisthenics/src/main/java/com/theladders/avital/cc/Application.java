@@ -114,17 +114,7 @@ public class Application {
             return result;
         }
 
-        findJobApplicationsByJobNameAndStartDate(jobName, from, result);
-        return result;
-    }
-
-    private void findJobApplicationsByJobNameAndStartDate(String jobName, LocalDate from, List<String> result) {
-        for (Entry<String, List<List<String>>> set : this.applied.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs = set.getValue();
-            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> job.get(0).equals(jobName) && !from.isAfter(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-            isMatchJobApplication(result, applicant, isAppliedThisDate);
-        }
+        return jobApplicationManager.findJobApplicationsByJobNameAndStartDate(jobName, from);
     }
 
     private void isMatchJobApplication(List<String> result, String applicant, boolean isAppliedThisDate) {

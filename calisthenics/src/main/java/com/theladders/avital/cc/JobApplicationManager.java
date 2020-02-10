@@ -1,5 +1,6 @@
 package com.theladders.avital.cc;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,5 +24,22 @@ public class JobApplicationManager {
 
     public List<List<String>> getJobApplications(String employerName) {
         return jobApplicationMap.get(employerName);
+    }
+
+    public List<String> findJobApplicationsByJobNameAndStartDate(String jobName, LocalDate from) {
+        List<String> result = new ArrayList<>();
+        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
+            String applicant = set.getKey();
+            List<List<String>> jobs = set.getValue();
+            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> job.get(0).equals(jobName) && !from.isAfter(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+            isMatchJobApplication(result, applicant, isAppliedThisDate);
+        }
+        return result;
+    }
+
+    private void isMatchJobApplication(List<String> result, String applicant, boolean isAppliedThisDate) {
+        if (isAppliedThisDate) {
+            result.add(applicant);
+        }
     }
 }
