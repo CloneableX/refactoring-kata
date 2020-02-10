@@ -6,7 +6,7 @@ import java.util.*;
 import static com.theladders.avital.cc.Command.*;
 
 public class Application {
-    private JobManager jobManager = new JobManager();
+    private Jobs jobs = new Jobs();
     private JobApplicationManager jobApplicationManager = new JobApplicationManager();
     private FailedJobApplications failedJobApplications = new FailedJobApplications();
 
@@ -17,12 +17,12 @@ public class Application {
                         JobApplication jobApplication,
                         Command command) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         if (command == PUBLISH) {
-            jobManager.publishJob(employer, job);
+            jobs.publishJob(employer, job);
             return;
         }
 
         if (command == SAVE) {
-            jobManager.saveJob(employer, job);
+            jobs.saveJob(employer, job);
             return;
         }
 
@@ -49,7 +49,7 @@ public class Application {
     }
 
     public List<List<String>> getJobs(String employerName) {
-        return jobManager.getJobs(employerName);
+        return jobs.getJobs(employerName);
     }
 
     public List<List<String>> getJobApplications(String jobSeekerName) {
