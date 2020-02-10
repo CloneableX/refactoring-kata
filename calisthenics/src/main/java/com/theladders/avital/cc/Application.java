@@ -17,13 +17,11 @@ public class Application {
     }
 
     public void applyJob(JobApplication jobApplication) throws RequiresResumeForJReqJobException, InvalidResumeException {
-        if (jobApplication.getJob().getType() == JobType.JREQ && jobApplication.getResume().getName() == null) {
+        try {
+            jobApplication.isValidJobApplication();
+        } catch (RequiresResumeForJReqJobException exception) {
             failedJobApplications.saveJobApplication(jobApplication.getJob().getEmployer(), jobApplication.getJob(), jobApplication);
-            throw new RequiresResumeForJReqJobException();
-        }
-
-        if (jobApplication.getJob().getType() == JobType.JREQ && !jobApplication.getResume().getName().equals(jobApplication.getJobSeeker().getName())) {
-            throw new InvalidResumeException();
+            throw exception;
         }
 
         jobApplicationManager.applyJob(jobApplication.getJob().getEmployer(), jobApplication.getJob(), jobApplication.getJobSeeker(), jobApplication);

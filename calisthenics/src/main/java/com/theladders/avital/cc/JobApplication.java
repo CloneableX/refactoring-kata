@@ -27,11 +27,17 @@ public class JobApplication {
         return jobSeeker;
     }
 
-    public Resume getResume() {
-        return resume;
-    }
-
     public Job getJob() {
         return job;
+    }
+
+    public void isValidJobApplication() throws InvalidResumeException, RequiresResumeForJReqJobException {
+        if (job.getType() == JobType.JREQ && resume.getName() == null) {
+            throw new RequiresResumeForJReqJobException();
+        }
+
+        if (job.getType() == JobType.JREQ && !resume.getName().equals(getJobSeeker().getName())) {
+            throw new InvalidResumeException();
+        }
     }
 }
