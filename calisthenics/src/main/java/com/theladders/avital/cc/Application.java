@@ -11,7 +11,7 @@ import static java.util.Map.*;
 public class Application {
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
-    private Jobs jobs = new Jobs();
+    private JobManager jobManager = new JobManager();
 
     public void execute(Employer employer,
                         Job job,
@@ -20,12 +20,12 @@ public class Application {
                         JobApplication jobApplication,
                         Command command) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         if (command == PUBLISH) {
-            jobs.publishJob(employer, job);
+            jobManager.publishJob(employer, job);
             return;
         }
 
         if (command == SAVE) {
-            jobs.saveJob(employer, job);
+            jobManager.saveJob(employer, job);
             return;
         }
 
@@ -69,7 +69,7 @@ public class Application {
             return applied.get(employerName);
         }
 
-        return jobs.getJobs(employerName);
+        return jobManager.getJobs(employerName);
     }
 
     public List<String> findApplicants(String jobName) {

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Jobs {
+public class JobManager {
     private Map<String, List<Job>> jobsMap = new HashMap<>();
 
     public void saveJob(Employer employer, Job job) {
