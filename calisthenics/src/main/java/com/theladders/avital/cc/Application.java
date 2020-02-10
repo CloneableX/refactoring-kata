@@ -1,15 +1,14 @@
 package com.theladders.avital.cc;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static com.theladders.avital.cc.Command.*;
 
 public class Application {
-    private final List<List<String>> failedApplications = new ArrayList<>();
     private JobManager jobManager = new JobManager();
-    JobApplicationManager jobApplicationManager = new JobApplicationManager();
+    private JobApplicationManager jobApplicationManager = new JobApplicationManager();
+    private FailedJobApplications failedJobApplications = new FailedJobApplications();
 
     public void execute(Employer employer,
                         Job job,
@@ -38,13 +37,7 @@ public class Application {
                           Resume resume,
                           JobApplication jobApplication) throws RequiresResumeForJReqJobException, InvalidResumeException {
         if (job.getType() == JobType.JREQ && resume.getName() == null) {
-            List<String> failedApplication = new ArrayList<>() {{
-                add(job.getName());
-                add(job.getTypeName());
-                add(jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-                add(employer.getName());
-            }};
-            failedApplications.add(failedApplication);
+            failedJobApplications.saveJobApplication(employer, job, jobApplication);
             throw new RequiresResumeForJReqJobException();
         }
 
@@ -106,6 +99,10 @@ public class Application {
     }
 
     public int getUnsuccessfulApplications(String employerName, String jobName) {
-        return (int) failedApplications.stream().filter(job -> job.get(0).equals(jobName) && job.get(3).equals(employerName)).count();
+        return failedJobApplications.getUnsuccessfulApplications(employerName, jobName);
+    }
+
+    public int getSuccessfulApplications(String employerName, String jobName) {
+        return jobApplicationManager.getSuccessfulApplications(employerName, jobName);
     }
 }

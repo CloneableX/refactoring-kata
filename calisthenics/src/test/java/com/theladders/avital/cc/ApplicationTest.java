@@ -406,8 +406,8 @@ public class ApplicationTest {
         applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, JobType.ATS, null, LocalDate.now());
         applyJob(employerTencent, jobSeekerHo, juniorJavaDevJob, JobType.ATS, null, LocalDate.now());
 
-        assertThat(application.jobApplicationManager.getSuccessfulApplications(employerAlibaba, seniorJavaDevJob), is(2));
-        assertThat(application.jobApplicationManager.getSuccessfulApplications(employerAlibaba, juniorJavaDevJob), is(1));
+        assertThat(application.getSuccessfulApplications(employerAlibaba, seniorJavaDevJob), is(2));
+        assertThat(application.getSuccessfulApplications(employerAlibaba, juniorJavaDevJob), is(1));
     }
 
     @Test
