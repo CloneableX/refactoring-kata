@@ -11,13 +11,9 @@ public class Jobs {
         jobs.add(job);
     }
 
-    public List<List<String>> getJobs(String employerName) {
+    public List<Job> getJobs(String employerName) {
         return jobs.stream()
                 .filter(job -> job.isSameEmployer(employerName))
-                .map(job -> new ArrayList<String>() {{
-                    add(job.getName());
-                    add(job.getTypeName());
-                }})
                 .collect(Collectors.toList());
     }
 

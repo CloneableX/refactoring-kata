@@ -2,6 +2,7 @@ package com.theladders.avital.cc;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.theladders.avital.cc.Command.*;
 
@@ -49,7 +50,13 @@ public class Application {
     }
 
     public List<List<String>> getJobs(String employerName) {
-        return jobs.getJobs(employerName);
+        List<Job> jobList = jobs.getJobs(employerName);
+        return jobList.stream()
+                .map(job -> new ArrayList<String>() {{
+                    add(job.getName());
+                    add(job.getTypeName());
+                }})
+                .collect(Collectors.toList());
     }
 
     public List<List<String>> getJobApplications(String jobSeekerName) {
