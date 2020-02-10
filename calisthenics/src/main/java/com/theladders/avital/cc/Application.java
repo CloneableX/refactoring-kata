@@ -9,10 +9,9 @@ import static com.theladders.avital.cc.Command.*;
 import static java.util.Map.*;
 
 public class Application {
-    private final HashMap<String, List<List<String>>> jobs = new HashMap<>();
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
-    private Jobs jobsTemp = new Jobs();
+    private Jobs jobs = new Jobs();
 
     public void execute(Employer employer,
                         Job job,
@@ -21,12 +20,12 @@ public class Application {
                         JobApplication jobApplication,
                         Command command) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         if (command == PUBLISH) {
-            publishJob(employer, job);
+            jobs.publishJob(employer, job);
             return;
         }
 
         if (command == SAVE) {
-            jobsTemp.saveJob(employer, job);
+            jobs.saveJob(employer, job);
             return;
         }
 
@@ -65,30 +64,12 @@ public class Application {
         applied.put(jobSeeker.getName(), saved);
     }
 
-    private void publishJob(Employer employer, Job job) throws NotSupportedJobTypeException {
-        if (job.getType() != JobType.JREQ && job.getType() != JobType.ATS) {
-            throw new NotSupportedJobTypeException();
-        }
-
-        List<List<String>> alreadyPublished = jobs.getOrDefault(employer.getName(), new ArrayList<>());
-
-        alreadyPublished.add(new ArrayList<>() {{
-            add(job.getName());
-            add(job.getTypeName());
-        }});
-        jobs.put(employer.getName(), alreadyPublished);
-    }
-
     public List<List<String>> getJobs(String employerName, Command command) {
-        if (command == PUBLISH) {
-            return jobs.get(employerName);
+        if (command == APPLY) {
+            return applied.get(employerName);
         }
 
-        if (command == SAVE) {
-            return jobsTemp.getJobs(employerName);
-        }
-
-        return applied.get(employerName);
+        return jobs.getJobs(employerName);
     }
 
     public List<String> findApplicants(String jobName) {

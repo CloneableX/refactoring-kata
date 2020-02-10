@@ -21,4 +21,18 @@ public class Jobs {
     public List<List<String>> getJobs(String employerName) {
         return jobsMap.get(employerName);
     }
+
+    void publishJob(Employer employer, Job job) throws NotSupportedJobTypeException {
+        if (job.getType() != JobType.JREQ && job.getType() != JobType.ATS) {
+            throw new NotSupportedJobTypeException();
+        }
+
+        List<List<String>> alreadyPublished = jobsMap.getOrDefault(employer.getName(), new ArrayList<>());
+
+        alreadyPublished.add(new ArrayList<>() {{
+            add(job.getName());
+            add(job.getTypeName());
+        }});
+        jobsMap.put(employer.getName(), alreadyPublished);
+    }
 }
