@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 public class Jobs {
     private List<Job> jobs = new ArrayList<>();
 
-    public void saveJob(Employer employer, Job job) {
-        jobs.add(new Job(job.getName(), job.getType(), employer));
+    public void save(Job job) {
+        jobs.add(job);
     }
 
     public List<List<String>> getJobs(String employerName) {
@@ -23,7 +23,7 @@ public class Jobs {
 
     public void publishJob(Employer employer, Job job) throws EmptyJobTypeException {
         job.isEmptyType();
-        saveJob(employer, job);
+        save(new Job(job.getName(), job.getType(), employer));
     }
 
 }

@@ -22,7 +22,7 @@ public class Application {
         }
 
         if (command == SAVE) {
-            jobs.saveJob(employer, job);
+            jobs.save(new Job(job.getName(), job.getType(), employer));
             return;
         }
 
