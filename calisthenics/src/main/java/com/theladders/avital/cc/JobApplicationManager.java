@@ -155,4 +155,14 @@ public class JobApplicationManager {
         }
         return result;
     }
+
+    public int getSuccessfulApplications(String employerName, String jobName) {
+        int result = 0;
+        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
+            List<List<String>> jobs = set.getValue();
+
+            result += jobs.stream().anyMatch(job -> job.get(3).equals(employerName) && job.get(0).equals(jobName)) ? 1 : 0;
+        }
+        return result;
+    }
 }

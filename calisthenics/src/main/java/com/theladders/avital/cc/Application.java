@@ -5,13 +5,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static com.theladders.avital.cc.Command.*;
-import static java.util.Map.*;
 
 public class Application {
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
     private JobManager jobManager = new JobManager();
-    private JobApplicationManager jobApplicationManager = new JobApplicationManager();
+    JobApplicationManager jobApplicationManager = new JobApplicationManager();
 
     public void execute(Employer employer,
                         Job job,
@@ -118,16 +117,6 @@ public class Application {
         }
 
         return jobApplicationManager.exportHtml(date);
-    }
-
-    public int getSuccessfulApplications(String employerName, String jobName) {
-        int result = 0;
-        for (Entry<String, List<List<String>>> set : this.applied.entrySet()) {
-            List<List<String>> jobs = set.getValue();
-
-            result += jobs.stream().anyMatch(job -> job.get(3).equals(employerName) && job.get(0).equals(jobName)) ? 1 : 0;
-        }
-        return result;
     }
 
     public int getUnsuccessfulApplications(String employerName, String jobName) {
