@@ -1,5 +1,7 @@
 package com.theladders.avital.cc;
 
+import java.util.Objects;
+
 public class Job {
     private final String name;
     private JobType type;
@@ -35,5 +37,19 @@ public class Job {
 
     public boolean isSameEmployer(String employerName) {
         return employerName.equals(employer.getName());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        Job job = (Job) other;
+        return Objects.equals(name, job.name) &&
+                type == job.type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, type);
     }
 }

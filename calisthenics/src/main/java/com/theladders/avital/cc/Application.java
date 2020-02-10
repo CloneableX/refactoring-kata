@@ -45,14 +45,8 @@ public class Application {
         jobApplicationManager.applyJob(employer, job, jobSeeker, jobApplication);
     }
 
-    public List<List<String>> getJobs(String employerName) {
-        List<Job> jobList = jobs.getJobs(employerName);
-        return jobList.stream()
-                .map(job -> new ArrayList<String>() {{
-                    add(job.getName());
-                    add(job.getTypeName());
-                }})
-                .collect(Collectors.toList());
+    public List<Job> getJobs(String employerName) {
+        return jobs.getJobs(employerName);
     }
 
     public List<List<String>> getJobApplications(String jobSeekerName) {

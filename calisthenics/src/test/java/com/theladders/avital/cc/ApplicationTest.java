@@ -40,12 +40,11 @@ public class ApplicationTest {
         String employerName = "";
         String jobName = "高级前端开发";
         publishJob(employerName, jobName, JobType.JREQ);
-        List<List<String>> jobs = application.getJobs(employerName);
-        List<List<String>> expected = new ArrayList<List<String>>() {{
-            add(createNewJob("高级前端开发", JobType.JREQ.getName()));
-        }};
 
-        assertThat(jobs, is(expected));
+        List<Job> expected = new ArrayList<>() {{
+            add(new Job("高级前端开发", JobType.JREQ));
+        }};
+        isSameJobs(employerName, expected);
     }
 
     @Test
@@ -56,12 +55,11 @@ public class ApplicationTest {
         String juniorJavaDevJob = "Java开发";
         publishJob(employerAlibaba, seniorJavaDevJob, JobType.JREQ);
         publishJob(employerTencent, juniorJavaDevJob, JobType.JREQ);
-        List<List<String>> jobs = application.getJobs(employerAlibaba);
-        List<List<String>> expected = new ArrayList<List<String>>() {{
-            add(createNewJob("高级Java开发", JobType.JREQ.getName()));
-        }};
 
-        assertThat(jobs, is(expected));
+        List<Job> expected = new ArrayList<>() {{
+            add(new Job("高级Java开发", JobType.JREQ));
+        }};
+        isSameJobs(employerAlibaba, expected);
     }
 
     @Test
@@ -70,12 +68,11 @@ public class ApplicationTest {
         String seniorJavaDevJob = "高级Java开发";
 
         publishJob(employerAlibaba, seniorJavaDevJob, JobType.ATS);
-        List<List<String>> jobs = application.getJobs(employerAlibaba);
-        List<List<String>> expected = new ArrayList<List<String>>() {{
-            add(createNewJob("高级Java开发", JobType.ATS.getName()));
+        List<Job> expected = new ArrayList<>() {{
+            add(new Job("高级Java开发", JobType.ATS));
         }};
 
-        assertThat(jobs, is(expected));
+        isSameJobs(employerAlibaba, expected);
     }
 
     @Test(expected = EmptyJobTypeException.class)
@@ -93,12 +90,11 @@ public class ApplicationTest {
         String jobName = "高级Java开发";
         publishJob(employerAlibaba, jobName, JobType.JREQ);
         application.saveJob(new Job(jobName, JobType.JREQ, new Employer(jobSeekerName)));
-        List<List<String>> savedJobs = application.getJobs(jobSeekerName);
-        List<List<String>> expected = new ArrayList<>() {{
-            add(createNewJob("高级Java开发", JobType.JREQ.getName()));
-        }};
 
-        assertThat(savedJobs, is(expected));
+        List<Job> expected = new ArrayList<>() {{
+            add(new Job("高级Java开发", JobType.JREQ));
+        }};
+        isSameJobs(jobSeekerName, expected);
     }
 
     @Test
@@ -447,5 +443,10 @@ public class ApplicationTest {
                 new Resume(resumeName),
                 new JobApplication(applicationDate)
         );
+    }
+
+    private void isSameJobs(String employerName, List<Job> expected) {
+        List<Job> jobs = application.getJobs(employerName);
+        assertThat(jobs, is(expected));
     }
 }
