@@ -68,12 +68,12 @@ public class Application {
             add(employer.getName());
         }});
         applied.put(jobSeeker.getName(), saved);
-        jobApplicationManager.applyJob(jobApplication);
+        jobApplicationManager.applyJob(employer, job, jobSeeker, jobApplication);
     }
 
     public List<List<String>> getJobs(String employerName, Command command) {
         if (command == APPLY) {
-            return applied.get(employerName);
+            return jobApplicationManager.getJobs(employerName);
         }
 
         return jobManager.getJobs(employerName);
