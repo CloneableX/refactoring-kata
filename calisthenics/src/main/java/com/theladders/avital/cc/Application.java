@@ -71,12 +71,12 @@ public class Application {
         jobApplicationManager.applyJob(employer, job, jobSeeker, jobApplication);
     }
 
-    public List<List<String>> getJobs(String employerName, Command command) {
-        if (command == APPLY) {
-            return jobApplicationManager.getJobs(employerName);
-        }
-
+    public List<List<String>> getJobs(String employerName) {
         return jobManager.getJobs(employerName);
+    }
+
+    public List<List<String>> getJobApplications(String jobSeekerName) {
+        return jobApplicationManager.getJobApplications(jobSeekerName);
     }
 
     public List<String> findApplicants(String jobName) {

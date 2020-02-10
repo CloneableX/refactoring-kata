@@ -21,7 +21,7 @@ public class JobApplicationManager {
         jobApplicationMap.put(jobSeeker.getName(), saved);
     }
 
-    public List<List<String>> getJobs(String employerName) {
+    public List<List<String>> getJobApplications(String employerName) {
         return jobApplicationMap.get(employerName);
     }
 }
