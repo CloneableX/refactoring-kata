@@ -77,7 +77,7 @@ public class Application {
     }
 
     private void publishJob(Employer employer, Job job) throws NotSupportedJobTypeException {
-        if (!job.getType().equals(J_REQ) && !job.getType().equals(ATS)) {
+        if (job.getJobType() != JobType.JREQ && job.getJobType() != JobType.ATS) {
             throw new NotSupportedJobTypeException();
         }
 
