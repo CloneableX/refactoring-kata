@@ -39,10 +39,10 @@ public class ApplicationTest {
     public void employers_should_be_able_to_publish_a_job() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerName = "";
         String jobName = "高级前端开发";
-        publishJob(employerName, jobName, "JReq");
+        publishJob(employerName, jobName, Application.J_REQ);
         List<List<String>> jobs = application.getJobs(employerName, "published");
         List<List<String>> expected = new ArrayList<List<String>>() {{
-            add(createNewJob("高级前端开发", "JReq"));
+            add(createNewJob("高级前端开发", Application.J_REQ));
         }};
 
         assertThat(jobs, is(expected));
@@ -54,11 +54,11 @@ public class ApplicationTest {
         String employerTencent = "Tencent";
         String seniorJavaDevJob = "高级Java开发";
         String juniorJavaDevJob = "Java开发";
-        publishJob(employerAlibaba, seniorJavaDevJob, "JReq");
-        publishJob(employerTencent, juniorJavaDevJob, "JReq");
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.J_REQ);
+        publishJob(employerTencent, juniorJavaDevJob, Application.J_REQ);
         List<List<String>> jobs = application.getJobs(employerAlibaba, "published");
         List<List<String>> expected = new ArrayList<List<String>>() {{
-            add(createNewJob("高级Java开发", "JReq"));
+            add(createNewJob("高级Java开发", Application.J_REQ));
         }};
 
         assertThat(jobs, is(expected));
@@ -69,10 +69,10 @@ public class ApplicationTest {
         String employerAlibaba = "Alibaba";
         String seniorJavaDevJob = "高级Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "ATS");
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.ATS);
         List<List<String>> jobs = application.getJobs(employerAlibaba, "published");
         List<List<String>> expected = new ArrayList<List<String>>() {{
-            add(createNewJob("高级Java开发", "ATS"));
+            add(createNewJob("高级Java开发", Application.ATS));
         }};
 
         assertThat(jobs, is(expected));
@@ -83,7 +83,7 @@ public class ApplicationTest {
         String employerAlibaba = "Alibaba";
         String seniorJavaDevJob = "高级Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "RJeq");
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.J_REQ);
     }
 
     @Test
@@ -91,11 +91,11 @@ public class ApplicationTest {
         String employerAlibaba = "Alibaba";
         String jobSeekerName = "Jacky";
         String jobName = "高级Java开发";
-        publishJob(employerAlibaba, jobName, "JReq");
-        saveJob(jobSeekerName, jobName, "JReq");
+        publishJob(employerAlibaba, jobName, Application.J_REQ);
+        saveJob(jobSeekerName, jobName);
         List<List<String>> savedJobs = application.getJobs(jobSeekerName, "published");
         List<List<String>> expected = new ArrayList<List<String>>() {{
-            add(createNewJob("高级Java开发", "JReq"));
+            add(createNewJob("高级Java开发", Application.J_REQ));
         }};
 
         assertThat(savedJobs, is(expected));
@@ -108,14 +108,14 @@ public class ApplicationTest {
         String seniorJavaDevJob = "高级Java开发";
         String juniorJavaDevJob = "Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "ATS");
-        publishJob(employerAlibaba, juniorJavaDevJob, "ATS");
-        applyJob(employerAlibaba, jobSeekerName, juniorJavaDevJob, "ATS", null, LocalDate.parse("2020-01-01"));
-        applyJob(employerAlibaba, jobSeekerName, seniorJavaDevJob, "ATS", null, LocalDate.parse("2020-01-01"));
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.ATS);
+        publishJob(employerAlibaba, juniorJavaDevJob, Application.ATS);
+        applyJob(employerAlibaba, jobSeekerName, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("2020-01-01"));
+        applyJob(employerAlibaba, jobSeekerName, seniorJavaDevJob, Application.ATS, null, LocalDate.parse("2020-01-01"));
         List<List<String>> appliedJobs = application.getJobs(jobSeekerName, "applied");
         List<List<String>> expected = new ArrayList<List<String>>() {{
-            add(createNewJob("Java开发", "ATS", "Alibaba", "2020-01-01"));
-            add(createNewJob("高级Java开发", "ATS", "Alibaba", "2020-01-01"));
+            add(createNewJob("Java开发", Application.ATS, "Alibaba", "2020-01-01"));
+            add(createNewJob("高级Java开发", Application.ATS, "Alibaba", "2020-01-01"));
         }};
 
         assertThat(appliedJobs, is(expected));
@@ -127,8 +127,8 @@ public class ApplicationTest {
         String jobSeekerName = "Jacky";
         String seniorJavaDevJob = "高级Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "JReq");
-        applyJob(employerAlibaba, jobSeekerName, seniorJavaDevJob, "JReq", null, LocalDate.now());
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.J_REQ);
+        applyJob(employerAlibaba, jobSeekerName, seniorJavaDevJob, Application.J_REQ, null, LocalDate.now());
     }
 
     @Test(expected = InvalidResumeException.class)
@@ -138,8 +138,8 @@ public class ApplicationTest {
         String seniorJavaDevJob = "高级Java开发";
         String resumeApplicantName = "Jacky Chen";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "JReq");
-        applyJob(employerAlibaba, jobSeekerName, seniorJavaDevJob, "JReq", resumeApplicantName, LocalDate.now());
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.J_REQ);
+        applyJob(employerAlibaba, jobSeekerName, seniorJavaDevJob, Application.J_REQ, resumeApplicantName, LocalDate.now());
     }
 
     @Test
@@ -149,9 +149,9 @@ public class ApplicationTest {
         String jobSeekerLam = "Lam";
         String seniorJavaDevJob = "高级Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "ATS");
-        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, "ATS", null, LocalDate.now());
-        applyJob(employerAlibaba, jobSeekerLam, seniorJavaDevJob, "ATS", null, LocalDate.now());
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.ATS);
+        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, Application.ATS, null, LocalDate.now());
+        applyJob(employerAlibaba, jobSeekerLam, seniorJavaDevJob, Application.ATS, null, LocalDate.now());
         List<String> applicants = application.findApplicants(seniorJavaDevJob);
 
         List<String> expected = new ArrayList<String>() {{
@@ -169,9 +169,9 @@ public class ApplicationTest {
         String jobSeekerHo = "Ho";
         String seniorJavaDevJob = "高级Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "ATS");
-        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, "ATS", null, LocalDate.parse("1997-07-01"));
-        applyJob(employerAlibaba, jobSeekerHo, seniorJavaDevJob, "ATS", null, LocalDate.parse("1999-12-20"));
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.ATS);
+        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, Application.ATS, null, LocalDate.parse("1997-07-01"));
+        applyJob(employerAlibaba, jobSeekerHo, seniorJavaDevJob, Application.ATS, null, LocalDate.parse("1999-12-20"));
         List<String> applicants = application.findApplicants(null, LocalDate.parse("1999-12-20"));
 
         List<String> expected = new ArrayList<String>() {{
@@ -188,9 +188,9 @@ public class ApplicationTest {
         String jobSeekerHo = "Ho";
         String seniorJavaDevJob = "高级Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "ATS");
-        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, "ATS", null, LocalDate.parse("1997-07-01"));
-        applyJob(employerAlibaba, jobSeekerHo, seniorJavaDevJob, "ATS", null, LocalDate.parse("1999-12-20"));
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.ATS);
+        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, Application.ATS, null, LocalDate.parse("1997-07-01"));
+        applyJob(employerAlibaba, jobSeekerHo, seniorJavaDevJob, Application.ATS, null, LocalDate.parse("1999-12-20"));
         List<String> applicants = application.findApplicants(null, null, LocalDate.parse("1999-01-01"));
 
         List<String> expected = new ArrayList<String>() {{
@@ -207,9 +207,9 @@ public class ApplicationTest {
         String jobSeekerHo = "Ho";
         String seniorJavaDevJob = "高级Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "ATS");
-        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, "ATS", null, LocalDate.parse("1997-07-01"));
-        applyJob(employerAlibaba, jobSeekerHo, seniorJavaDevJob, "ATS", null, LocalDate.parse("1999-12-20"));
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.ATS);
+        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, Application.ATS, null, LocalDate.parse("1997-07-01"));
+        applyJob(employerAlibaba, jobSeekerHo, seniorJavaDevJob, Application.ATS, null, LocalDate.parse("1999-12-20"));
         List<String> applicants = application.findApplicants(null, LocalDate.parse("1997-07-01"), LocalDate.parse("1999-12-20"));
 
         List<String> expected = new ArrayList<String>() {{
@@ -229,11 +229,11 @@ public class ApplicationTest {
         String seniorJavaDevJob = "高级Java开发";
         String juniorJavaDevJob = "Java开发";
 
-        publishJob(employerAlibaba, juniorJavaDevJob, "ATS");
-        publishJob(employerAlibaba, seniorJavaDevJob, "JReq");
-        applyJob(employerAlibaba, jobSeekerJacky, juniorJavaDevJob, "ATS", null, LocalDate.parse("1997-07-01"));
-        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, "JReq", resumeApplicantName, LocalDate.parse("1999-12-20"));
-        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, "ATS", null, LocalDate.parse("1999-12-20"));
+        publishJob(employerAlibaba, juniorJavaDevJob, Application.ATS);
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.J_REQ);
+        applyJob(employerAlibaba, jobSeekerJacky, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1997-07-01"));
+        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, Application.J_REQ, resumeApplicantName, LocalDate.parse("1999-12-20"));
+        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1999-12-20"));
 
         List<String> applicants = application.findApplicants(seniorJavaDevJob, LocalDate.parse("1999-12-20"));
 
@@ -252,11 +252,11 @@ public class ApplicationTest {
         String seniorJavaDevJob = "高级Java开发";
         String juniorJavaDevJob = "Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "ATS");
-        publishJob(employerAlibaba, juniorJavaDevJob, "ATS");
-        applyJob(employerAlibaba, jobSeekerJacky, juniorJavaDevJob, "ATS", null, LocalDate.parse("1997-07-01"));
-        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, "ATS", null, LocalDate.parse("1997-07-01"));
-        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, "ATS", null, LocalDate.parse("1999-12-20"));
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.ATS);
+        publishJob(employerAlibaba, juniorJavaDevJob, Application.ATS);
+        applyJob(employerAlibaba, jobSeekerJacky, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1997-07-01"));
+        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, Application.ATS, null, LocalDate.parse("1997-07-01"));
+        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1999-12-20"));
 
         List<String> applicants = application.findApplicants(juniorJavaDevJob, null, LocalDate.parse("1999-01-01"));
 
@@ -277,12 +277,12 @@ public class ApplicationTest {
         String seniorJavaDevJob = "高级Java开发";
         String juniorJavaDevJob = "Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "ATS");
-        publishJob(employerAlibaba, juniorJavaDevJob, "ATS");
-        applyJob(employerAlibaba, jobSeekerWong, seniorJavaDevJob, "ATS", null, LocalDate.parse("1997-07-01"));
-        applyJob(employerAlibaba, jobSeekerJacky, juniorJavaDevJob, "ATS", null, LocalDate.parse("1997-07-01"));
-        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, "ATS", null, LocalDate.parse("1998-01-01"));
-        applyJob(employerAlibaba, jobSeekerLam, juniorJavaDevJob, "ATS", null, LocalDate.parse("1999-12-20"));
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.ATS);
+        publishJob(employerAlibaba, juniorJavaDevJob, Application.ATS);
+        applyJob(employerAlibaba, jobSeekerWong, seniorJavaDevJob, Application.ATS, null, LocalDate.parse("1997-07-01"));
+        applyJob(employerAlibaba, jobSeekerJacky, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1997-07-01"));
+        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1998-01-01"));
+        applyJob(employerAlibaba, jobSeekerLam, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1999-12-20"));
 
         List<String> applicants = application.findApplicants(juniorJavaDevJob, LocalDate.parse("1997-01-01"), LocalDate.parse("1999-01-01"));
 
@@ -305,13 +305,13 @@ public class ApplicationTest {
         String seniorJavaDevJob = "高级Java开发";
         String juniorJavaDevJob = "Java开发";
 
-        publishJob(employerAlibaba, juniorJavaDevJob, "ATS");
-        publishJob(employerAlibaba, seniorJavaDevJob, "JReq");
-        applyJob(employerAlibaba, jobSeekerJacky, juniorJavaDevJob, "ATS", null, LocalDate.parse("1997-07-01"));
-        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, "JReq", jackyResume, LocalDate.parse("1999-12-20"));
-        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, "ATS", null, LocalDate.parse("1999-12-20"));
-        applyJob(employerAlibaba, jobSeekerLam, juniorJavaDevJob, "ATS", null, LocalDate.parse("1999-12-20"));
-        applyJob(employerAlibaba, jobSeekerLam, seniorJavaDevJob, "JReq", lamResume, LocalDate.parse("1999-12-20"));
+        publishJob(employerAlibaba, juniorJavaDevJob, Application.ATS);
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.J_REQ);
+        applyJob(employerAlibaba, jobSeekerJacky, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1997-07-01"));
+        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, Application.J_REQ, jackyResume, LocalDate.parse("1999-12-20"));
+        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1999-12-20"));
+        applyJob(employerAlibaba, jobSeekerLam, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1999-12-20"));
+        applyJob(employerAlibaba, jobSeekerLam, seniorJavaDevJob, Application.J_REQ, lamResume, LocalDate.parse("1999-12-20"));
 
         String csv = application.export("csv", LocalDate.parse("1999-12-20"));
         String expected = "Employer,Job,Job Type,Applicants,Date" + "\n" + "Alibaba,Java开发,ATS,Ho,1999-12-20" + "\n" + "Alibaba,Java开发,ATS,Lam,1999-12-20" + "\n" + "Alibaba,高级Java开发,JReq,Lam,1999-12-20" + "\n" + "Alibaba,高级Java开发,JReq,Jacky,1999-12-20" + "\n";
@@ -330,13 +330,13 @@ public class ApplicationTest {
         String seniorJavaDevJob = "高级Java开发";
         String juniorJavaDevJob = "Java开发";
 
-        publishJob(employerAlibaba, juniorJavaDevJob, "ATS");
-        publishJob(employerAlibaba, seniorJavaDevJob, "JReq");
-        applyJob(employerAlibaba, jobSeekerJacky, juniorJavaDevJob, "ATS", null, LocalDate.parse("1997-07-01"));
-        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, "JReq", jackyResume, LocalDate.parse("1999-12-20"));
-        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, "ATS", null, LocalDate.parse("1999-12-20"));
-        applyJob(employerAlibaba, jobSeekerLam, juniorJavaDevJob, "ATS", null, LocalDate.parse("1999-12-20"));
-        applyJob(employerAlibaba, jobSeekerLam, seniorJavaDevJob, "JReq", lamResume, LocalDate.parse("1999-12-20"));
+        publishJob(employerAlibaba, juniorJavaDevJob, Application.ATS);
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.J_REQ);
+        applyJob(employerAlibaba, jobSeekerJacky, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1997-07-01"));
+        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, Application.J_REQ, jackyResume, LocalDate.parse("1999-12-20"));
+        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1999-12-20"));
+        applyJob(employerAlibaba, jobSeekerLam, juniorJavaDevJob, Application.ATS, null, LocalDate.parse("1999-12-20"));
+        applyJob(employerAlibaba, jobSeekerLam, seniorJavaDevJob, Application.J_REQ, lamResume, LocalDate.parse("1999-12-20"));
 
         String csv = application.export("html", LocalDate.parse("1999-12-20"));
         String expected = "<!DOCTYPE html>"
@@ -398,13 +398,13 @@ public class ApplicationTest {
         String seniorJavaDevJob = "高级Java开发";
         String juniorJavaDevJob = "Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "ATS");
-        publishJob(employerAlibaba, juniorJavaDevJob, "ATS");
-        publishJob(employerTencent, juniorJavaDevJob, "ATS");
-        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, "ATS", null, LocalDate.now());
-        applyJob(employerAlibaba, jobSeekerLam, seniorJavaDevJob, "ATS", null, LocalDate.now());
-        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, "ATS", null, LocalDate.now());
-        applyJob(employerTencent, jobSeekerHo, juniorJavaDevJob, "ATS", null, LocalDate.now());
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.ATS);
+        publishJob(employerAlibaba, juniorJavaDevJob, Application.ATS);
+        publishJob(employerTencent, juniorJavaDevJob, Application.ATS);
+        applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, Application.ATS, null, LocalDate.now());
+        applyJob(employerAlibaba, jobSeekerLam, seniorJavaDevJob, Application.ATS, null, LocalDate.now());
+        applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, Application.ATS, null, LocalDate.now());
+        applyJob(employerTencent, jobSeekerHo, juniorJavaDevJob, Application.ATS, null, LocalDate.now());
 
         assertThat(application.getSuccessfulApplications(employerAlibaba, seniorJavaDevJob), is(2));
         assertThat(application.getSuccessfulApplications(employerAlibaba, juniorJavaDevJob), is(1));
@@ -418,13 +418,13 @@ public class ApplicationTest {
         String seniorJavaDevJob = "高级Java开发";
         String juniorJavaDevJob = "Java开发";
 
-        publishJob(employerAlibaba, seniorJavaDevJob, "JReq");
-        publishJob(employerAlibaba, juniorJavaDevJob, "ATS");
+        publishJob(employerAlibaba, seniorJavaDevJob, Application.J_REQ);
+        publishJob(employerAlibaba, juniorJavaDevJob, Application.ATS);
         try {
-            applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, "JReq", null, LocalDate.now());
+            applyJob(employerAlibaba, jobSeekerJacky, seniorJavaDevJob, Application.J_REQ, null, LocalDate.now());
         } catch (RequiresResumeForJReqJobException ignored) {
         }
-        applyJob(employerAlibaba, jobSeekerLam, juniorJavaDevJob, "ATS", null, LocalDate.now());
+        applyJob(employerAlibaba, jobSeekerLam, juniorJavaDevJob, Application.ATS, null, LocalDate.now());
 
         assertThat(application.getUnsuccessfulApplications(employerAlibaba, seniorJavaDevJob), is(1));
         assertThat(application.getUnsuccessfulApplications(employerAlibaba, juniorJavaDevJob), is(0));
@@ -434,8 +434,8 @@ public class ApplicationTest {
         application.execute(new Employer(employerName), new Job(jobName, jobType), new JobSeeker(null), new Resume(null), new JobApplication(null), Command.PUBLISH);
     }
 
-    private void saveJob(String jobSeekerName, String jobName, String jobType) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
-        application.execute(new Employer(jobSeekerName), new Job(jobName, jobType), new JobSeeker(null), new Resume(null), new JobApplication(null), Command.SAVE);
+    private void saveJob(String jobSeekerName, String jobName) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+        application.execute(new Employer(jobSeekerName), new Job(jobName, Application.J_REQ), new JobSeeker(null), new Resume(null), new JobApplication(null), Command.SAVE);
     }
 
     private void applyJob(String employer,

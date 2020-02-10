@@ -9,6 +9,8 @@ import static com.theladders.avital.cc.Command.*;
 import static java.util.Map.*;
 
 public class Application {
+    public static final String J_REQ = "JReq";
+    public static final String ATS = "ATS";
     private final HashMap<String, List<List<String>>> jobs = new HashMap<>();
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
     private final List<List<String>> failedApplications = new ArrayList<>();
@@ -39,7 +41,7 @@ public class Application {
                           JobSeeker jobSeeker,
                           Resume resume,
                           JobApplication jobApplication) throws RequiresResumeForJReqJobException, InvalidResumeException {
-        if (job.getType().equals("JReq") && resume.getName() == null) {
+        if (job.getType().equals(J_REQ) && resume.getName() == null) {
             List<String> failedApplication = new ArrayList<>() {{
                 add(job.getName());
                 add(job.getType());
@@ -50,7 +52,7 @@ public class Application {
             throw new RequiresResumeForJReqJobException();
         }
 
-        if (job.getType().equals("JReq") && !resume.getName().equals(jobSeeker.getName())) {
+        if (job.getType().equals(J_REQ) && !resume.getName().equals(jobSeeker.getName())) {
             throw new InvalidResumeException();
         }
         List<List<String>> saved = this.applied.getOrDefault(jobSeeker.getName(), new ArrayList<>());
@@ -75,7 +77,7 @@ public class Application {
     }
 
     private void publishJob(Employer employer, Job job) throws NotSupportedJobTypeException {
-        if (!job.getType().equals("JReq") && !job.getType().equals("ATS")) {
+        if (!job.getType().equals(J_REQ) && !job.getType().equals(ATS)) {
             throw new NotSupportedJobTypeException();
         }
 
