@@ -42,4 +42,15 @@ public class JobApplicationManager {
             result.add(applicant);
         }
     }
+
+    public List<String> findJobApplicationsByJobNameAndEndDate(String jobName, LocalDate to) {
+        List<String> result = new ArrayList<>();
+        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
+            String applicant = set.getKey();
+            List<List<String>> jobs = set.getValue();
+            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> job.get(0).equals(jobName) && !to.isBefore(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+            isMatchJobApplication(result, applicant, isAppliedThisDate);
+        }
+        return result;
+    }
 }
