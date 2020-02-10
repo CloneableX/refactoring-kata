@@ -92,9 +92,9 @@ public class ApplicationTest {
         String jobSeekerName = "Jacky";
         String jobName = "高级Java开发";
         publishJob(employerAlibaba, jobName, JobType.JREQ);
-        saveJob(jobSeekerName, jobName);
+        application.saveJob(new Job(jobName, JobType.JREQ, new Employer(jobSeekerName)));
         List<List<String>> savedJobs = application.getJobs(jobSeekerName);
-        List<List<String>> expected = new ArrayList<List<String>>() {{
+        List<List<String>> expected = new ArrayList<>() {{
             add(createNewJob("高级Java开发", JobType.JREQ.getName()));
         }};
 
@@ -434,22 +434,18 @@ public class ApplicationTest {
         application.publishJob(new Job(jobName, jobType, new Employer(employerName)));
     }
 
-    private void saveJob(String jobSeekerName, String jobName) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
-        application.execute(new Employer(jobSeekerName), new Job(jobName, JobType.JREQ, new Employer(jobSeekerName)), new JobSeeker(null), new Resume(null), new JobApplication(null), Command.SAVE);
-    }
-
     private void applyJob(String employer,
                           String jobSeekerName,
                           String jobName,
                           JobType jobType,
                           String resumeName,
-                          LocalDate applicationDate) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+                          LocalDate applicationDate) throws RequiresResumeForJReqJobException, InvalidResumeException {
         application.execute(
                 new Employer(employer),
                 new Job(jobName, jobType),
                 new JobSeeker(jobSeekerName),
                 new Resume(resumeName),
-                new JobApplication(applicationDate),
-                Command.APPLY);
+                new JobApplication(applicationDate)
+        );
     }
 }

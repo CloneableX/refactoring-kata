@@ -15,16 +15,13 @@ public class Application {
                         Job job,
                         JobSeeker jobSeeker,
                         Resume resume,
-                        JobApplication jobApplication,
-                        Command command) throws RequiresResumeForJReqJobException, InvalidResumeException {
-        if (command == SAVE) {
-            jobs.save(job);
-            return;
-        }
+                        JobApplication jobApplication) throws RequiresResumeForJReqJobException, InvalidResumeException {
 
-        if (command == APPLY) {
             applyJob(employer, job, jobSeeker, resume, jobApplication);
-        }
+    }
+
+    public void saveJob(Job job) {
+        jobs.save(job);
     }
 
     public void publishJob(Job job) throws EmptyJobTypeException {
