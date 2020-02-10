@@ -309,7 +309,7 @@ public class ApplicationTest {
         applyJob(employerAlibaba, jobSeekerLam, juniorJavaDevJob, JobType.ATS, null, LocalDate.parse("1999-12-20"));
         applyJob(employerAlibaba, jobSeekerLam, seniorJavaDevJob, JobType.JREQ, lamResume, LocalDate.parse("1999-12-20"));
 
-        String csv = application.export("csv", LocalDate.parse("1999-12-20"));
+        String csv = application.exportCvs(LocalDate.parse("1999-12-20"));
         String expected = "Employer,Job,Job Type,Applicants,Date" + "\n" + "Alibaba,Java开发,ATS,Ho,1999-12-20" + "\n" + "Alibaba,Java开发,ATS,Lam,1999-12-20" + "\n" + "Alibaba,高级Java开发,JReq,Lam,1999-12-20" + "\n" + "Alibaba,高级Java开发,JReq,Jacky,1999-12-20" + "\n";
 
         assertThat(csv, is(expected));
@@ -334,7 +334,7 @@ public class ApplicationTest {
         applyJob(employerAlibaba, jobSeekerLam, juniorJavaDevJob, JobType.ATS, null, LocalDate.parse("1999-12-20"));
         applyJob(employerAlibaba, jobSeekerLam, seniorJavaDevJob, JobType.JREQ, lamResume, LocalDate.parse("1999-12-20"));
 
-        String csv = application.export("html", LocalDate.parse("1999-12-20"));
+        String csv = application.exportHtml(LocalDate.parse("1999-12-20"));
         String expected = "<!DOCTYPE html>"
                 + "<body>"
                 + "<table>"

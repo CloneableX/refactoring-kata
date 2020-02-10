@@ -73,13 +73,13 @@ public class Application {
         return jobApplicationManager.findJobApplicationsByJobNameAndStartDate(jobName, from);
     }
 
-    public String export(String type, LocalDate date) {
-        if (type.equals("csv")) {
-            String result = "Employer,Job,Job Type,Applicants,Date" + "\n";
-            result = jobApplicationManager.buildCvsContent(date, result);
-            return result;
-        }
+    public String exportCvs(LocalDate date) {
+        String result = "Employer,Job,Job Type,Applicants,Date" + "\n";
+        result = jobApplicationManager.buildCvsContent(date, result);
+        return result;
+    }
 
+    public String exportHtml(LocalDate date) {
         return jobApplicationManager.exportHtml(date);
     }
 
