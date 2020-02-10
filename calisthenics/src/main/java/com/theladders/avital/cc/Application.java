@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import static java.util.Map.*;
 
 public class Application {
-    public static final String SAVE = "save";
     public static final String APPLY = "apply";
     private final HashMap<String, List<List<String>>> jobs = new HashMap<>();
     private final HashMap<String, List<List<String>>> applied = new HashMap<>();
@@ -20,15 +19,8 @@ public class Application {
                         JobSeeker jobSeeker,
                         Resume resume,
                         JobApplication jobApplication) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
-        switch (command) {
-            case SAVE: {
-                saveJob(employer, job);
-                break;
-            }
-            case APPLY: {
-                applyJob(employer, job, jobSeeker, resume, jobApplication);
-                break;
-            }
+        if (APPLY.equals(command)) {
+            applyJob(employer, job, jobSeeker, resume, jobApplication);
         }
     }
 
@@ -41,6 +33,11 @@ public class Application {
                             Command commandEnum) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         if (commandEnum == Command.PUBLISH) {
             publishJob(employer, job);
+            return;
+        }
+
+        if (commandEnum == Command.SAVE) {
+            saveJob(employer, job);
             return;
         }
         execute(command, employer, job, jobSeeker, resume, jobApplication);

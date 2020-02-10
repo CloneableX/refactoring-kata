@@ -92,7 +92,7 @@ public class ApplicationTest {
         String jobSeekerName = "Jacky";
         String jobName = "高级Java开发";
         publishJob(employerAlibaba, jobName, "JReq");
-        application.execute(Application.SAVE, new Employer(jobSeekerName), new Job(jobName, "JReq"), new JobSeeker(null), new Resume(null), new JobApplication(null));
+        saveJob(jobSeekerName, jobName);
         List<List<String>> savedJobs = application.getJobs(jobSeekerName, "published");
         List<List<String>> expected = new ArrayList<List<String>>() {{
             add(createNewJob("高级Java开发", "JReq"));
@@ -432,5 +432,9 @@ public class ApplicationTest {
 
     private void publishJob(String employerName, String jobName, String jobType) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         application.executeTemp(null, new Employer(employerName), new Job(jobName, jobType), new JobSeeker(null), new Resume(null), new JobApplication(null), Command.PUBLISH);
+    }
+
+    private void saveJob(String jobSeekerName, String jobName) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+        application.executeTemp(null, new Employer(jobSeekerName), new Job(jobName, "JReq"), new JobSeeker(null), new Resume(null), new JobApplication(null), Command.SAVE);
     }
 }
