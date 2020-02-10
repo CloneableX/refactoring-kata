@@ -2,11 +2,11 @@ package com.theladders.avital.cc;
 
 public class Job {
     private final String name;
-    private JobType jobType;
+    private JobType type;
 
-    public Job(String name, JobType jobType) {
+    public Job(String name, JobType type) {
         this.name = name;
-        this.jobType = jobType;
+        this.type = type;
     }
 
     public String getName() {
@@ -14,10 +14,10 @@ public class Job {
     }
 
     public String getTypeName() {
-        return jobType.getName();
+        return type.getName();
     }
 
     public JobType getType() {
-        return jobType;
+        return type;
     }
 }
