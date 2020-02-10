@@ -17,7 +17,7 @@ public class Application {
                         JobApplication jobApplication,
                         Command command) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         if (command == PUBLISH) {
-            jobs.publishJob(employer, job);
+            jobs.publish(new Job(job.getName(), job.getType(), employer));
             return;
         }
 

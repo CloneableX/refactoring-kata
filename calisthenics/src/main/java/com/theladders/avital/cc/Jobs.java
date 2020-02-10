@@ -21,9 +21,9 @@ public class Jobs {
                 .collect(Collectors.toList());
     }
 
-    public void publishJob(Employer employer, Job job) throws EmptyJobTypeException {
+    public void publish(Job job) throws EmptyJobTypeException {
         job.isEmptyType();
-        save(new Job(job.getName(), job.getType(), employer));
+        save(job);
     }
 
 }
