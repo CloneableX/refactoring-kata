@@ -111,12 +111,6 @@ public class Application {
         return jobApplicationManager.findJobApplicationsByJobNameAndStartDate(jobName, from);
     }
 
-    private void isMatchJobApplication(List<String> result, String applicant, boolean isAppliedThisDate) {
-        if (isAppliedThisDate) {
-            result.add(applicant);
-        }
-    }
-
     public String export(String type, LocalDate date) {
         if (type.equals("csv")) {
             String result = "Employer,Job,Job Type,Applicants,Date" + "\n";
@@ -124,40 +118,7 @@ public class Application {
             return result;
         }
 
-        String content = "";
-        for (Entry<String, List<List<String>>> set : this.applied.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs1 = set.getValue();
-            List<List<String>> appliedOnDate = jobs1.stream().filter(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))).collect(Collectors.toList());
-
-            content = buildHtmlContent(content, applicant, appliedOnDate);
-        }
-
-        return "<!DOCTYPE html>"
-                + "<body>"
-                + "<table>"
-                + "<thead>"
-                + "<tr>"
-                + "<th>Employer</th>"
-                + "<th>Job</th>"
-                + "<th>Job Type</th>"
-                + "<th>Applicants</th>"
-                + "<th>Date</th>"
-                + "</tr>"
-                + "</thead>"
-                + "<tbody>"
-                + content
-                + "</tbody>"
-                + "</table>"
-                + "</body>"
-                + "</html>";
-    }
-
-    private String buildHtmlContent(String content, String applicant, List<List<String>> appliedOnDate) {
-        for (List<String> job : appliedOnDate) {
-            content = content.concat("<tr>" + "<td>" + job.get(3) + "</td>" + "<td>" + job.get(0) + "</td>" + "<td>" + job.get(1) + "</td>" + "<td>" + applicant + "</td>" + "<td>" + job.get(2) + "</td>" + "</tr>");
-        }
-        return content;
+        return jobApplicationManager.exportHtml(date);
     }
 
     private String buildCvsContent(LocalDate date, String result) {
