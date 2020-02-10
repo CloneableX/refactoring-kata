@@ -22,10 +22,9 @@ public class Jobs {
         return jobsMap.get(employerName);
     }
 
-    public void publishJob(Employer employer, Job job) throws NotSupportedJobTypeException {
-        if (job.getType() != JobType.JREQ && job.getType() != JobType.ATS) {
-            throw new NotSupportedJobTypeException();
-        }
+    public void publishJob(Employer employer, Job job) throws EmptyJobTypeException {
+        job.isEmptyType();
         saveJob(employer, job);
     }
+
 }

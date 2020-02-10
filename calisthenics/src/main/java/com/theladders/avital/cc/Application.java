@@ -18,7 +18,7 @@ public class Application {
                         JobSeeker jobSeeker,
                         Resume resume,
                         JobApplication jobApplication,
-                        Command command) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+                        Command command) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         if (command == PUBLISH) {
             jobs.publishJob(employer, job);
             return;

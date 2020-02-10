@@ -36,7 +36,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void employers_should_be_able_to_publish_a_job() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void employers_should_be_able_to_publish_a_job() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerName = "";
         String jobName = "高级前端开发";
         publishJob(employerName, jobName, JobType.JREQ);
@@ -49,7 +49,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void employers_should_only_be_able_to_see_jobs_published_by_them() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void employers_should_only_be_able_to_see_jobs_published_by_them() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String employerTencent = "Tencent";
         String seniorJavaDevJob = "高级Java开发";
@@ -65,7 +65,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void employers_should_be_able_to_publish_ATS_jobs() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void employers_should_be_able_to_publish_ATS_jobs() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String seniorJavaDevJob = "高级Java开发";
 
@@ -78,8 +78,8 @@ public class ApplicationTest {
         assertThat(jobs, is(expected));
     }
 
-    @Test(expected = NotSupportedJobTypeException.class)
-    public void employers_should_not_be_able_to_publish_jobs_that_are_neither_ATS_nor_JReq() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    @Test(expected = EmptyJobTypeException.class)
+    public void employers_should_not_be_able_to_publish_jobs_that_are_neither_ATS_nor_JReq() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String seniorJavaDevJob = "高级Java开发";
 
@@ -87,7 +87,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void jobseekers_should_be_able_to_save_jobs_published_by_employers_for_later_review() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void jobseekers_should_be_able_to_save_jobs_published_by_employers_for_later_review() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerName = "Jacky";
         String jobName = "高级Java开发";
@@ -102,7 +102,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void jobseekers_should_be_able_to_apply_for_an_ATS_job_some_employer_published_without_a_resume() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void jobseekers_should_be_able_to_apply_for_an_ATS_job_some_employer_published_without_a_resume() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerName = "Jacky";
         String seniorJavaDevJob = "高级Java开发";
@@ -122,7 +122,7 @@ public class ApplicationTest {
     }
 
     @Test(expected = RequiresResumeForJReqJobException.class)
-    public void jobseekers_should_not_be_able_to_apply_for_an_JReq_job_some_employer_published_without_a_resume() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void jobseekers_should_not_be_able_to_apply_for_an_JReq_job_some_employer_published_without_a_resume() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerName = "Jacky";
         String seniorJavaDevJob = "高级Java开发";
@@ -132,7 +132,7 @@ public class ApplicationTest {
     }
 
     @Test(expected = InvalidResumeException.class)
-    public void jobseekers_should_not_be_able_to_apply_for_an_JReq_job_some_employer_published_with_someone_else_s_resume() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void jobseekers_should_not_be_able_to_apply_for_an_JReq_job_some_employer_published_with_someone_else_s_resume() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerName = "Jacky";
         String seniorJavaDevJob = "高级Java开发";
@@ -143,7 +143,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void employers_should_be_able_to_find_applicants_of_a_job() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void employers_should_be_able_to_find_applicants_of_a_job() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerJacky = "Jacky";
         String jobSeekerLam = "Lam";
@@ -163,7 +163,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void employers_should_be_able_to_find_applicants_to_a_job_by_application_date() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void employers_should_be_able_to_find_applicants_to_a_job_by_application_date() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerJacky = "Jacky";
         String jobSeekerHo = "Ho";
@@ -182,7 +182,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void employers_should_be_able_to_find_applicants_to_a_job_by_period_when_period_end_is_given_while_period_start_is_not() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void employers_should_be_able_to_find_applicants_to_a_job_by_period_when_period_end_is_given_while_period_start_is_not() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerJacky = "Jacky";
         String jobSeekerHo = "Ho";
@@ -201,7 +201,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void employers_should_be_able_to_find_applicants_to_a_job_by_period() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void employers_should_be_able_to_find_applicants_to_a_job_by_period() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerJacky = "Jacky";
         String jobSeekerHo = "Ho";
@@ -221,7 +221,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void employers_should_be_able_to_find_applicants_to_a_job_by_job_name_and_period_when_period_start_is_given_while_period_end_is_not() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void employers_should_be_able_to_find_applicants_to_a_job_by_job_name_and_period_when_period_start_is_given_while_period_end_is_not() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerJacky = "Jacky";
         String resumeApplicantName = "Jacky";
@@ -245,7 +245,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void employers_should_be_able_to_find_applicants_to_a_job_by_job_name_and_period_when_period_end_is_given_while_period_start_is_not() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void employers_should_be_able_to_find_applicants_to_a_job_by_job_name_and_period_when_period_end_is_given_while_period_start_is_not() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerJacky = "Jacky";
         String jobSeekerHo = "Ho";
@@ -268,7 +268,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void employers_should_be_able_to_find_applicants_to_a_job_by_job_name_and_period() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void employers_should_be_able_to_find_applicants_to_a_job_by_job_name_and_period() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerWong = "Wong";
         String jobSeekerJacky = "Jacky";
@@ -295,7 +295,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void should_generator_csv_reports_of_all_jobseekers_on_a_given_date() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void should_generator_csv_reports_of_all_jobseekers_on_a_given_date() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerJacky = "Jacky";
         String jackyResume = "Jacky";
@@ -320,7 +320,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void should_generator_html_reports_of_all_jobseekers_on_a_given_date() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void should_generator_html_reports_of_all_jobseekers_on_a_given_date() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerJacky = "Jacky";
         String jackyResume = "Jacky";
@@ -389,7 +389,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void should_be_able_to_see_successful_application_of_a_job_for_an_employer() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void should_be_able_to_see_successful_application_of_a_job_for_an_employer() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String employerTencent = "Tencent";
         String jobSeekerJacky = "Jacky";
@@ -411,7 +411,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void should_be_able_to_see_unsuccessful_applications_of_a_job_for_an_employer() throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    public void should_be_able_to_see_unsuccessful_applications_of_a_job_for_an_employer() throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         String employerAlibaba = "Alibaba";
         String jobSeekerJacky = "Jacky";
         String jobSeekerLam = "Lam";
@@ -430,11 +430,11 @@ public class ApplicationTest {
         assertThat(application.getUnsuccessfulApplications(employerAlibaba, juniorJavaDevJob), is(0));
     }
 
-    private void publishJob(String employerName, String jobName, JobType jobType) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    private void publishJob(String employerName, String jobName, JobType jobType) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         application.execute(new Employer(employerName), new Job(jobName, jobType), new JobSeeker(null), new Resume(null), new JobApplication(null), Command.PUBLISH);
     }
 
-    private void saveJob(String jobSeekerName, String jobName) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+    private void saveJob(String jobSeekerName, String jobName) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         application.execute(new Employer(jobSeekerName), new Job(jobName, JobType.JREQ), new JobSeeker(null), new Resume(null), new JobApplication(null), Command.SAVE);
     }
 
@@ -443,7 +443,7 @@ public class ApplicationTest {
                           String jobName,
                           JobType jobType,
                           String resumeName,
-                          LocalDate applicationDate) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+                          LocalDate applicationDate) throws EmptyJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
         application.execute(
                 new Employer(employer),
                 new Job(jobName, jobType),

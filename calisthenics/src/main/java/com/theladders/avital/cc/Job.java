@@ -20,4 +20,10 @@ public class Job {
     public JobType getType() {
         return type;
     }
+
+    public void isEmptyType() throws EmptyJobTypeException {
+        if (type == null) {
+            throw new EmptyJobTypeException();
+        }
+    }
 }
