@@ -39,10 +39,10 @@ public class Application {
                           JobSeeker jobSeeker,
                           Resume resume,
                           JobApplication jobApplication) throws RequiresResumeForJReqJobException, InvalidResumeException {
-        if (job.getJobType() == JobType.JREQ && resume.getName() == null) {
+        if (job.getType() == JobType.JREQ && resume.getName() == null) {
             List<String> failedApplication = new ArrayList<>() {{
                 add(job.getName());
-                add(job.getType());
+                add(job.getTypeName());
                 add(jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                 add(employer.getName());
             }};
@@ -50,14 +50,14 @@ public class Application {
             throw new RequiresResumeForJReqJobException();
         }
 
-        if (job.getJobType() == JobType.JREQ && !resume.getName().equals(jobSeeker.getName())) {
+        if (job.getType() == JobType.JREQ && !resume.getName().equals(jobSeeker.getName())) {
             throw new InvalidResumeException();
         }
         List<List<String>> saved = this.applied.getOrDefault(jobSeeker.getName(), new ArrayList<>());
 
         saved.add(new ArrayList<>() {{
             add(job.getName());
-            add(job.getType());
+            add(job.getTypeName());
             add(jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             add(employer.getName());
         }});
@@ -69,13 +69,13 @@ public class Application {
 
         saved.add(new ArrayList<>() {{
             add(job.getName());
-            add(job.getType());
+            add(job.getTypeName());
         }});
         jobs.put(employer.getName(), saved);
     }
 
     private void publishJob(Employer employer, Job job) throws NotSupportedJobTypeException {
-        if (job.getJobType() != JobType.JREQ && job.getJobType() != JobType.ATS) {
+        if (job.getType() != JobType.JREQ && job.getType() != JobType.ATS) {
             throw new NotSupportedJobTypeException();
         }
 
@@ -83,7 +83,7 @@ public class Application {
 
         alreadyPublished.add(new ArrayList<>() {{
             add(job.getName());
-            add(job.getType());
+            add(job.getTypeName());
         }});
         jobs.put(employer.getName(), alreadyPublished);
     }
