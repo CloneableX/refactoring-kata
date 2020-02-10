@@ -436,13 +436,8 @@ public class ApplicationTest {
                           JobType jobType,
                           String resumeName,
                           LocalDate applicationDate) throws RequiresResumeForJReqJobException, InvalidResumeException {
-        application.execute(
-                new Employer(employer),
-                new Job(jobName, jobType),
-                new JobSeeker(jobSeekerName),
-                new Resume(resumeName),
-                new JobApplication(applicationDate)
-        );
+
+        application.applyJob(new Employer(employer), new Job(jobName, jobType), new JobSeeker(jobSeekerName), new Resume(resumeName), new JobApplication(applicationDate));
     }
 
     private void isSameJobs(String employerName, List<Job> expected) {

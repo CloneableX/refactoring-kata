@@ -1,24 +1,12 @@
 package com.theladders.avital.cc;
 
 import java.time.LocalDate;
-import java.util.*;
-import java.util.stream.Collectors;
-
-import static com.theladders.avital.cc.Command.*;
+import java.util.List;
 
 public class Application {
     private Jobs jobs = new Jobs();
     private JobApplicationManager jobApplicationManager = new JobApplicationManager();
     private FailedJobApplications failedJobApplications = new FailedJobApplications();
-
-    public void execute(Employer employer,
-                        Job job,
-                        JobSeeker jobSeeker,
-                        Resume resume,
-                        JobApplication jobApplication) throws RequiresResumeForJReqJobException, InvalidResumeException {
-
-            applyJob(employer, job, jobSeeker, resume, jobApplication);
-    }
 
     public void saveJob(Job job) {
         jobs.save(job);
@@ -28,11 +16,11 @@ public class Application {
         jobs.publish(job);
     }
 
-    private void applyJob(Employer employer,
-                          Job job,
-                          JobSeeker jobSeeker,
-                          Resume resume,
-                          JobApplication jobApplication) throws RequiresResumeForJReqJobException, InvalidResumeException {
+    public void applyJob(Employer employer,
+                         Job job,
+                         JobSeeker jobSeeker,
+                         Resume resume,
+                         JobApplication jobApplication) throws RequiresResumeForJReqJobException, InvalidResumeException {
         if (job.getType() == JobType.JREQ && resume.getName() == null) {
             failedJobApplications.saveJobApplication(employer, job, jobApplication);
             throw new RequiresResumeForJReqJobException();
