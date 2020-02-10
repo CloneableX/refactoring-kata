@@ -88,4 +88,15 @@ public class JobApplicationManager {
         }
         return result;
     }
+
+    public List<String> findJobApplicationsByJobName(String jobName) {
+        List<String> result = new ArrayList<>();
+        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
+            String applicant = set.getKey();
+            List<List<String>> jobs = set.getValue();
+            boolean hasAppliedToThisJob = jobs.stream().anyMatch(job -> job.get(0).equals(jobName));
+            isMatchJobApplication(result, applicant, hasAppliedToThisJob);
+        }
+        return result;
+    }
 }

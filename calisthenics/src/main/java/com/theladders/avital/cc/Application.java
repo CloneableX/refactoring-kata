@@ -88,10 +88,8 @@ public class Application {
     }
 
     public List<String> findApplicants(String jobName, LocalDate from, LocalDate to) {
-        List<String> result = new ArrayList<>();
         if (from == null && to == null) {
-            findJobApplicationsByJobName(jobName, result);
-            return result;
+            return jobApplicationManager.findJobApplicationsByJobName(jobName);
         }
 
         if (jobName == null && to == null) {
@@ -116,15 +114,6 @@ public class Application {
     private void isMatchJobApplication(List<String> result, String applicant, boolean isAppliedThisDate) {
         if (isAppliedThisDate) {
             result.add(applicant);
-        }
-    }
-
-    private void findJobApplicationsByJobName(String jobName, List<String> result) {
-        for (Entry<String, List<List<String>>> set : this.applied.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs = set.getValue();
-            boolean hasAppliedToThisJob = jobs.stream().anyMatch(job -> job.get(0).equals(jobName));
-            isMatchJobApplication(result, applicant, hasAppliedToThisJob);
         }
     }
 
