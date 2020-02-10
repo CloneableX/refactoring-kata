@@ -95,8 +95,7 @@ public class Application {
         }
 
         if (jobName == null && to == null) {
-            findJobApplicationsByStartDate(from, result);
-            return result;
+            return jobApplicationManager.findJobApplicationsByStartDate(from);
         }
 
         if (jobName == null && from == null) {
@@ -117,16 +116,6 @@ public class Application {
     private void isMatchJobApplication(List<String> result, String applicant, boolean isAppliedThisDate) {
         if (isAppliedThisDate) {
             result.add(applicant);
-        }
-    }
-
-    private void findJobApplicationsByStartDate(LocalDate from, List<String> result) {
-        for (Entry<String, List<List<String>>> set : this.applied.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs = set.getValue();
-            boolean isAppliedThisDate = jobs.stream().anyMatch(job ->
-                    !from.isAfter(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-            isMatchJobApplication(result, applicant, isAppliedThisDate);
         }
     }
 
