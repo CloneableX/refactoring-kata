@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.theladders.avital.cc.Command.*;
 import static java.util.Map.*;
 
 public class Application {
@@ -17,18 +18,18 @@ public class Application {
                         JobSeeker jobSeeker,
                         Resume resume,
                         JobApplication jobApplication,
-                        Command commandEnum) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
-        if (commandEnum == Command.PUBLISH) {
+                        Command command) throws NotSupportedJobTypeException, RequiresResumeForJReqJobException, InvalidResumeException {
+        if (command == PUBLISH) {
             publishJob(employer, job);
             return;
         }
 
-        if (commandEnum == Command.SAVE) {
+        if (command == SAVE) {
             saveJob(employer, job);
             return;
         }
 
-        if (commandEnum == Command.APPLY) {
+        if (command == APPLY) {
             applyJob(employer, job, jobSeeker, resume, jobApplication);
         }
     }
