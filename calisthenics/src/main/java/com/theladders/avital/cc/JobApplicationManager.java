@@ -9,6 +9,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class JobApplicationManager {
+    public static final String CONTENT_TAG = "{CONTENT}";
     public static final String HTML_TEMPLATE = "<!DOCTYPE html>"
             + "<body>"
             + "<table>"
@@ -22,12 +23,12 @@ public class JobApplicationManager {
             + "</tr>"
             + "</thead>"
             + "<tbody>"
-            + "{CONTENT}"
+            + CONTENT_TAG
             + "</tbody>"
             + "</table>"
             + "</body>"
             + "</html>";
-    public static final String CONTENT_TAG = "{CONTENT}";
+    public static final String CVS_TEMPLATE = "Employer,Job,Job Type,Applicants,Date" + "\n" + CONTENT_TAG;
     private Map<String, List<JobApplication>> jobApplicationMap = new HashMap<>();
 
     public void applyJob(JobApplication jobApplication) {
@@ -79,10 +80,9 @@ public class JobApplicationManager {
     }
 
     public String buildCvsContent(LocalDate date) {
-        List<JobApplication> appliedOnDate = findJobApplications(jobApplication ->
+        List<JobApplication> jobApplications = findJobApplications(jobApplication ->
                 jobApplication.isSameApplicationTime(date));
-        String result = buildCvsItem(appliedOnDate);
-        return "Employer,Job,Job Type,Applicants,Date" + "\n" + result;
+        return CVS_TEMPLATE.replace(CONTENT_TAG, buildCvsItem(jobApplications));
     }
 
     private List<JobApplication> findJobApplications(Predicate<JobApplication> predicate) {
