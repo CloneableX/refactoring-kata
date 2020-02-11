@@ -56,4 +56,8 @@ public class Job {
     public Employer getEmployer() {
         return employer;
     }
+
+    boolean isSameName(String jobName) {
+        return name.equals(jobName);
+    }
 }

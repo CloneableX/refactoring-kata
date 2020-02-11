@@ -44,4 +44,9 @@ public class JobApplication {
     public String getJobSeekerName() {
         return jobSeeker.getName();
     }
+
+    public boolean isSameJobName(String jobName) {
+        return job.isSameName(jobName);
+    }
+
 }

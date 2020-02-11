@@ -23,7 +23,7 @@ public class JobApplicationManager {
     }
 
     public List<String> findJobApplications(String jobName) {
-        return findJobApplicationsBy(jobApplication -> jobApplication.getJob().getName().equals(jobName));
+        return findJobApplicationsBy(jobApplication -> jobApplication.isSameJobName(jobName));
     }
 
     public List<String> findJobApplications(DateRange dateRange) {
@@ -32,7 +32,7 @@ public class JobApplicationManager {
 
     public List<String> findJobApplications(String jobName, DateRange dateRange) {
         return findJobApplicationsBy(jobApplication ->
-                jobApplication.getJob().getName().equals(jobName)
+                jobApplication.isSameJobName(jobName)
                         && dateRange.isBetween(jobApplication.getApplicationTime()));
     }
 
@@ -129,7 +129,7 @@ public class JobApplicationManager {
 
     public int countJobApplications(String employerName, String jobName) {
         List<JobApplication> jobApplications = findJobApplications(job ->
-                job.getJob().getEmployer().getName().equals(employerName) && job.getJob().getName().equals(jobName));
+                job.getJob().getEmployer().getName().equals(employerName) && job.isSameJobName(jobName));
         return jobApplications.size();
     }
 
