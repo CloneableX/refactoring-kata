@@ -63,7 +63,8 @@ public class JobApplicationManager {
     }
 
     public String exportHtml(LocalDate date) {
-        List<List<String>> appliedOnDate = findJobApplications(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+        List<JobApplication> appliedOnDate = findJobApplications(job ->
+                job.getApplicationTime().equals(date));
         String content = "";
         content = buildHtmlContent(content, appliedOnDate);
 
@@ -87,37 +88,63 @@ public class JobApplicationManager {
                 + "</html>";
     }
 
-    private String buildHtmlContent(String content, List<List<String>> appliedOnDate) {
-        for (List<String> job : appliedOnDate) {
-            content = content.concat("<tr>" + "<td>" + job.get(3) + "</td>" + "<td>" + job.get(0) + "</td>" + "<td>" + job.get(1) + "</td>" + "<td>" + job.get(4) + "</td>" + "<td>" + job.get(2) + "</td>" + "</tr>");
+    private String buildHtmlContent(String content, List<JobApplication> appliedOnDate) {
+        for (JobApplication job : appliedOnDate) {
+            content = content.concat("<tr>"
+                    + "<td>"
+                    + job.getJob().getEmployer().getName()
+                    + "</td>"
+                    + "<td>"
+                    + job.getJob().getName()
+                    + "</td>"
+                    + "<td>"
+                    + job.getJob().getTypeName()
+                    + "</td>"
+                    + "<td>"
+                    + job.getJobSeeker().getName()
+                    + "</td>"
+                    + "<td>"
+                    + job.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    + "</td>"
+                    + "</tr>");
         }
         return content;
     }
 
     public String buildCvsContent(LocalDate date, String result) {
-        List<List<String>> appliedOnDate = findJobApplications(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+        List<JobApplication> appliedOnDate = findJobApplications(job ->
+                job.getApplicationTime().equals(date));
         result = buildCvsItem(result, appliedOnDate);
         return result;
     }
 
-    private List<List<String>> findJobApplications(Predicate<List<String>> predicate) {
-        List<List<String>> appliedOnDate = new ArrayList<>();
-        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
-            List<List<String>> jobApplications = set.getValue();
+    private List<JobApplication> findJobApplications(Predicate<JobApplication> predicate) {
+        List<JobApplication> appliedOnDate = new ArrayList<>();
+        for (Map.Entry<String, List<JobApplication>> set : jobApplicationMapTemp.entrySet()) {
+            List<JobApplication> jobApplications = set.getValue();
             appliedOnDate.addAll(jobApplications.stream().filter(predicate).collect(Collectors.toList()));
         }
         return appliedOnDate;
     }
 
-    private String buildCvsItem(String result, List<List<String>> appliedOnDate) {
-        for (List<String> job : appliedOnDate) {
-            result = result.concat(job.get(3) + "," + job.get(0) + "," + job.get(1) + "," + job.get(4) + "," + job.get(2) + "\n");
+    private String buildCvsItem(String result, List<JobApplication> appliedOnDate) {
+        for (JobApplication job : appliedOnDate) {
+            result = result.concat(job.getJob().getEmployer().getName()
+                    + ","
+                    + job.getJob().getName()
+                    + ","
+                    + job.getJob().getTypeName()
+                    + ","
+                    + job.getJobSeeker().getName()
+                    + ","
+                    + job.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n");
         }
         return result;
     }
 
     public int countJobApplications(String employerName, String jobName) {
-        List<List<String>> jobApplications = findJobApplications(job -> job.get(3).equals(employerName) && job.get(0).equals(jobName));
+        List<JobApplication> jobApplications = findJobApplications(job ->
+                job.getJob().getEmployer().getName().equals(employerName) && job.getJob().getName().equals(jobName));
         return jobApplications.size();
     }
 
