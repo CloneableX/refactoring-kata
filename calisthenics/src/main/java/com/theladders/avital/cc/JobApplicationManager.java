@@ -61,7 +61,7 @@ public class JobApplicationManager {
     }
 
     public String exportHtml(LocalDate date) {
-        List<List<String>> appliedOnDate = findJobApplicationsByDate(date);
+        List<List<String>> appliedOnDate = findJobApplications(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
         String content = "";
         content = buildHtmlContent(content, appliedOnDate);
 
@@ -93,16 +93,16 @@ public class JobApplicationManager {
     }
 
     public String buildCvsContent(LocalDate date, String result) {
-        List<List<String>> appliedOnDate = findJobApplicationsByDate(date);
+        List<List<String>> appliedOnDate = findJobApplications(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
         result = buildCvsItem(result, appliedOnDate);
         return result;
     }
 
-    private List<List<String>> findJobApplicationsByDate(LocalDate date) {
+    private List<List<String>> findJobApplications(Predicate<List<String>> predicate) {
         List<List<String>> appliedOnDate = new ArrayList<>();
         for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
-            List<List<String>> jobs1 = set.getValue();
-            appliedOnDate.addAll(jobs1.stream().filter(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))).collect(Collectors.toList()));
+            List<List<String>> jobApplications = set.getValue();
+            appliedOnDate.addAll(jobApplications.stream().filter(predicate).collect(Collectors.toList()));
         }
         return appliedOnDate;
     }
