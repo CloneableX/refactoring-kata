@@ -22,26 +22,23 @@ public class JobApplicationManager {
     }
 
     public List<String> findJobApplications(String jobName) {
-        return findJobApplicationsBy(jobApplication -> jobApplication.isSameJobName(jobName));
+        return findJobSeekers(jobApplication -> jobApplication.isSameJobName(jobName));
     }
 
     public List<String> findJobApplications(DateRange dateRange) {
-        return findJobApplicationsBy(jobApplication -> dateRange.isBetween(jobApplication.getApplicationTime()));
+        return findJobSeekers(jobApplication -> dateRange.isBetween(jobApplication.getApplicationTime()));
     }
 
     public List<String> findJobApplications(String jobName, DateRange dateRange) {
-        return findJobApplicationsBy(jobApplication ->
+        return findJobSeekers(jobApplication ->
                 jobApplication.isSameJobName(jobName)
                         && dateRange.isBetween(jobApplication.getApplicationTime()));
     }
 
-    private List<String> findJobApplicationsBy(Predicate<JobApplication> predicate) {
+    private List<String> findJobSeekers(Predicate<JobApplication> predicate) {
         List<String> result = new ArrayList<>();
-        for (Map.Entry<String, List<JobApplication>> set : jobApplicationMap.entrySet()) {
-            List<JobApplication> jobs = set.getValue();
-            List<JobApplication> jobApplications = jobs.stream().filter(predicate).collect(Collectors.toList());
-            isMatchJobApplication(result, jobApplications);
-        }
+        List<JobApplication> jobApplications = findJobApplications(predicate);
+        isMatchJobApplication(result, jobApplications);
         return result;
     }
 
@@ -86,6 +83,10 @@ public class JobApplicationManager {
     }
 
     private void isMatchJobApplication(List<String> result, List<JobApplication> jobApplications) {
-        jobApplications.forEach(jobApplication -> result.add(jobApplication.getJobSeeker().getName()));
+        jobApplications.forEach(jobApplication -> {
+            if (!result.contains(jobApplication.getJobSeekerName())) {
+                result.add(jobApplication.getJobSeekerName());
+            }
+        });
     }
 }
