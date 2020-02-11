@@ -37,14 +37,14 @@ public class Application {
 
     public List<String> findApplicants(String jobName, DateRange dateRange) {
         if (dateRange.getFrom() == null && dateRange.getTo() == null) {
-            return jobApplicationManager.findJobApplicationsByJobName(jobName);
+            return jobApplicationManager.findJobApplications(jobName);
         }
 
         if (jobName == null) {
-            return jobApplicationManager.findJobApplicationsByDateRange(dateRange);
+            return jobApplicationManager.findJobApplications(dateRange);
         }
 
-        return jobApplicationManager.findJobApplicationsByJobNameAndDateRange(jobName, dateRange);
+        return jobApplicationManager.findJobApplications(jobName, dateRange);
     }
 
     public String exportCvs(LocalDate date) {
