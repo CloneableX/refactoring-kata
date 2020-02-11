@@ -54,19 +54,17 @@ public class JobApplicationManager {
         List<JobApplication> jobApplications = findJobApplications(job ->
                 job.isSameApplicationTime(date));
 
-        return ExportTemplate.HTML.export(buildHtmlContent(jobApplications));
-    }
-
-    private String buildHtmlContent(List<JobApplication> jobApplications) {
-        return jobApplications.stream()
+        return ExportTemplate.HTML.export(jobApplications.stream()
                 .map(JobApplication::toHtmlString)
-                .reduce("", String::concat);
+                .reduce("", String::concat));
     }
 
     public String buildCvsContent(LocalDate date) {
         List<JobApplication> jobApplications = findJobApplications(jobApplication ->
                 jobApplication.isSameApplicationTime(date));
-        return ExportTemplate.CVS.export(buildCvsItem(jobApplications));
+        return ExportTemplate.CVS.export(jobApplications.stream()
+                .map(JobApplication::toCvsString)
+                .reduce("", String::concat));
     }
 
     private List<JobApplication> findJobApplications(Predicate<JobApplication> predicate) {
@@ -76,12 +74,6 @@ public class JobApplicationManager {
             appliedOnDate.addAll(jobApplications.stream().filter(predicate).collect(Collectors.toList()));
         }
         return appliedOnDate;
-    }
-
-    private String buildCvsItem(List<JobApplication> jobApplications) {
-        return jobApplications.stream()
-                .map(JobApplication::toCvsString)
-                .reduce("", String::concat);
     }
 
     public int countJobApplications(String employerName, String jobName) {
