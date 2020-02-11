@@ -56,7 +56,7 @@ public class Application {
             return jobApplicationManager.findJobApplicationsByJobNameAndEndDate(jobName, dateRange.getTo());
         }
 
-        return jobApplicationManager.findJobApplicationsByJobNameAndStartDate(jobName, dateRange.getFrom());
+        return jobApplicationManager.findJobApplicationsByJobNameAndDateRange(jobName, new DateRange(dateRange.getFrom(), null));
     }
 
     public String exportCvs(LocalDate date) {
