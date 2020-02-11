@@ -9,6 +9,25 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class JobApplicationManager {
+    public static final String HTML_TEMPLATE = "<!DOCTYPE html>"
+            + "<body>"
+            + "<table>"
+            + "<thead>"
+            + "<tr>"
+            + "<th>Employer</th>"
+            + "<th>Job</th>"
+            + "<th>Job Type</th>"
+            + "<th>Applicants</th>"
+            + "<th>Date</th>"
+            + "</tr>"
+            + "</thead>"
+            + "<tbody>"
+            + "{CONTENT}"
+            + "</tbody>"
+            + "</table>"
+            + "</body>"
+            + "</html>";
+    public static final String CONTENT_TAG = "{CONTENT}";
     private Map<String, List<JobApplication>> jobApplicationMap = new HashMap<>();
 
     public void applyJob(JobApplication jobApplication) {
@@ -52,24 +71,7 @@ public class JobApplicationManager {
         String content = "";
         content = buildHtmlContent(content, appliedOnDate);
 
-        return "<!DOCTYPE html>"
-                + "<body>"
-                + "<table>"
-                + "<thead>"
-                + "<tr>"
-                + "<th>Employer</th>"
-                + "<th>Job</th>"
-                + "<th>Job Type</th>"
-                + "<th>Applicants</th>"
-                + "<th>Date</th>"
-                + "</tr>"
-                + "</thead>"
-                + "<tbody>"
-                + content
-                + "</tbody>"
-                + "</table>"
-                + "</body>"
-                + "</html>";
+        return HTML_TEMPLATE.replace(CONTENT_TAG, content);
     }
 
     private String buildHtmlContent(String content, List<JobApplication> appliedOnDate) {
