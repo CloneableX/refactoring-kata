@@ -69,4 +69,24 @@ public class JobApplication {
     public boolean isSameEmployerName(String employerName) {
         return getEmployerName().equals(employerName);
     }
+
+    public String toHtmlString() {
+        return "<tr>"
+                + "<td>"
+                + getEmployerName()
+                + "</td>"
+                + "<td>"
+                + getJobName()
+                + "</td>"
+                + "<td>"
+                + getJobTypeName()
+                + "</td>"
+                + "<td>"
+                + getJobSeekerName()
+                + "</td>"
+                + "<td>"
+                + getApplicationTime("yyyy-MM-dd")
+                + "</td>"
+                + "</tr>";
+    }
 }

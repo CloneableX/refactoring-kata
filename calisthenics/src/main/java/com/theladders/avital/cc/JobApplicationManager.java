@@ -76,23 +76,7 @@ public class JobApplicationManager {
 
     private String buildHtmlContent(String content, List<JobApplication> appliedOnDate) {
         for (JobApplication jobApplication : appliedOnDate) {
-            content = content.concat("<tr>"
-                    + "<td>"
-                    + jobApplication.getEmployerName()
-                    + "</td>"
-                    + "<td>"
-                    + jobApplication.getJobName()
-                    + "</td>"
-                    + "<td>"
-                    + jobApplication.getJobTypeName()
-                    + "</td>"
-                    + "<td>"
-                    + jobApplication.getJobSeekerName()
-                    + "</td>"
-                    + "<td>"
-                    + jobApplication.getApplicationTime("yyyy-MM-dd")
-                    + "</td>"
-                    + "</tr>");
+            content = content.concat(jobApplication.toHtmlString());
         }
         return content;
     }
