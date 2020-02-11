@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class JobApplicationManager {
@@ -28,34 +29,24 @@ public class JobApplicationManager {
     }
 
     public List<String> findJobApplications(String jobName) {
-        List<String> result = new ArrayList<>();
-        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs = set.getValue();
-            boolean hasAppliedToThisJob = jobs.stream().anyMatch(job -> job.get(0).equals(jobName));
-            isMatchJobApplication(result, applicant, hasAppliedToThisJob);
-        }
-        return result;
+        return findJobApplicationsBy(job -> job.get(0).equals(jobName));
     }
 
     public List<String> findJobApplications(DateRange dateRange) {
-        List<String> result = new ArrayList<>();
-        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs = set.getValue();
-            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> dateRange.isBetween(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-            isMatchJobApplication(result, applicant, isAppliedThisDate);
-        }
-        return result;
+        return findJobApplicationsBy(job -> dateRange.isBetween(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
     }
 
     public List<String> findJobApplications(String jobName, DateRange dateRange) {
+        return findJobApplicationsBy(job -> job.get(0).equals(jobName) && dateRange.isBetween(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+    }
+
+    private List<String> findJobApplicationsBy(Predicate<List<String>> predicate) {
         List<String> result = new ArrayList<>();
         for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
             String applicant = set.getKey();
             List<List<String>> jobs = set.getValue();
-            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> job.get(0).equals(jobName) && dateRange.isBetween(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-            isMatchJobApplication(result, applicant, isAppliedThisDate);
+            boolean hasAppliedToThisJob = jobs.stream().anyMatch(predicate);
+            isMatchJobApplication(result, applicant, hasAppliedToThisJob);
         }
         return result;
     }
