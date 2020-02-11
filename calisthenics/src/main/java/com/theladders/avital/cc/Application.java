@@ -44,10 +44,6 @@ public class Application {
             return jobApplicationManager.findJobApplicationsByDateRange(dateRange);
         }
 
-        if (dateRange.getTo() != null) {
-            return jobApplicationManager.findJobApplicationsByJobNameAndEndDate(jobName, dateRange);
-        }
-
         return jobApplicationManager.findJobApplicationsByJobNameAndDateRange(jobName, dateRange);
     }
 
