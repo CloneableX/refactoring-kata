@@ -65,4 +65,8 @@ public class JobApplication {
     public boolean isSameApplicationTime(LocalDate date) {
         return applicationTime.equals(date);
     }
+
+    public boolean isSameEmployerName(String employerName) {
+        return getEmployerName().equals(employerName);
+    }
 }

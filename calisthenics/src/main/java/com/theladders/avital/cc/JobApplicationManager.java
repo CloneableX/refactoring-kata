@@ -128,7 +128,7 @@ public class JobApplicationManager {
 
     public int countJobApplications(String employerName, String jobName) {
         List<JobApplication> jobApplications = findJobApplications(job ->
-                job.getEmployerName().equals(employerName) && job.isSameJobName(jobName));
+                job.isSameEmployerName(employerName) && job.isSameJobName(jobName));
         return jobApplications.size();
     }
 
