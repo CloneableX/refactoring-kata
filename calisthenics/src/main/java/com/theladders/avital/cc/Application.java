@@ -41,22 +41,22 @@ public class Application {
         }
 
         if (jobName == null && dateRange.getTo() == null) {
-            return jobApplicationManager.findJobApplicationsByStartDate(new DateRange(dateRange.getFrom(), null));
+            return jobApplicationManager.findJobApplicationsByStartDate(dateRange);
         }
 
         if (jobName == null && dateRange.getFrom() == null) {
-            return jobApplicationManager.findJobApplicationsByEndDate(new DateRange(null, dateRange.getTo()));
+            return jobApplicationManager.findJobApplicationsByEndDate(dateRange);
         }
 
         if (jobName == null) {
-            return jobApplicationManager.findJobApplicationsByDateRange(new DateRange(dateRange.getFrom(), dateRange.getTo()));
+            return jobApplicationManager.findJobApplicationsByDateRange(dateRange);
         }
 
         if (dateRange.getTo() != null) {
-            return jobApplicationManager.findJobApplicationsByJobNameAndEndDate(jobName, new DateRange(null, dateRange.getTo()));
+            return jobApplicationManager.findJobApplicationsByJobNameAndEndDate(jobName, dateRange);
         }
 
-        return jobApplicationManager.findJobApplicationsByJobNameAndDateRange(jobName, new DateRange(dateRange.getFrom(), null));
+        return jobApplicationManager.findJobApplicationsByJobNameAndDateRange(jobName, dateRange);
     }
 
     public String exportCvs(LocalDate date) {
