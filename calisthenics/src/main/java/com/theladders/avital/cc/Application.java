@@ -62,6 +62,6 @@ public class Application {
     }
 
     public int getSuccessfulApplications(String employerName, String jobName) {
-        return jobApplicationManager.getSuccessfulApplications(employerName, jobName);
+        return jobApplicationManager.countJobApplications(employerName, jobName);
     }
 }
