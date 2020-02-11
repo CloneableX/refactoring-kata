@@ -1,7 +1,10 @@
 package com.theladders.avital.cc;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Application {
     private Jobs jobs = new Jobs();
@@ -32,7 +35,15 @@ public class Application {
     }
 
     public List<List<String>> getJobApplications(String jobSeekerName) {
-        return jobApplicationManager.getJobApplications(jobSeekerName);
+        return jobApplicationManager.getJobApplications(jobSeekerName)
+                .stream()
+                .map(jobApplication -> new ArrayList<String>() {{
+                    add(jobApplication.getJob().getName());
+                    add(jobApplication.getJob().getTypeName());
+                    add(jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                    add(jobApplication.getJob().getEmployer().getName());
+                }})
+                .collect(Collectors.toList());
     }
 
     public List<String> findApplicants(String jobName, DateRange dateRange) {
