@@ -35,7 +35,7 @@ public class JobApplication {
     }
 
     public boolean isSameJobName(String jobName) {
-        return job.isSameName(jobName);
+        return getJobName().equals(jobName);
     }
 
     public String getEmployerName() {

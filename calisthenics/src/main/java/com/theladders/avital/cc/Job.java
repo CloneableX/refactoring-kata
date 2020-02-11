@@ -53,14 +53,6 @@ public class Job {
         return Objects.hash(name, type);
     }
 
-    public Employer getEmployer() {
-        return employer;
-    }
-
-    boolean isSameName(String jobName) {
-        return name.equals(jobName);
-    }
-
     public String getEmployerName() {
         return employer.getName();
     }
