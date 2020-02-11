@@ -49,7 +49,7 @@ public class Application {
         }
 
         if (jobName == null) {
-            return jobApplicationManager.findJobApplicationsByDateRange(dateRange.getFrom(), dateRange.getTo());
+            return jobApplicationManager.findJobApplicationsByDateRange(new DateRange(dateRange.getFrom(), dateRange.getTo()));
         }
 
         if (dateRange.getTo() != null) {

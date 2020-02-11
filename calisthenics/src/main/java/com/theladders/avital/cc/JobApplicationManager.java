@@ -49,12 +49,12 @@ public class JobApplicationManager {
         return result;
     }
 
-    public List<String> findJobApplicationsByDateRange(LocalDate from, LocalDate to) {
+    public List<String> findJobApplicationsByDateRange(DateRange dateRange) {
         List<String> result = new ArrayList<>();
         for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
             String applicant = set.getKey();
             List<List<String>> jobs = set.getValue();
-            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> !from.isAfter(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))) && !to.isBefore(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> !dateRange.getFrom().isAfter(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))) && !dateRange.getTo().isBefore(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
             isMatchJobApplication(result, applicant, isAppliedThisDate);
         }
         return result;
