@@ -38,10 +38,9 @@ public class JobApplicationManager {
     private List<String> findJobApplicationsBy(Predicate<JobApplication> predicate) {
         List<String> result = new ArrayList<>();
         for (Map.Entry<String, List<JobApplication>> set : jobApplicationMap.entrySet()) {
-            String applicant = set.getKey();
             List<JobApplication> jobs = set.getValue();
-            boolean hasAppliedToThisJob = jobs.stream().anyMatch(predicate);
-            isMatchJobApplication(result, applicant, hasAppliedToThisJob);
+            List<JobApplication> jobApplications = jobs.stream().filter(predicate).collect(Collectors.toList());
+            isMatchJobApplication(result, jobApplications);
         }
         return result;
     }
@@ -86,9 +85,7 @@ public class JobApplicationManager {
         return jobApplications.size();
     }
 
-    private void isMatchJobApplication(List<String> result, String applicant, boolean isAppliedThisDate) {
-        if (isAppliedThisDate) {
-            result.add(applicant);
-        }
+    private void isMatchJobApplication(List<String> result, List<JobApplication> jobApplications) {
+        jobApplications.forEach(jobApplication -> result.add(jobApplication.getJobSeeker().getName()));
     }
 }
