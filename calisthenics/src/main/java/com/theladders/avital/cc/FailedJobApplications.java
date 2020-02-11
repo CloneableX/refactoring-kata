@@ -1,10 +1,12 @@
 package com.theladders.avital.cc;
 
+import javax.naming.CompositeName;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FailedJobApplications {
     private List<List<String>> failedApplications = new ArrayList<>();
+    private List<JobApplication> failedApplicationsTemp = new ArrayList<>();
 
     public void saveJobApplication(JobApplication jobApplication) {
         List<String> failedApplication = new ArrayList<>() {{
@@ -14,6 +16,11 @@ public class FailedJobApplications {
             add(jobApplication.getEmployerName());
         }};
         failedApplications.add(failedApplication);
+        saveJobApplicationTemp(jobApplication);
+    }
+
+    public void saveJobApplicationTemp(JobApplication jobApplication) {
+        failedApplicationsTemp.add(jobApplication);
     }
 
     public int getUnsuccessfulApplications(String employerName, String jobName) {
