@@ -61,14 +61,9 @@ public class JobApplicationManager {
     }
 
     public String exportHtml(LocalDate date) {
+        List<List<String>> appliedOnDate = findJobApplicationsByDate(date);
         String content = "";
-        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs1 = set.getValue();
-            List<List<String>> appliedOnDate = jobs1.stream().filter(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))).collect(Collectors.toList());
-
-            content = buildHtmlContent(content, appliedOnDate);
-        }
+        content = buildHtmlContent(content, appliedOnDate);
 
         return "<!DOCTYPE html>"
                 + "<body>"
@@ -98,14 +93,18 @@ public class JobApplicationManager {
     }
 
     public String buildCvsContent(LocalDate date, String result) {
-        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs1 = set.getValue();
-            List<List<String>> appliedOnDate = jobs1.stream().filter(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))).collect(Collectors.toList());
-
-            result = buildCvsItem(result, appliedOnDate);
-        }
+        List<List<String>> appliedOnDate = findJobApplicationsByDate(date);
+        result = buildCvsItem(result, appliedOnDate);
         return result;
+    }
+
+    private List<List<String>> findJobApplicationsByDate(LocalDate date) {
+        List<List<String>> appliedOnDate = new ArrayList<>();
+        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
+            List<List<String>> jobs1 = set.getValue();
+            appliedOnDate.addAll(jobs1.stream().filter(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))).collect(Collectors.toList()));
+        }
+        return appliedOnDate;
     }
 
     private String buildCvsItem(String result, List<List<String>> appliedOnDate) {
