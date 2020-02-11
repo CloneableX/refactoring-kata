@@ -62,7 +62,7 @@ public class JobApplicationManager {
     public String buildCvsContent(LocalDate date) {
         List<JobApplication> jobApplications = findJobApplications(jobApplication ->
                 jobApplication.isSameApplicationTime(date));
-        return ExportTemplate.CVS_TEMPLATE.replace(ExportTemplate.CONTENT_TAG, buildCvsItem(jobApplications));
+        return ExportTemplate.CVS.export(buildCvsItem(jobApplications));
     }
 
     private List<JobApplication> findJobApplications(Predicate<JobApplication> predicate) {
