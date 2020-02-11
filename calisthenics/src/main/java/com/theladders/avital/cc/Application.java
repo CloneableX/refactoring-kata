@@ -1,9 +1,7 @@
 package com.theladders.avital.cc;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Application {
     private Jobs jobs = new Jobs();
@@ -22,7 +20,7 @@ public class Application {
         try {
             jobApplication.isValidJobApplication();
         } catch (RequiresResumeForJReqJobException exception) {
-            failedJobApplications.saveJobApplication(jobApplication.getJob().getEmployer(), jobApplication.getJob(), jobApplication);
+            failedJobApplications.saveJobApplication(jobApplication);
             throw exception;
         }
 

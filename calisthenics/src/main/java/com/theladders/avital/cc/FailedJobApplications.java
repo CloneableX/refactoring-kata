@@ -1,18 +1,17 @@
 package com.theladders.avital.cc;
 
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FailedJobApplications {
     private List<List<String>> failedApplications = new ArrayList<>();
 
-    public void saveJobApplication(Employer employer, Job job, JobApplication jobApplication) {
+    public void saveJobApplication(JobApplication jobApplication) {
         List<String> failedApplication = new ArrayList<>() {{
-            add(job.getName());
-            add(job.getTypeName());
-            add(jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            add(employer.getName());
+            add(jobApplication.getJobName());
+            add(jobApplication.getJobTypeName());
+            add(jobApplication.getApplicationTime("yyyy-MM-dd"));
+            add(jobApplication.getEmployerName());
         }};
         failedApplications.add(failedApplication);
     }
