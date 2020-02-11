@@ -35,36 +35,28 @@ public class Application {
         return jobApplicationManager.getJobApplications(jobSeekerName);
     }
 
-    public List<String> findApplicants(String jobName) {
-        return findApplicants(jobName, null);
-    }
-
-    public List<String> findApplicants(String jobName, LocalDate from) {
-        return findApplicants(jobName, from, null);
-    }
-
-    public List<String> findApplicants(String jobName, LocalDate from, LocalDate to) {
-        if (from == null && to == null) {
+    public List<String> findApplicants(String jobName, DateRange dateRange) {
+        if (dateRange.getFrom() == null && dateRange.getTo() == null) {
             return jobApplicationManager.findJobApplicationsByJobName(jobName);
         }
 
-        if (jobName == null && to == null) {
-            return jobApplicationManager.findJobApplicationsByStartDate(from);
+        if (jobName == null && dateRange.getTo() == null) {
+            return jobApplicationManager.findJobApplicationsByStartDate(dateRange.getFrom());
         }
 
-        if (jobName == null && from == null) {
-            return jobApplicationManager.findJobApplicationsByEndDate(to);
+        if (jobName == null && dateRange.getFrom() == null) {
+            return jobApplicationManager.findJobApplicationsByEndDate(dateRange.getTo());
         }
 
         if (jobName == null) {
-            return jobApplicationManager.findJobApplicationsByDateRange(from, to);
+            return jobApplicationManager.findJobApplicationsByDateRange(dateRange.getFrom(), dateRange.getTo());
         }
 
-        if (to != null) {
-            return jobApplicationManager.findJobApplicationsByJobNameAndEndDate(jobName, to);
+        if (dateRange.getTo() != null) {
+            return jobApplicationManager.findJobApplicationsByJobNameAndEndDate(jobName, dateRange.getTo());
         }
 
-        return jobApplicationManager.findJobApplicationsByJobNameAndStartDate(jobName, from);
+        return jobApplicationManager.findJobApplicationsByJobNameAndStartDate(jobName, dateRange.getFrom());
     }
 
     public String exportCvs(LocalDate date) {
