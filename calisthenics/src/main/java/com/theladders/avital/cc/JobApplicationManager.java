@@ -80,7 +80,7 @@ public class JobApplicationManager {
                     + job.getEmployerName()
                     + "</td>"
                     + "<td>"
-                    + job.getJob().getName()
+                    + job.getJobName()
                     + "</td>"
                     + "<td>"
                     + job.getJob().getTypeName()
@@ -116,7 +116,7 @@ public class JobApplicationManager {
         for (JobApplication job : appliedOnDate) {
             result = result.concat(job.getEmployerName()
                     + ","
-                    + job.getJob().getName()
+                    + job.getJobName()
                     + ","
                     + job.getJob().getTypeName()
                     + ","

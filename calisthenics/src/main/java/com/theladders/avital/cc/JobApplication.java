@@ -52,4 +52,8 @@ public class JobApplication {
     public String getEmployerName() {
         return job.getEmployerName();
     }
+
+    public String getJobName() {
+        return job.getName();
+    }
 }
