@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 public class JobApplicationManager {
     private Map<String, List<List<String>>> jobApplicationMap = new HashMap<>();
+    private Map<String, List<JobApplication>> jobApplicationMapTemp = new HashMap<>();
 
     public void applyJob(JobApplication jobApplication) {
         List<List<String>> saved = jobApplicationMap.getOrDefault(jobApplication.getJobSeeker().getName(), new ArrayList<>());
@@ -23,6 +24,13 @@ public class JobApplicationManager {
             add(jobApplication.getJobSeeker().getName());
         }});
         jobApplicationMap.put(jobApplication.getJobSeeker().getName(), saved);
+        applyJobTemp(jobApplication);
+    }
+
+    public void applyJobTemp(JobApplication jobApplication) {
+        List<JobApplication> jobApplications = jobApplicationMapTemp.getOrDefault(jobApplication.getJobSeeker().getName(), new ArrayList<>());
+        jobApplications.add(jobApplication);
+        jobApplicationMapTemp.put(jobApplication.getJobSeeker().getName(), jobApplications);
     }
 
     public List<List<String>> getJobApplications(String employerName) {
