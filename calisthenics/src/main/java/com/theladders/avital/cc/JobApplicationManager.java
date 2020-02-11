@@ -68,17 +68,14 @@ public class JobApplicationManager {
     public String exportHtml(LocalDate date) {
         List<JobApplication> appliedOnDate = findJobApplications(job ->
                 job.isSameApplicationTime(date));
-        String content = "";
-        content = buildHtmlContent(content, appliedOnDate);
 
-        return HTML_TEMPLATE.replace(CONTENT_TAG, content);
+        return HTML_TEMPLATE.replace(CONTENT_TAG, buildHtmlContent(appliedOnDate));
     }
 
-    private String buildHtmlContent(String content, List<JobApplication> appliedOnDate) {
-        for (JobApplication jobApplication : appliedOnDate) {
-            content = content.concat(jobApplication.toHtmlString());
-        }
-        return content;
+    private String buildHtmlContent(List<JobApplication> jobApplications) {
+        return jobApplications.stream()
+                .map(JobApplication::toHtmlString)
+                .reduce("", String::concat);
     }
 
     public String buildCvsContent(LocalDate date, String result) {
