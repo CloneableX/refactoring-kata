@@ -67,7 +67,7 @@ public class JobApplicationManager {
             List<List<String>> jobs1 = set.getValue();
             List<List<String>> appliedOnDate = jobs1.stream().filter(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))).collect(Collectors.toList());
 
-            content = buildHtmlContent(content, applicant, appliedOnDate);
+            content = buildHtmlContent(content, appliedOnDate);
         }
 
         return "<!DOCTYPE html>"
@@ -90,9 +90,9 @@ public class JobApplicationManager {
                 + "</html>";
     }
 
-    private String buildHtmlContent(String content, String applicant, List<List<String>> appliedOnDate) {
+    private String buildHtmlContent(String content, List<List<String>> appliedOnDate) {
         for (List<String> job : appliedOnDate) {
-            content = content.concat("<tr>" + "<td>" + job.get(3) + "</td>" + "<td>" + job.get(0) + "</td>" + "<td>" + job.get(1) + "</td>" + "<td>" + applicant + "</td>" + "<td>" + job.get(2) + "</td>" + "</tr>");
+            content = content.concat("<tr>" + "<td>" + job.get(3) + "</td>" + "<td>" + job.get(0) + "</td>" + "<td>" + job.get(1) + "</td>" + "<td>" + job.get(4) + "</td>" + "<td>" + job.get(2) + "</td>" + "</tr>");
         }
         return content;
     }
@@ -103,14 +103,14 @@ public class JobApplicationManager {
             List<List<String>> jobs1 = set.getValue();
             List<List<String>> appliedOnDate = jobs1.stream().filter(job -> job.get(2).equals(date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))).collect(Collectors.toList());
 
-            result = buildCvsItem(result, applicant, appliedOnDate);
+            result = buildCvsItem(result, appliedOnDate);
         }
         return result;
     }
 
-    private String buildCvsItem(String result, String applicant, List<List<String>> appliedOnDate) {
+    private String buildCvsItem(String result, List<List<String>> appliedOnDate) {
         for (List<String> job : appliedOnDate) {
-            result = result.concat(job.get(3) + "," + job.get(0) + "," + job.get(1) + "," + applicant + "," + job.get(2) + "\n");
+            result = result.concat(job.get(3) + "," + job.get(0) + "," + job.get(1) + "," + job.get(4) + "," + job.get(2) + "\n");
         }
         return result;
     }
