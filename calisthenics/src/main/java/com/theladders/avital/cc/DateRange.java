@@ -11,14 +11,6 @@ public class DateRange {
         this.to = to;
     }
 
-    public LocalDate getFrom() {
-        return from;
-    }
-
-    public LocalDate getTo() {
-        return to;
-    }
-
     public boolean isBetween(LocalDate date) {
         if (to == null) {
             return isBeforeOrEquals(date);
@@ -35,5 +27,9 @@ public class DateRange {
 
     private boolean isBeforeOrEquals(LocalDate date) {
         return !from.isAfter(date);
+    }
+
+    public boolean isEmpty() {
+        return from == null && to == null;
     }
 }

@@ -46,7 +46,7 @@ public class Application {
     }
 
     public List<String> findApplicants(String jobName, DateRange dateRange) {
-        if (dateRange.getFrom() == null && dateRange.getTo() == null) {
+        if (dateRange.isEmpty()) {
             return jobApplicationManager.findJobApplications(jobName);
         }
 
