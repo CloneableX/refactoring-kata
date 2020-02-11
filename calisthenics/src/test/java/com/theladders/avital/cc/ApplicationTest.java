@@ -411,8 +411,8 @@ public class ApplicationTest {
         applyJob(employerAlibaba, jobSeekerHo, juniorJavaDevJob, JobType.ATS, null, LocalDate.now());
         applyJob(employerTencent, jobSeekerHo, juniorJavaDevJob, JobType.ATS, null, LocalDate.now());
 
-        assertThat(application.getSuccessfulApplications(employerAlibaba, seniorJavaDevJob), is(2));
-        assertThat(application.getSuccessfulApplications(employerAlibaba, juniorJavaDevJob), is(1));
+        assertThat(application.countSuccessJobApplications(employerAlibaba, seniorJavaDevJob), is(2));
+        assertThat(application.countSuccessJobApplications(employerAlibaba, juniorJavaDevJob), is(1));
     }
 
     @Test
@@ -431,8 +431,8 @@ public class ApplicationTest {
         }
         applyJob(employerAlibaba, jobSeekerLam, juniorJavaDevJob, JobType.ATS, null, LocalDate.now());
 
-        assertThat(application.getUnsuccessfulApplications(employerAlibaba, seniorJavaDevJob), is(1));
-        assertThat(application.getUnsuccessfulApplications(employerAlibaba, juniorJavaDevJob), is(0));
+        assertThat(application.countFailedJobApplications(employerAlibaba, seniorJavaDevJob), is(1));
+        assertThat(application.countFailedJobApplications(employerAlibaba, juniorJavaDevJob), is(0));
     }
 
     private void publishJob(String employerName, String jobName, JobType jobType) throws EmptyJobTypeException {

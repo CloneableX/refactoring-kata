@@ -55,11 +55,11 @@ public class Application {
         return jobApplicationManager.exportHtml(date);
     }
 
-    public int getUnsuccessfulApplications(String employerName, String jobName) {
-        return failedJobApplications.getUnsuccessfulApplications(employerName, jobName);
+    public int countFailedJobApplications(String employerName, String jobName) {
+        return failedJobApplications.count(employerName, jobName);
     }
 
-    public int getSuccessfulApplications(String employerName, String jobName) {
+    public int countSuccessJobApplications(String employerName, String jobName) {
         return jobApplicationManager.countJobApplications(employerName, jobName);
     }
 }
