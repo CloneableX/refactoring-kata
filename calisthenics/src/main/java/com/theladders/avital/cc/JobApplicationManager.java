@@ -60,30 +60,6 @@ public class JobApplicationManager {
         return result;
     }
 
-    public List<String> findJobApplicationsByEndDate(DateRange dateRange) {
-        List<String> result = new ArrayList<>();
-        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs = set.getValue();
-            boolean isAppliedThisDate = jobs.stream().anyMatch(job ->
-                    dateRange.isBetween(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-            isMatchJobApplication(result, applicant, isAppliedThisDate);
-        }
-        return result;
-    }
-
-    public List<String> findJobApplicationsByStartDate(DateRange dateRange) {
-        List<String> result = new ArrayList<>();
-        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
-            String applicant = set.getKey();
-            List<List<String>> jobs = set.getValue();
-            boolean isAppliedThisDate = jobs.stream().anyMatch(job ->
-                    dateRange.isBetween(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
-            isMatchJobApplication(result, applicant, isAppliedThisDate);
-        }
-        return result;
-    }
-
     public List<String> findJobApplicationsByJobName(String jobName) {
         List<String> result = new ArrayList<>();
         for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {

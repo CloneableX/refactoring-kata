@@ -40,14 +40,6 @@ public class Application {
             return jobApplicationManager.findJobApplicationsByJobName(jobName);
         }
 
-        if (jobName == null && dateRange.getTo() == null) {
-            return jobApplicationManager.findJobApplicationsByStartDate(dateRange);
-        }
-
-        if (jobName == null && dateRange.getFrom() == null) {
-            return jobApplicationManager.findJobApplicationsByEndDate(dateRange);
-        }
-
         if (jobName == null) {
             return jobApplicationManager.findJobApplicationsByDateRange(dateRange);
         }
