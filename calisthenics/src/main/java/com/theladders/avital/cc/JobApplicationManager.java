@@ -13,9 +13,9 @@ public class JobApplicationManager {
     private Map<String, List<JobApplication>> jobApplicationMap = new HashMap<>();
 
     public void applyJob(JobApplication jobApplication) {
-        List<JobApplication> jobApplications = jobApplicationMap.getOrDefault(jobApplication.getJobSeeker().getName(), new ArrayList<>());
+        List<JobApplication> jobApplications = jobApplicationMap.getOrDefault(jobApplication.getJobSeekerName(), new ArrayList<>());
         jobApplications.add(jobApplication);
-        jobApplicationMap.put(jobApplication.getJobSeeker().getName(), jobApplications);
+        jobApplicationMap.put(jobApplication.getJobSeekerName(), jobApplications);
     }
 
     public List<JobApplication> getJobApplications(String jobSeekerName) {
@@ -86,7 +86,7 @@ public class JobApplicationManager {
                     + job.getJob().getTypeName()
                     + "</td>"
                     + "<td>"
-                    + job.getJobSeeker().getName()
+                    + job.getJobSeekerName()
                     + "</td>"
                     + "<td>"
                     + job.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
@@ -120,7 +120,7 @@ public class JobApplicationManager {
                     + ","
                     + job.getJob().getTypeName()
                     + ","
-                    + job.getJobSeeker().getName()
+                    + job.getJobSeekerName()
                     + ","
                     + job.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n");
         }

@@ -40,4 +40,8 @@ public class JobApplication {
             throw new InvalidResumeException();
         }
     }
+
+    public String getJobSeekerName() {
+        return jobSeeker.getName();
+    }
 }
