@@ -112,10 +112,10 @@ public class ApplicationTest {
         List<List<String>> appliedJobs = application.getJobApplications(jobSeekerName)
                 .stream()
                 .map(jobApplication -> new ArrayList<String>() {{
-                    add(jobApplication.getJob().getName());
-                    add(jobApplication.getJob().getTypeName());
+                    add(jobApplication.getJobName());
+                    add(jobApplication.getJobTypeName());
                     add(jobApplication.getApplicationTime("yyyy-MM-dd"));
-                    add(jobApplication.getJob().getEmployer().getName());
+                    add(jobApplication.getEmployerName());
                 }})
                 .collect(Collectors.toList());
         List<List<String>> expected = new ArrayList<List<String>>() {{

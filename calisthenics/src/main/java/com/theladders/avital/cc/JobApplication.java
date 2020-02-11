@@ -20,20 +20,12 @@ public class JobApplication {
         return applicationTime;
     }
 
-    public JobSeeker getJobSeeker() {
-        return jobSeeker;
-    }
-
-    public Job getJob() {
-        return job;
-    }
-
     public void isValidJobApplication() throws InvalidResumeException, RequiresResumeForJReqJobException {
         if (job.getType() == JobType.JREQ && resume.getName() == null) {
             throw new RequiresResumeForJReqJobException();
         }
 
-        if (job.getType() == JobType.JREQ && !resume.getName().equals(getJobSeeker().getName())) {
+        if (job.getType() == JobType.JREQ && !resume.getName().equals(jobSeeker.getName())) {
             throw new InvalidResumeException();
         }
     }
