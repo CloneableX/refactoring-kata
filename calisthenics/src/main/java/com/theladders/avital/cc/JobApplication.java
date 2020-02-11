@@ -1,6 +1,7 @@
 package com.theladders.avital.cc;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class JobApplication {
     private LocalDate applicationTime;
@@ -59,5 +60,9 @@ public class JobApplication {
 
     public String getJobTypeName() {
         return job.getTypeName();
+    }
+
+    public String getApplicationTime(String pattern) {
+        return applicationTime.format(DateTimeFormatter.ofPattern(pattern));
     }
 }

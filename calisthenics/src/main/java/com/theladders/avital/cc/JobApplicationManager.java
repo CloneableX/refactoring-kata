@@ -1,7 +1,6 @@
 package com.theladders.avital.cc;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -89,7 +88,7 @@ public class JobApplicationManager {
                     + jobApplication.getJobSeekerName()
                     + "</td>"
                     + "<td>"
-                    + jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    + jobApplication.getApplicationTime("yyyy-MM-dd")
                     + "</td>"
                     + "</tr>");
         }
@@ -122,7 +121,7 @@ public class JobApplicationManager {
                     + ","
                     + job.getJobSeekerName()
                     + ","
-                    + job.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + "\n");
+                    + job.getApplicationTime("yyyy-MM-dd") + "\n");
         }
         return result;
     }
