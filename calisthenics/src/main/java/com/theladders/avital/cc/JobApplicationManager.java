@@ -11,16 +11,16 @@ import java.util.stream.Collectors;
 public class JobApplicationManager {
     private Map<String, List<List<String>>> jobApplicationMap = new HashMap<>();
 
-    public void applyJob(Employer employer, Job job, JobSeeker jobSeeker, JobApplication jobApplication) {
-        List<List<String>> saved = jobApplicationMap.getOrDefault(jobSeeker.getName(), new ArrayList<>());
+    public void applyJob(JobApplication jobApplication) {
+        List<List<String>> saved = jobApplicationMap.getOrDefault(jobApplication.getJobSeeker().getName(), new ArrayList<>());
 
         saved.add(new ArrayList<>() {{
-            add(job.getName());
-            add(job.getTypeName());
+            add(jobApplication.getJob().getName());
+            add(jobApplication.getJob().getTypeName());
             add(jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            add(employer.getName());
+            add(jobApplication.getJob().getEmployer().getName());
         }});
-        jobApplicationMap.put(jobSeeker.getName(), saved);
+        jobApplicationMap.put(jobApplication.getJobSeeker().getName(), saved);
     }
 
     public List<List<String>> getJobApplications(String employerName) {

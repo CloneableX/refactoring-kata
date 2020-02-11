@@ -24,7 +24,7 @@ public class Application {
             throw exception;
         }
 
-        jobApplicationManager.applyJob(jobApplication.getJob().getEmployer(), jobApplication.getJob(), jobApplication.getJobSeeker(), jobApplication);
+        jobApplicationManager.applyJob(jobApplication);
     }
 
     public List<Job> getJobs(String employerName) {
