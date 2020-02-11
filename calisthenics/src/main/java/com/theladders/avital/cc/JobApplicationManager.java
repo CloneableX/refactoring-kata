@@ -54,7 +54,7 @@ public class JobApplicationManager {
         for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
             String applicant = set.getKey();
             List<List<String>> jobs = set.getValue();
-            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> !dateRange.getFrom().isAfter(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))) && !dateRange.getTo().isBefore(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> dateRange.isBetween(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
             isMatchJobApplication(result, applicant, isAppliedThisDate);
         }
         return result;
@@ -66,7 +66,7 @@ public class JobApplicationManager {
             String applicant = set.getKey();
             List<List<String>> jobs = set.getValue();
             boolean isAppliedThisDate = jobs.stream().anyMatch(job ->
-                    !dateRange.getTo().isBefore(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+                    dateRange.isBetween(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
             isMatchJobApplication(result, applicant, isAppliedThisDate);
         }
         return result;
@@ -78,7 +78,7 @@ public class JobApplicationManager {
             String applicant = set.getKey();
             List<List<String>> jobs = set.getValue();
             boolean isAppliedThisDate = jobs.stream().anyMatch(job ->
-                    !dateRange.getFrom().isAfter(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+                    dateRange.isBetween(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
             isMatchJobApplication(result, applicant, isAppliedThisDate);
         }
         return result;

@@ -18,4 +18,22 @@ public class DateRange {
     public LocalDate getTo() {
         return to;
     }
+
+    public boolean isBetween(LocalDate date) {
+        if (to == null) {
+            return isBeforeOrEquals(date);
+        }
+        if (from == null) {
+            return isAfterOrEquals(date);
+        }
+        return isBeforeOrEquals(date) && isAfterOrEquals(date);
+    }
+
+    private boolean isAfterOrEquals(LocalDate date) {
+        return !to.isBefore(date);
+    }
+
+    private boolean isBeforeOrEquals(LocalDate date) {
+        return !from.isAfter(date);
+    }
 }
