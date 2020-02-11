@@ -77,7 +77,7 @@ public class JobApplicationManager {
         for (JobApplication job : appliedOnDate) {
             content = content.concat("<tr>"
                     + "<td>"
-                    + job.getJob().getEmployer().getName()
+                    + job.getEmployerName()
                     + "</td>"
                     + "<td>"
                     + job.getJob().getName()
@@ -114,7 +114,7 @@ public class JobApplicationManager {
 
     private String buildCvsItem(String result, List<JobApplication> appliedOnDate) {
         for (JobApplication job : appliedOnDate) {
-            result = result.concat(job.getJob().getEmployer().getName()
+            result = result.concat(job.getEmployerName()
                     + ","
                     + job.getJob().getName()
                     + ","
@@ -129,7 +129,7 @@ public class JobApplicationManager {
 
     public int countJobApplications(String employerName, String jobName) {
         List<JobApplication> jobApplications = findJobApplications(job ->
-                job.getJob().getEmployer().getName().equals(employerName) && job.isSameJobName(jobName));
+                job.getEmployerName().equals(employerName) && job.isSameJobName(jobName));
         return jobApplications.size();
     }
 

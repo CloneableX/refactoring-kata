@@ -49,4 +49,7 @@ public class JobApplication {
         return job.isSameName(jobName);
     }
 
+    public String getEmployerName() {
+        return job.getEmployerName();
+    }
 }
