@@ -41,7 +41,7 @@ public class Application {
         }
 
         if (jobName == null && dateRange.getTo() == null) {
-            return jobApplicationManager.findJobApplicationsByStartDate(dateRange.getFrom());
+            return jobApplicationManager.findJobApplicationsByStartDate(new DateRange(dateRange.getFrom(), null));
         }
 
         if (jobName == null && dateRange.getFrom() == null) {
