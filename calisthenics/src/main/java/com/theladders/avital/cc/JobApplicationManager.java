@@ -38,15 +38,23 @@ public class JobApplicationManager {
     private List<String> findJobSeekers(Predicate<JobApplication> predicate) {
         List<String> result = new ArrayList<>();
         List<JobApplication> jobApplications = findJobApplications(predicate);
-        isMatchJobApplication(result, jobApplications);
+        jobApplications.forEach(jobApplication -> {
+            addSingleJobSeeker(result, jobApplication);
+        });
         return result;
     }
 
+    private void addSingleJobSeeker(List<String> result, JobApplication jobApplication) {
+        if (!result.contains(jobApplication.getJobSeekerName())) {
+            result.add(jobApplication.getJobSeekerName());
+        }
+    }
+
     public String exportHtml(LocalDate date) {
-        List<JobApplication> appliedOnDate = findJobApplications(job ->
+        List<JobApplication> jobApplications = findJobApplications(job ->
                 job.isSameApplicationTime(date));
 
-        return ExportTemplate.HTML.export(buildHtmlContent(appliedOnDate));
+        return ExportTemplate.HTML.export(buildHtmlContent(jobApplications));
     }
 
     private String buildHtmlContent(List<JobApplication> jobApplications) {
@@ -82,11 +90,4 @@ public class JobApplicationManager {
         return jobApplications.size();
     }
 
-    private void isMatchJobApplication(List<String> result, List<JobApplication> jobApplications) {
-        jobApplications.forEach(jobApplication -> {
-            if (!result.contains(jobApplication.getJobSeekerName())) {
-                result.add(jobApplication.getJobSeekerName());
-            }
-        });
-    }
 }
