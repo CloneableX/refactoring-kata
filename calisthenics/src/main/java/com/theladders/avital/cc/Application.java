@@ -1,7 +1,6 @@
 package com.theladders.avital.cc;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -59,9 +58,7 @@ public class Application {
     }
 
     public String exportCvs(LocalDate date) {
-        String result = "Employer,Job,Job Type,Applicants,Date" + "\n";
-        result = jobApplicationManager.buildCvsContent(date, result);
-        return result;
+        return jobApplicationManager.buildCvsContent(date);
     }
 
     public String exportHtml(LocalDate date) {

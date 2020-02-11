@@ -78,11 +78,11 @@ public class JobApplicationManager {
                 .reduce("", String::concat);
     }
 
-    public String buildCvsContent(LocalDate date, String result) {
+    public String buildCvsContent(LocalDate date) {
         List<JobApplication> appliedOnDate = findJobApplications(jobApplication ->
                 jobApplication.isSameApplicationTime(date));
-        result = buildCvsItem(result, appliedOnDate);
-        return result;
+        String result = buildCvsItem(appliedOnDate);
+        return "Employer,Job,Job Type,Applicants,Date" + "\n" + result;
     }
 
     private List<JobApplication> findJobApplications(Predicate<JobApplication> predicate) {
@@ -94,11 +94,10 @@ public class JobApplicationManager {
         return appliedOnDate;
     }
 
-    private String buildCvsItem(String result, List<JobApplication> appliedOnDate) {
-        for (JobApplication job : appliedOnDate) {
-            result = result.concat(job.toCvsString());
-        }
-        return result;
+    private String buildCvsItem(List<JobApplication> jobApplications) {
+        return jobApplications.stream()
+                .map(JobApplication::toCvsString)
+                .reduce("", String::concat);
     }
 
     public int countJobApplications(String employerName, String jobName) {
