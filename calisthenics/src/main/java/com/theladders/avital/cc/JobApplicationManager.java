@@ -96,15 +96,7 @@ public class JobApplicationManager {
 
     private String buildCvsItem(String result, List<JobApplication> appliedOnDate) {
         for (JobApplication job : appliedOnDate) {
-            result = result.concat(job.getEmployerName()
-                    + ","
-                    + job.getJobName()
-                    + ","
-                    + job.getJobTypeName()
-                    + ","
-                    + job.getJobSeekerName()
-                    + ","
-                    + job.getApplicationTime("yyyy-MM-dd") + "\n");
+            result = result.concat(job.toCvsString());
         }
         return result;
     }

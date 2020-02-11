@@ -89,4 +89,16 @@ public class JobApplication {
                 + "</td>"
                 + "</tr>";
     }
+
+    public String toCvsString() {
+        return getEmployerName()
+                + ","
+                + getJobName()
+                + ","
+                + getJobTypeName()
+                + ","
+                + getJobSeekerName()
+                + ","
+                + getApplicationTime("yyyy-MM-dd") + "\n";
+    }
 }
