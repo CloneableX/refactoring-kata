@@ -33,16 +33,8 @@ public class Application {
         return jobs.getJobs(employerName);
     }
 
-    public List<List<String>> getJobApplications(String jobSeekerName) {
-        return jobApplicationManager.getJobApplications(jobSeekerName)
-                .stream()
-                .map(jobApplication -> new ArrayList<String>() {{
-                    add(jobApplication.getJob().getName());
-                    add(jobApplication.getJob().getTypeName());
-                    add(jobApplication.getApplicationTime("yyyy-MM-dd"));
-                    add(jobApplication.getJob().getEmployer().getName());
-                }})
-                .collect(Collectors.toList());
+    public List<JobApplication> getJobApplications(String jobSeekerName) {
+        return jobApplicationManager.getJobApplications(jobSeekerName);
     }
 
     public List<String> findApplicants(String jobName, DateRange dateRange) {

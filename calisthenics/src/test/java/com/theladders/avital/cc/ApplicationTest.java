@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -108,7 +109,15 @@ public class ApplicationTest {
         publishJob(employerAlibaba, juniorJavaDevJob, JobType.ATS);
         applyJob(employerAlibaba, jobSeekerName, juniorJavaDevJob, JobType.ATS, null, LocalDate.parse("2020-01-01"));
         applyJob(employerAlibaba, jobSeekerName, seniorJavaDevJob, JobType.ATS, null, LocalDate.parse("2020-01-01"));
-        List<List<String>> appliedJobs = application.getJobApplications(jobSeekerName);
+        List<List<String>> appliedJobs = application.getJobApplications(jobSeekerName)
+                .stream()
+                .map(jobApplication -> new ArrayList<String>() {{
+                    add(jobApplication.getJob().getName());
+                    add(jobApplication.getJob().getTypeName());
+                    add(jobApplication.getApplicationTime("yyyy-MM-dd"));
+                    add(jobApplication.getJob().getEmployer().getName());
+                }})
+                .collect(Collectors.toList());
         List<List<String>> expected = new ArrayList<List<String>>() {{
             add(createNewJob("Java开发", JobType.ATS.getName(), "Alibaba", "2020-01-01"));
             add(createNewJob("高级Java开发", JobType.ATS.getName(), "Alibaba", "2020-01-01"));
