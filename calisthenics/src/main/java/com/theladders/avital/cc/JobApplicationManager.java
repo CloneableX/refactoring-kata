@@ -10,31 +10,16 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class JobApplicationManager {
-    private Map<String, List<List<String>>> jobApplicationMap = new HashMap<>();
-    private Map<String, List<JobApplication>> jobApplicationMapTemp = new HashMap<>();
+    private Map<String, List<JobApplication>> jobApplicationMap = new HashMap<>();
 
     public void applyJob(JobApplication jobApplication) {
-        List<List<String>> saved = jobApplicationMap.getOrDefault(jobApplication.getJobSeeker().getName(), new ArrayList<>());
-
-        saved.add(new ArrayList<>() {{
-            add(jobApplication.getJob().getName());
-            add(jobApplication.getJob().getTypeName());
-            add(jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            add(jobApplication.getJob().getEmployer().getName());
-            add(jobApplication.getJobSeeker().getName());
-        }});
-        jobApplicationMap.put(jobApplication.getJobSeeker().getName(), saved);
-        applyJobTemp(jobApplication);
-    }
-
-    public void applyJobTemp(JobApplication jobApplication) {
-        List<JobApplication> jobApplications = jobApplicationMapTemp.getOrDefault(jobApplication.getJobSeeker().getName(), new ArrayList<>());
+        List<JobApplication> jobApplications = jobApplicationMap.getOrDefault(jobApplication.getJobSeeker().getName(), new ArrayList<>());
         jobApplications.add(jobApplication);
-        jobApplicationMapTemp.put(jobApplication.getJobSeeker().getName(), jobApplications);
+        jobApplicationMap.put(jobApplication.getJobSeeker().getName(), jobApplications);
     }
 
     public List<JobApplication> getJobApplications(String jobSeekerName) {
-        return jobApplicationMapTemp.get(jobSeekerName);
+        return jobApplicationMap.get(jobSeekerName);
     }
 
     public List<String> findJobApplications(String jobName) {
@@ -42,7 +27,7 @@ public class JobApplicationManager {
     }
 
     public List<String> findJobApplications(DateRange dateRange) {
-        return findJobApplicationsBy(jobapplication -> dateRange.isBetween(jobapplication.getApplicationTime()));
+        return findJobApplicationsBy(jobApplication -> dateRange.isBetween(jobApplication.getApplicationTime()));
     }
 
     public List<String> findJobApplications(String jobName, DateRange dateRange) {
@@ -53,7 +38,7 @@ public class JobApplicationManager {
 
     private List<String> findJobApplicationsBy(Predicate<JobApplication> predicate) {
         List<String> result = new ArrayList<>();
-        for (Map.Entry<String, List<JobApplication>> set : jobApplicationMapTemp.entrySet()) {
+        for (Map.Entry<String, List<JobApplication>> set : jobApplicationMap.entrySet()) {
             String applicant = set.getKey();
             List<JobApplication> jobs = set.getValue();
             boolean hasAppliedToThisJob = jobs.stream().anyMatch(predicate);
@@ -120,7 +105,7 @@ public class JobApplicationManager {
 
     private List<JobApplication> findJobApplications(Predicate<JobApplication> predicate) {
         List<JobApplication> appliedOnDate = new ArrayList<>();
-        for (Map.Entry<String, List<JobApplication>> set : jobApplicationMapTemp.entrySet()) {
+        for (Map.Entry<String, List<JobApplication>> set : jobApplicationMap.entrySet()) {
             List<JobApplication> jobApplications = set.getValue();
             appliedOnDate.addAll(jobApplications.stream().filter(predicate).collect(Collectors.toList()));
         }
