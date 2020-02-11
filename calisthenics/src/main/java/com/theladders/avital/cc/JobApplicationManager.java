@@ -38,22 +38,24 @@ public class JobApplicationManager {
     }
 
     public List<String> findJobApplications(String jobName) {
-        return findJobApplicationsBy(job -> job.get(0).equals(jobName));
+        return findJobApplicationsBy(jobApplication -> jobApplication.getJob().getName().equals(jobName));
     }
 
     public List<String> findJobApplications(DateRange dateRange) {
-        return findJobApplicationsBy(job -> dateRange.isBetween(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+        return findJobApplicationsBy(jobapplication -> dateRange.isBetween(jobapplication.getApplicationTime()));
     }
 
     public List<String> findJobApplications(String jobName, DateRange dateRange) {
-        return findJobApplicationsBy(job -> job.get(0).equals(jobName) && dateRange.isBetween(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+        return findJobApplicationsBy(jobApplication ->
+                jobApplication.getJob().getName().equals(jobName)
+                        && dateRange.isBetween(jobApplication.getApplicationTime()));
     }
 
-    private List<String> findJobApplicationsBy(Predicate<List<String>> predicate) {
+    private List<String> findJobApplicationsBy(Predicate<JobApplication> predicate) {
         List<String> result = new ArrayList<>();
-        for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
+        for (Map.Entry<String, List<JobApplication>> set : jobApplicationMapTemp.entrySet()) {
             String applicant = set.getKey();
-            List<List<String>> jobs = set.getValue();
+            List<JobApplication> jobs = set.getValue();
             boolean hasAppliedToThisJob = jobs.stream().anyMatch(predicate);
             isMatchJobApplication(result, applicant, hasAppliedToThisJob);
         }
