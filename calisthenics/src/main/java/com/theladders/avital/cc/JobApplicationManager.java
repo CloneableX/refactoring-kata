@@ -20,12 +20,21 @@ public class JobApplicationManager {
             add(jobApplication.getJob().getTypeName());
             add(jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             add(jobApplication.getJob().getEmployer().getName());
+            add(jobApplication.getJobSeeker().getName());
         }});
         jobApplicationMap.put(jobApplication.getJobSeeker().getName(), saved);
     }
 
     public List<List<String>> getJobApplications(String employerName) {
-        return jobApplicationMap.get(employerName);
+        return jobApplicationMap.get(employerName)
+                .stream()
+                .map(jobApplication -> new ArrayList<String>() {{
+                    add(jobApplication.get(0));
+                    add(jobApplication.get(1));
+                    add(jobApplication.get(2));
+                    add(jobApplication.get(3));
+                }})
+                .collect(Collectors.toList());
     }
 
     public List<String> findJobApplications(String jobName) {
