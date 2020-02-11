@@ -53,7 +53,7 @@ public class Application {
         }
 
         if (dateRange.getTo() != null) {
-            return jobApplicationManager.findJobApplicationsByJobNameAndEndDate(jobName, dateRange.getTo());
+            return jobApplicationManager.findJobApplicationsByJobNameAndEndDate(jobName, new DateRange(null, dateRange.getTo()));
         }
 
         return jobApplicationManager.findJobApplicationsByJobNameAndDateRange(jobName, new DateRange(dateRange.getFrom(), null));

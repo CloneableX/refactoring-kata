@@ -38,18 +38,12 @@ public class JobApplicationManager {
         return result;
     }
 
-    private void isMatchJobApplication(List<String> result, String applicant, boolean isAppliedThisDate) {
-        if (isAppliedThisDate) {
-            result.add(applicant);
-        }
-    }
-
-    public List<String> findJobApplicationsByJobNameAndEndDate(String jobName, LocalDate to) {
+    public List<String> findJobApplicationsByJobNameAndEndDate(String jobName, DateRange dateRange) {
         List<String> result = new ArrayList<>();
         for (Map.Entry<String, List<List<String>>> set : jobApplicationMap.entrySet()) {
             String applicant = set.getKey();
             List<List<String>> jobs = set.getValue();
-            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> job.get(0).equals(jobName) && !to.isBefore(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
+            boolean isAppliedThisDate = jobs.stream().anyMatch(job -> job.get(0).equals(jobName) && !dateRange.getTo().isBefore(LocalDate.parse(job.get(2), DateTimeFormatter.ofPattern("yyyy-MM-dd"))));
             isMatchJobApplication(result, applicant, isAppliedThisDate);
         }
         return result;
@@ -164,5 +158,11 @@ public class JobApplicationManager {
             result += jobs.stream().anyMatch(job -> job.get(3).equals(employerName) && job.get(0).equals(jobName)) ? 1 : 0;
         }
         return result;
+    }
+
+    private void isMatchJobApplication(List<String> result, String applicant, boolean isAppliedThisDate) {
+        if (isAppliedThisDate) {
+            result.add(applicant);
+        }
     }
 }
