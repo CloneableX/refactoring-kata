@@ -9,26 +9,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class JobApplicationManager {
-    public static final String CONTENT_TAG = "{CONTENT}";
-    public static final String HTML_TEMPLATE = "<!DOCTYPE html>"
-            + "<body>"
-            + "<table>"
-            + "<thead>"
-            + "<tr>"
-            + "<th>Employer</th>"
-            + "<th>Job</th>"
-            + "<th>Job Type</th>"
-            + "<th>Applicants</th>"
-            + "<th>Date</th>"
-            + "</tr>"
-            + "</thead>"
-            + "<tbody>"
-            + CONTENT_TAG
-            + "</tbody>"
-            + "</table>"
-            + "</body>"
-            + "</html>";
-    public static final String CVS_TEMPLATE = "Employer,Job,Job Type,Applicants,Date" + "\n" + CONTENT_TAG;
     private Map<String, List<JobApplication>> jobApplicationMap = new HashMap<>();
 
     public void applyJob(JobApplication jobApplication) {
@@ -70,7 +50,7 @@ public class JobApplicationManager {
         List<JobApplication> appliedOnDate = findJobApplications(job ->
                 job.isSameApplicationTime(date));
 
-        return HTML_TEMPLATE.replace(CONTENT_TAG, buildHtmlContent(appliedOnDate));
+        return ExportTemplate.HTML_TEMPLATE.replace(ExportTemplate.CONTENT_TAG, buildHtmlContent(appliedOnDate));
     }
 
     private String buildHtmlContent(List<JobApplication> jobApplications) {
@@ -82,7 +62,7 @@ public class JobApplicationManager {
     public String buildCvsContent(LocalDate date) {
         List<JobApplication> jobApplications = findJobApplications(jobApplication ->
                 jobApplication.isSameApplicationTime(date));
-        return CVS_TEMPLATE.replace(CONTENT_TAG, buildCvsItem(jobApplications));
+        return ExportTemplate.CVS_TEMPLATE.replace(ExportTemplate.CONTENT_TAG, buildCvsItem(jobApplications));
     }
 
     private List<JobApplication> findJobApplications(Predicate<JobApplication> predicate) {
