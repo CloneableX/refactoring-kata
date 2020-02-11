@@ -74,22 +74,22 @@ public class JobApplicationManager {
     }
 
     private String buildHtmlContent(String content, List<JobApplication> appliedOnDate) {
-        for (JobApplication job : appliedOnDate) {
+        for (JobApplication jobApplication : appliedOnDate) {
             content = content.concat("<tr>"
                     + "<td>"
-                    + job.getEmployerName()
+                    + jobApplication.getEmployerName()
                     + "</td>"
                     + "<td>"
-                    + job.getJobName()
+                    + jobApplication.getJobName()
                     + "</td>"
                     + "<td>"
-                    + job.getJob().getTypeName()
+                    + jobApplication.getJobTypeName()
                     + "</td>"
                     + "<td>"
-                    + job.getJobSeekerName()
+                    + jobApplication.getJobSeekerName()
                     + "</td>"
                     + "<td>"
-                    + job.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    + jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                     + "</td>"
                     + "</tr>");
         }
@@ -118,7 +118,7 @@ public class JobApplicationManager {
                     + ","
                     + job.getJobName()
                     + ","
-                    + job.getJob().getTypeName()
+                    + job.getJobTypeName()
                     + ","
                     + job.getJobSeekerName()
                     + ","

@@ -56,4 +56,8 @@ public class JobApplication {
     public String getJobName() {
         return job.getName();
     }
+
+    public String getJobTypeName() {
+        return job.getTypeName();
+    }
 }
