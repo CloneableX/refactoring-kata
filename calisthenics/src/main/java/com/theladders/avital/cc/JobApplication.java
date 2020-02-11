@@ -9,10 +9,6 @@ public class JobApplication {
     private Resume resume;
     private Job job;
 
-    public JobApplication(LocalDate applicationTime) {
-        this.applicationTime = applicationTime;
-    }
-
     public JobApplication(LocalDate applicationTime, JobSeeker jobSeeker, Resume resume, Job job) {
         this.applicationTime = applicationTime;
         this.jobSeeker = jobSeeker;
@@ -64,5 +60,9 @@ public class JobApplication {
 
     public String getApplicationTime(String pattern) {
         return applicationTime.format(DateTimeFormatter.ofPattern(pattern));
+    }
+
+    public boolean isSameApplicationTime(LocalDate date) {
+        return applicationTime.equals(date);
     }
 }

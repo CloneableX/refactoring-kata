@@ -40,7 +40,7 @@ public class Application {
                 .map(jobApplication -> new ArrayList<String>() {{
                     add(jobApplication.getJob().getName());
                     add(jobApplication.getJob().getTypeName());
-                    add(jobApplication.getApplicationTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                    add(jobApplication.getApplicationTime("yyyy-MM-dd"));
                     add(jobApplication.getJob().getEmployer().getName());
                 }})
                 .collect(Collectors.toList());

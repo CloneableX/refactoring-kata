@@ -437,7 +437,7 @@ public class ApplicationTest {
                           String resumeName,
                           LocalDate applicationDate) throws RequiresResumeForJReqJobException, InvalidResumeException {
 
-        application.applyJob(new JobApplication(new JobApplication(applicationDate).getApplicationTime(), new JobSeeker(jobSeekerName), new Resume(resumeName), new Job(jobName, jobType, new Employer(employer))));
+        application.applyJob(new JobApplication(applicationDate, new JobSeeker(jobSeekerName), new Resume(resumeName), new Job(jobName, jobType, new Employer(employer))));
     }
 
     private void isSameJobs(String employerName, List<Job> expected) {

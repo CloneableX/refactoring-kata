@@ -48,7 +48,7 @@ public class JobApplicationManager {
 
     public String exportHtml(LocalDate date) {
         List<JobApplication> appliedOnDate = findJobApplications(job ->
-                job.getApplicationTime().equals(date));
+                job.isSameApplicationTime(date));
         String content = "";
         content = buildHtmlContent(content, appliedOnDate);
 
@@ -96,8 +96,8 @@ public class JobApplicationManager {
     }
 
     public String buildCvsContent(LocalDate date, String result) {
-        List<JobApplication> appliedOnDate = findJobApplications(job ->
-                job.getApplicationTime().equals(date));
+        List<JobApplication> appliedOnDate = findJobApplications(jobApplication ->
+                jobApplication.isSameApplicationTime(date));
         result = buildCvsItem(result, appliedOnDate);
         return result;
     }
