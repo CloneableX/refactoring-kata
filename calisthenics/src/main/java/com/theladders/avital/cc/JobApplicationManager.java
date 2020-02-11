@@ -50,7 +50,7 @@ public class JobApplicationManager {
         List<JobApplication> appliedOnDate = findJobApplications(job ->
                 job.isSameApplicationTime(date));
 
-        return ExportTemplate.HTML_TEMPLATE.replace(ExportTemplate.CONTENT_TAG, buildHtmlContent(appliedOnDate));
+        return ExportTemplate.HTML.export(buildHtmlContent(appliedOnDate));
     }
 
     private String buildHtmlContent(List<JobApplication> jobApplications) {

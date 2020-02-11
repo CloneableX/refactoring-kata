@@ -1,9 +1,8 @@
 package com.theladders.avital.cc;
 
 public enum ExportTemplate {
-    CVS("Employer,Job,Job Type,Applicants,Date" + "\n" + "{CONTENT}");
-    public static final String CONTENT_TAG = "{CONTENT}";
-    public static final String HTML_TEMPLATE = "<!DOCTYPE html>"
+    CVS("Employer,Job,Job Type,Applicants,Date" + "\n" + "{CONTENT}"),
+    HTML("<!DOCTYPE html>"
             + "<body>"
             + "<table>"
             + "<thead>"
@@ -16,11 +15,12 @@ public enum ExportTemplate {
             + "</tr>"
             + "</thead>"
             + "<tbody>"
-            + CONTENT_TAG
+            + "{CONTENT}"
             + "</tbody>"
             + "</table>"
             + "</body>"
-            + "</html>";
+            + "</html>");
+
     private String template;
 
     ExportTemplate(String template) {
@@ -28,6 +28,6 @@ public enum ExportTemplate {
     }
 
     public String export(String content) {
-        return template.replace(CONTENT_TAG, content);
+        return template.replace("{CONTENT}", content);
     }
 }
