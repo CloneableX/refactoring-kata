@@ -4,3 +4,4 @@
 - gildedrose
 - bugszero
 - calishenics
+- parallel-change
