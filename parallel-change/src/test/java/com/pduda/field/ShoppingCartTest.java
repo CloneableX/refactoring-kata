@@ -3,6 +3,8 @@ package com.pduda.field;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
+
 public class ShoppingCartTest {
 
 
@@ -11,7 +13,7 @@ public class ShoppingCartTest {
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.add(10);
 
-        Assert.assertEquals(1, shoppingCart.numberOfProducts());
+        assertEquals(1, shoppingCart.numberOfProducts());
     }
 
     @Test
@@ -19,7 +21,7 @@ public class ShoppingCartTest {
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.add(10);
 
-        Assert.assertEquals(10, shoppingCart.calculateTotalPrice());
+        assertEquals(10, shoppingCart.calculateTotalPrice());
     }
 
     @Test
@@ -38,4 +40,12 @@ public class ShoppingCartTest {
         Assert.assertFalse(shoppingCart.hasDiscount());
     }
 
+    @Test
+    public void should_get_2_products_when_add_2_items() {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.add(10);
+        shoppingCart.add(20);
+
+        assertEquals(2, shoppingCart.numberOfProducts());
+    }
 }

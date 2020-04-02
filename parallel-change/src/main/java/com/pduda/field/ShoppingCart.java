@@ -2,9 +2,11 @@ package com.pduda.field;
 
 public class ShoppingCart {
     private int price;
+    private int productsNumber = 0;
 
     public void add(int price) {
         this.price = price;
+        productsNumber++;
     }
 
     public int calculateTotalPrice() {
@@ -16,6 +18,6 @@ public class ShoppingCart {
     }
 
     public int numberOfProducts() {
-        return 1;
+        return productsNumber;
     }
 }
