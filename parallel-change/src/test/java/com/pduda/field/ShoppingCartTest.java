@@ -47,5 +47,6 @@ public class ShoppingCartTest {
         shoppingCart.add(20);
 
         assertEquals(2, shoppingCart.numberOfProducts());
+        assertEquals(30, shoppingCart.calculateTotalPrice());
     }
 }
