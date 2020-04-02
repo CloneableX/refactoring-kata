@@ -1,13 +1,11 @@
 package com.pduda.field;
 
 public class ShoppingCart {
-    private int price = 0;
+    private int price;
     private int productsNumber = 0;
-    private int leastPrice = 0;
 
     public void add(int price) {
-        this.price += price;
-        leastPrice = price;
+        this.price = price;
         productsNumber++;
     }
 
@@ -16,7 +14,7 @@ public class ShoppingCart {
     }
 
     public boolean hasDiscount() {
-        return leastPrice >= 100;
+        return price >= 100;
     }
 
     public int numberOfProducts() {
