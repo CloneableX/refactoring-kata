@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 public class ShoppingCartTest {
 
@@ -48,5 +49,12 @@ public class ShoppingCartTest {
 
         assertEquals(2, shoppingCart.numberOfProducts());
         assertEquals(30, shoppingCart.calculateTotalPrice());
+    }
+
+    @Test
+    public void should_has_not_discount_when_not_have_product() {
+        ShoppingCart shoppingCart = new ShoppingCart();
+
+        assertFalse(shoppingCart.hasDiscount());
     }
 }
