@@ -9,15 +9,15 @@ public class Product {
         this.number = number;
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
     public boolean hasDiscount() {
         return price >= 100;
     }
 
     public Integer getNumber() {
         return number;
+    }
+
+    public Double calculatePrice() {
+        return number * price;
     }
 }

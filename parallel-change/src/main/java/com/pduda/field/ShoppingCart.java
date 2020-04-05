@@ -18,8 +18,7 @@ public class ShoppingCart {
     public double calculateTotalPrice() {
         Double reducePrice = products.stream()
                 .reduce(0d,
-                        (totalPrice, product) -> totalPrice + product.getPrice(),
-                        Double::sum);
+                        (totalPrice, product) -> totalPrice + product.calculatePrice(), Double::sum);
 
         if (hasDiscount()) {
             return reducePrice * DISCOUNT;

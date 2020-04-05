@@ -78,4 +78,13 @@ public class ShoppingCartTest {
 
         assertThat(shoppingCart.numberOfProducts(), is(5));
     }
+
+    @Test
+    public void should_count_all_number_products_price_when_add_multiple_number_products_item() {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.add(10, 2);
+        shoppingCart.add(30, 3);
+
+        assertThat(shoppingCart.calculateTotalPrice(), is((double) (10 * 2 + 30 * 3)));
+    }
 }
