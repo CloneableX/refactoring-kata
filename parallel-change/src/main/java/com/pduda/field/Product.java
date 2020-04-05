@@ -1,6 +1,7 @@
 package com.pduda.field;
 
 public class Product {
+    public static final int PRICE_DISCOUNT_BASE_LINE = 100;
     private Double price;
     private Integer number;
 
@@ -10,7 +11,7 @@ public class Product {
     }
 
     public boolean hasDiscount() {
-        return price >= 100;
+        return price >= PRICE_DISCOUNT_BASE_LINE;
     }
 
     public Integer getNumber() {
