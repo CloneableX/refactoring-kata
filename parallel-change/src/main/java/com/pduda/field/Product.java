@@ -1,13 +1,13 @@
 package com.pduda.field;
 
 public class Product {
-    private int price;
+    private Double price;
 
-    public Product(int price) {
+    public Product(double price) {
         this.price = price;
     }
 
-    public int getPrice() {
+    public Double getPrice() {
         return price;
     }
 

@@ -7,20 +7,20 @@ public class ShoppingCart {
     public static final double DISCOUNT = 0.9d;
     private List<Product> products = new ArrayList<>();
 
-    public void add(int price) {
+    public void add(double price) {
         products.add(new Product(price));
     }
 
     public double calculateTotalPrice() {
-        Integer reducePrice = products.stream()
-                .reduce(0,
+        Double reducePrice = products.stream()
+                .reduce(0d,
                         (totalPrice, product) -> totalPrice + product.getPrice(),
-                        Integer::sum);
+                        Double::sum);
 
         if (hasDiscount()) {
             return reducePrice * DISCOUNT;
         }
-        return Double.parseDouble(String.valueOf(reducePrice));
+        return reducePrice;
     }
 
     public boolean hasDiscount() {
