@@ -69,4 +69,13 @@ public class ShoppingCartTest {
 
         assertThat(shoppingCart.calculateTotalPrice(), is((100 + 10) * ShoppingCart.DISCOUNT));
     }
+
+    @Test
+    public void should_count_products_number_when_add_multiple_number_products_item() {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.add(10, 2);
+        shoppingCart.add(30, 3);
+
+        assertThat(shoppingCart.numberOfProducts(), is(5));
+    }
 }

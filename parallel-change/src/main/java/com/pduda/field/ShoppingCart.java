@@ -8,7 +8,11 @@ public class ShoppingCart {
     private List<Product> products = new ArrayList<>();
 
     public void add(double price) {
-        products.add(new Product(price));
+        add(price, 1);
+    }
+
+    public void add(double price, int number) {
+        products.add(new Product(price, number));
     }
 
     public double calculateTotalPrice() {
@@ -35,6 +39,8 @@ public class ShoppingCart {
     }
 
     public int numberOfProducts() {
-        return products.size();
+        return products.stream()
+                .reduce(0, (totalNumber, product) -> totalNumber + product.getNumber(), Integer::sum);
     }
+
 }
