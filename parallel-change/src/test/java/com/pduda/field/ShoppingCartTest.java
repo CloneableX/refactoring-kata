@@ -3,6 +3,8 @@ package com.pduda.field;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.xml.ws.soap.Addressing;
+
 import static org.junit.Assert.*;
 
 public class ShoppingCartTest {
@@ -27,7 +29,9 @@ public class ShoppingCartTest {
     @Test
     public void singleItem_hasDiscountIfContainsAtLeastOneProductWorthAtLeast100() throws Exception {
         ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.add(99);
         shoppingCart.add(100);
+        shoppingCart.add(10);
 
         Assert.assertTrue(shoppingCart.hasDiscount());
     }
