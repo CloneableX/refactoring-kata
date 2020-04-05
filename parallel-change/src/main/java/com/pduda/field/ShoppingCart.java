@@ -23,7 +23,10 @@ public class ShoppingCart {
             return false;
         }
 
-        return calculateTotalPrice() >= 100;
+        long discountNumber = products.stream()
+                .filter(Product::hasDiscount)
+                .count();
+        return discountNumber > 0;
     }
 
     public int numberOfProducts() {

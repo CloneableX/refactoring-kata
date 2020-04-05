@@ -10,4 +10,8 @@ public class Product {
     public int getPrice() {
         return price;
     }
+
+    public boolean hasDiscount() {
+        return price >= 100;
+    }
 }
