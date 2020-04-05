@@ -23,8 +23,7 @@ public class ShoppingCart {
             return false;
         }
 
-        Product lastProduct = products.get(products.size() - 1);
-        return lastProduct.getPrice() >= 100;
+        return calculateTotalPrice() >= 100;
     }
 
     public int numberOfProducts() {

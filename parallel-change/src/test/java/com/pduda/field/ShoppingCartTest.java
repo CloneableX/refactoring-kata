@@ -3,8 +3,7 @@ package com.pduda.field;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 public class ShoppingCartTest {
 
@@ -56,5 +55,14 @@ public class ShoppingCartTest {
         ShoppingCart shoppingCart = new ShoppingCart();
 
         assertFalse(shoppingCart.hasDiscount());
+    }
+
+    @Test
+    public void should_have_discount_when_total_price_worth_at_least_100() {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.add(20);
+        shoppingCart.add(80);
+
+        assertTrue(shoppingCart.hasDiscount());
     }
 }
