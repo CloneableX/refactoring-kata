@@ -1,21 +1,26 @@
 package com.pduda.field;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ShoppingCart {
+    public static final double DISCOUNT = 0.9d;
     private List<Product> products = new ArrayList<>();
 
     public void add(int price) {
         products.add(new Product(price));
     }
 
-    public int calculateTotalPrice() {
-        return products.stream()
+    public double calculateTotalPrice() {
+        Integer reducePrice = products.stream()
                 .reduce(0,
                         (totalPrice, product) -> totalPrice + product.getPrice(),
                         Integer::sum);
+
+        if (hasDiscount()) {
+            return reducePrice * DISCOUNT;
+        }
+        return Double.parseDouble(String.valueOf(reducePrice));
     }
 
     public boolean hasDiscount() {

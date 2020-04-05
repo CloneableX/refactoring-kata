@@ -3,8 +3,7 @@ package com.pduda.field;
 import org.junit.Assert;
 import org.junit.Test;
 
-import javax.xml.ws.soap.Addressing;
-
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class ShoppingCartTest {
@@ -23,7 +22,7 @@ public class ShoppingCartTest {
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.add(10);
 
-        assertEquals(10, shoppingCart.calculateTotalPrice());
+        assertThat(shoppingCart.calculateTotalPrice(), is(10d));
     }
 
     @Test
@@ -52,7 +51,7 @@ public class ShoppingCartTest {
         shoppingCart.add(20);
 
         assertEquals(2, shoppingCart.numberOfProducts());
-        assertEquals(30, shoppingCart.calculateTotalPrice());
+        assertThat(shoppingCart.calculateTotalPrice(), is(30d));
     }
 
     @Test
@@ -60,5 +59,14 @@ public class ShoppingCartTest {
         ShoppingCart shoppingCart = new ShoppingCart();
 
         assertFalse(shoppingCart.hasDiscount());
+    }
+
+    @Test
+    public void should_discount_price_when_calculate_total_price_at_least_one_worth_at_least_100() {
+        ShoppingCart shoppingCart = new ShoppingCart();
+        shoppingCart.add(100);
+        shoppingCart.add(10);
+
+        assertThat(shoppingCart.calculateTotalPrice(), is((100 + 10) * ShoppingCart.DISCOUNT));
     }
 }
