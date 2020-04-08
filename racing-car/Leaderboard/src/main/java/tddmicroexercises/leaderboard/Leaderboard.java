@@ -1,12 +1,6 @@
 package tddmicroexercises.leaderboard;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Leaderboard {
 
@@ -25,7 +19,7 @@ public class Leaderboard {
                 if (results.containsKey(driverName)) {
                     results.put(driverName, results.get(driverName) + points);
                 } else {
-                    results.put(driverName, 0 + points);
+                    results.put(driverName, points);
                 }
             }
         }
@@ -35,7 +29,7 @@ public class Leaderboard {
     public List<String> driverRankings() {
         Map<String, Integer> results = driverResults();
         List<String> resultsList = new ArrayList<>(results.keySet());
-        Collections.sort(resultsList, new DriverByPointsDescendingComparator(results));
+        resultsList.sort(new DriverByPointsDescendingComparator(results));
         return resultsList;
     }
 

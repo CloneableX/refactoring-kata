@@ -28,7 +28,7 @@ public class Driver {
         if (this == obj) {
             return true;
         }
-        if (obj == null || !(obj instanceof Driver)) {
+        if (!(obj instanceof Driver)) {
             return false;
         }
         Driver other = (Driver) obj;
