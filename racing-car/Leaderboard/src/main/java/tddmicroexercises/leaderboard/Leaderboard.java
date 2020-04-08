@@ -13,17 +13,25 @@ public class Leaderboard {
     public Map<String, Integer> driverResults() {
         Map<String, Integer> results = new HashMap<>();
         for (Race race : this.races) {
-            for (Driver driver : race.getResults()) {
-                String driverName = race.getDriverName(driver);
-                int points = race.getPoints(driver);
-                if (results.containsKey(driverName)) {
-                    results.put(driverName, results.get(driverName) + points);
-                } else {
-                    results.put(driverName, points);
-                }
-            }
+            calculateDiversPoint(results, race);
         }
         return results;
+    }
+
+    private void calculateDiversPoint(Map<String, Integer> results, Race race) {
+        for (Driver driver : race.getResults()) {
+            String driverName = race.getDriverName(driver);
+            int points = race.getPoints(driver);
+            saveDriverToResult(results, driverName, points);
+        }
+    }
+
+    private void saveDriverToResult(Map<String, Integer> results, String driverName, int points) {
+        if (results.containsKey(driverName)) {
+            results.put(driverName, results.get(driverName) + points);
+        } else {
+            results.put(driverName, points);
+        }
     }
 
     public List<String> driverRankings() {
