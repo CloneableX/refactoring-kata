@@ -1,6 +1,7 @@
 package tddmicroexercises.textconvertor;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,6 +16,13 @@ public class HtmlPagesConverter {
         this.filename = filename;
 
         this.breaks.add(0);
+
+        File file = new File(filename);
+        if (!file.exists()) {
+            boolean isCreate = file.createNewFile();
+            System.out.println("Create file " + file.getPath() + " " + isCreate);
+        }
+
         BufferedReader reader = new BufferedReader(new FileReader(this.filename));
         int cumulativeCharCount = 0;
         String line = reader.readLine();
