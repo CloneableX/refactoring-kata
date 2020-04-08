@@ -20,7 +20,7 @@ public class Leaderboard {
 
     private void calculateDiversPoint(Map<String, Integer> results, Race race) {
         for (Driver driver : race.getResults()) {
-            String driverName = race.getDriverName(driver);
+            String driverName = driver.getName();
             int points = race.getPoints(driver);
             saveDriverToResult(results, driverName, points);
         }

@@ -11,15 +11,10 @@ public class Race {
 
     private final String name;
     private final List<Driver> results;
-    private final Map<Driver, String> driverNames;
 
     public Race(String name, Driver... drivers) {
         this.name = name;
         this.results = Arrays.asList(drivers);
-        this.driverNames = new HashMap<>();
-        for (Driver driver : results) {
-            this.driverNames.put(driver, driver.getName());
-        }
     }
 
     public int position(Driver driver) {
@@ -32,10 +27,6 @@ public class Race {
 
     public List<Driver> getResults() {
         return results;
-    }
-
-    public String getDriverName(Driver driver) {
-        return this.driverNames.get(driver);
     }
 
     @Override
