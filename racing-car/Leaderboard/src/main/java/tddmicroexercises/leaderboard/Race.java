@@ -18,11 +18,7 @@ public class Race {
         this.results = Arrays.asList(drivers);
         this.driverNames = new HashMap<>();
         for (Driver driver : results) {
-            String driverName = driver.getName();
-            if (driver instanceof SelfDrivingCar) {
-                driverName = "Self Driving Car - " + driver.getCountry() + " (" + ((SelfDrivingCar) driver).getAlgorithmVersion() + ")";
-            }
-            this.driverNames.put(driver, driverName);
+            this.driverNames.put(driver, driver.getName());
         }
     }
 
