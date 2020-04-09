@@ -1,6 +1,7 @@
 package tddmicroexercises.leaderboard;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Leaderboard {
 
@@ -26,23 +27,11 @@ public class Leaderboard {
     }
 
     public List<String> driverRankings() {
-        Map<String, Integer> results = driverResults();
-        List<String> resultsList = new ArrayList<>(results.keySet());
-        resultsList.sort(new DriverByPointsDescendingComparator(results));
-        return resultsList;
-    }
-
-    private static final class DriverByPointsDescendingComparator implements Comparator<String> {
-        private final Map<String, Integer> results;
-
-        private DriverByPointsDescendingComparator(Map<String, Integer> results) {
-            this.results = results;
-        }
-
-        @Override
-        public int compare(String driverName1, String driverName2) {
-            return -results.get(driverName1).compareTo(results.get(driverName2));
-        }
+        Set<Driver> results = calculateDriversPoint();
+        return results.stream()
+                .sorted()
+                .map(Driver::getName)
+                .collect(Collectors.toList());
     }
 
 }

@@ -1,10 +1,12 @@
 package tddmicroexercises.leaderboard;
 
-public class Driver {
+import java.util.Comparator;
+
+public class Driver implements Comparator<Driver>, Comparable<Driver> {
 
     private final String name;
     private final String country;
-    private int point = 0;
+    private Integer point = 0;
 
     public Driver(String name, String country) {
         this.name = name;
@@ -25,6 +27,11 @@ public class Driver {
     }
 
     @Override
+    public int compare(Driver driver, Driver otherDriver) {
+        return -driver.getName().compareTo(otherDriver.getName());
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -42,5 +49,10 @@ public class Driver {
 
     public int getPoint() {
         return this.point;
+    }
+
+    @Override
+    public int compareTo(Driver driver) {
+        return -this.point.compareTo(driver.getPoint());
     }
 }

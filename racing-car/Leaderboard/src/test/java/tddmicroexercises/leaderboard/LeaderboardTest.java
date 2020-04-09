@@ -54,7 +54,7 @@ public class LeaderboardTest {
         List<String> rankings = exEquoLeaderBoard.driverRankings();
 
         // verify
-        assertEquals(Arrays.asList(testData.driver1.getName(), testData.driver2.getName(), testData.driver3.getName()), rankings);
+        assertEquals(Arrays.asList(testData.driver2.getName(), testData.driver1.getName(), testData.driver3.getName()), rankings);
         // note: the order of driver1 and driver2 is JDK/platform dependent
     }
 
