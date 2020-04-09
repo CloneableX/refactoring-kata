@@ -13,9 +13,14 @@ public class Leaderboard {
     public Map<String, Integer> driverResults() {
         Map<String, Integer> results = new HashMap<>();
         for (Race race : this.races) {
-            race.calculateDiversPoint(results);
+            race.calculateDiversPoint();
+            calculateResult(results, race.getResults());
         }
         return results;
+    }
+
+    private void calculateResult(Map<String, Integer> results, List<Driver> drivers) {
+        drivers.forEach(driver -> results.put(driver.getName(), driver.getPoint()));
     }
 
     public List<String> driverRankings() {
