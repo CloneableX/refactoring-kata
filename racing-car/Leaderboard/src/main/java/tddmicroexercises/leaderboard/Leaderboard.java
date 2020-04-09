@@ -18,12 +18,8 @@ public class Leaderboard {
             drivers.addAll(race.getResults());
         }
 
-        calculateResult(results, drivers);
-        return results;
-    }
-
-    private void calculateResult(Map<String, Integer> results, Set<Driver> drivers) {
         drivers.forEach(driver -> results.put(driver.getName(), driver.getPoint()));
+        return results;
     }
 
     public List<String> driverRankings() {
