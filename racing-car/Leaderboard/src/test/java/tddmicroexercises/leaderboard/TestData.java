@@ -2,22 +2,22 @@ package tddmicroexercises.leaderboard;
 
 public class TestData {
 
-    public static Driver driver1;
-    public static Driver driver2;
-    public static Driver driver3;
-    public static SelfDrivingCar driver4;
+    public Driver driver1;
+    public Driver driver2;
+    public Driver driver3;
+    public SelfDrivingCar driver4;
 
-    public static Race race1;
-    public static Race race2;
-    public static Race race3;
-    public static Race race4;
-    public static Race race5;
-    public static Race race6;
+    public Race race1;
+    public Race race2;
+    public Race race3;
+    public Race race4;
+    public Race race5;
+    public Race race6;
 
-    public static Leaderboard sampleLeaderboard1;
-    public static Leaderboard sampleLeaderboard2;
+    public Leaderboard sampleLeaderboard1;
+    public Leaderboard sampleLeaderboard2;
 
-    static {
+    public TestData() {
         driver1 = new Driver("Nico Rosberg", "DE");
         driver2 = new Driver("Lewis Hamilton", "UK");
         driver3 = new Driver("Sebastian Vettel", "DE");
