@@ -12,14 +12,17 @@ public class Leaderboard {
 
     public Map<String, Integer> driverResults() {
         Map<String, Integer> results = new HashMap<>();
+        Set<Driver> drivers = new HashSet<>();
         for (Race race : this.races) {
             race.calculateDiversPoint();
-            calculateResult(results, race.getResults());
+            drivers.addAll(race.getResults());
         }
+
+        calculateResult(results, drivers);
         return results;
     }
 
-    private void calculateResult(Map<String, Integer> results, List<Driver> drivers) {
+    private void calculateResult(Map<String, Integer> results, Set<Driver> drivers) {
         drivers.forEach(driver -> results.put(driver.getName(), driver.getPoint()));
     }
 
