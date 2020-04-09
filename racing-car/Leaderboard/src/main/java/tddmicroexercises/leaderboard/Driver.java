@@ -1,8 +1,6 @@
 package tddmicroexercises.leaderboard;
 
-import java.util.Comparator;
-
-public class Driver implements Comparator<Driver>, Comparable<Driver> {
+public class Driver implements Comparable<Driver> {
 
     private final String name;
     private final String country;
@@ -24,11 +22,6 @@ public class Driver implements Comparator<Driver>, Comparable<Driver> {
     @Override
     public int hashCode() {
         return name.hashCode() * 31 + country.hashCode();
-    }
-
-    @Override
-    public int compare(Driver driver, Driver otherDriver) {
-        return -driver.getName().compareTo(otherDriver.getName());
     }
 
     @Override
