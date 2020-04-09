@@ -1,7 +1,6 @@
 package tddmicroexercises.leaderboard;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,20 +16,16 @@ public class Race {
         this.results = Arrays.asList(drivers);
     }
 
-    public int position(Driver driver) {
-        return this.results.indexOf(driver);
-    }
-
-    public int getPoints(Driver driver) {
-        return Race.POINTS[position(driver)];
-    }
-
-    public List<Driver> getResults() {
-        return results;
-    }
-
     @Override
     public String toString() {
         return name;
+    }
+
+    public void calculateDiversPoint(Map<String, Integer> results) {
+        for (int i = 0; i < this.results.size(); i++) {
+            Driver driver = this.results.get(i);
+            driver.addPoints(POINTS[i]);
+            results.put(driver.getName(), driver.getPoint());
+        }
     }
 }
