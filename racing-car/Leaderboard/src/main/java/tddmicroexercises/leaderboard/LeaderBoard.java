@@ -3,21 +3,15 @@ package tddmicroexercises.leaderboard;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class Leaderboard {
+public class LeaderBoard {
 
     private final List<Race> races;
 
-    public Leaderboard(Race... races) {
+    public LeaderBoard(Race... races) {
         this.races = Arrays.asList(races);
     }
 
-    public Map<String, Integer> driverResults() {
-        Map<String, Integer> results = new HashMap<>();
-        calculateDriversPoint().forEach(driver -> results.put(driver.getName(), driver.getPoint()));
-        return results;
-    }
-
-    private Set<Driver> calculateDriversPoint() {
+    public Set<Driver> driverResults() {
         Set<Driver> drivers = new HashSet<>();
         for (Race race : this.races) {
             race.calculateDiversPoint();
@@ -27,7 +21,7 @@ public class Leaderboard {
     }
 
     public List<String> driverRankings() {
-        Set<Driver> results = calculateDriversPoint();
+        Set<Driver> results = driverResults();
         return results.stream()
                 .sorted()
                 .map(Driver::getName)

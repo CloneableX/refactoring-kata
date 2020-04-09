@@ -5,12 +5,12 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class LeaderboardTest {
+public class LeaderBoardTest {
 
     private TestData testData;
 
@@ -24,11 +24,15 @@ public class LeaderboardTest {
         // setup
 
         // act
-        Map<String, Integer> results = testData.sampleLeaderboard1.driverResults();
+        Set<Driver> results = testData.sampleLeaderBoard1.driverResults();
 
+        Driver actualDriver = results.stream()
+                .filter(driver -> driver.equals(testData.driver2))
+                .findFirst()
+                .orElse(null);
         // verify
-        assertTrue("results " + results, results.containsKey("Lewis Hamilton"));
-        assertEquals(18 + 18 + 25, (int) results.get("Lewis Hamilton"));
+        assertTrue("results " + results, results.contains(testData.driver2));
+        assertEquals(18 + 18 + 25, actualDriver.getPoint());
     }
 
     @Test
@@ -36,7 +40,7 @@ public class LeaderboardTest {
         // setup
 
         // act
-        List<String> result = testData.sampleLeaderboard1.driverRankings();
+        List<String> result = testData.sampleLeaderBoard1.driverRankings();
 
         // verify
         assertEquals("Lewis Hamilton", result.get(0));
@@ -48,7 +52,7 @@ public class LeaderboardTest {
         // bug, drops drivers with same points
         Race winDriver1 = new Race("Australian Grand Prix", testData.driver1, testData.driver2, testData.driver3);
         Race winDriver2 = new Race("Malaysian Grand Prix", testData.driver2, testData.driver1, testData.driver3);
-        Leaderboard exEquoLeaderBoard = new Leaderboard(winDriver1, winDriver2);
+        LeaderBoard exEquoLeaderBoard = new LeaderBoard(winDriver1, winDriver2);
 
         // act
         List<String> rankings = exEquoLeaderBoard.driverRankings();

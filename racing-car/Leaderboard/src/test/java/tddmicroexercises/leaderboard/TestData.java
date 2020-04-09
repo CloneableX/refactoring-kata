@@ -14,8 +14,8 @@ public class TestData {
     public Race race5;
     public Race race6;
 
-    public Leaderboard sampleLeaderboard1;
-    public Leaderboard sampleLeaderboard2;
+    public LeaderBoard sampleLeaderBoard1;
+    public LeaderBoard sampleLeaderBoard2;
 
     public TestData() {
         driver1 = new Driver("Nico Rosberg", "DE");
@@ -31,7 +31,7 @@ public class TestData {
         driver4.setAlgorithmVersion("1.3");
         race6 = new Race("Fictional Grand Prix 3", driver2, driver1, driver4);
 
-        sampleLeaderboard1 = new Leaderboard(race1, race2, race3);
-        sampleLeaderboard2 = new Leaderboard(race4, race5, race6);
+        sampleLeaderBoard1 = new LeaderBoard(race1, race2, race3);
+        sampleLeaderBoard2 = new LeaderBoard(race4, race5, race6);
     }
 }
