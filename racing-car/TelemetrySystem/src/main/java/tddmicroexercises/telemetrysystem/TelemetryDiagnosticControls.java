@@ -20,7 +20,7 @@ public class TelemetryDiagnosticControls
             this.diagnosticInfo = diagnosticInfo;
         }
  
-        public void checkTransmission() throws Exception
+        public String checkTransmission() throws Exception
         {
             diagnosticInfo = "";
 
@@ -39,6 +39,6 @@ public class TelemetryDiagnosticControls
             }
     
             telemetryClient.send(TelemetryClient.DIAGNOSTIC_MESSAGE);
-            diagnosticInfo = telemetryClient.receive();
+            return diagnosticInfo = telemetryClient.receive();
     }
 }
