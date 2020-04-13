@@ -13,12 +13,12 @@ public class TelemetryDiagnosticControls {
         telemetryClient.disconnect();
 
         int retryTimes = 0;
-        while (!telemetryClient.getOnlineStatus() && retryTimes < 3) {
+        while (telemetryClient.isOffline() && retryTimes < 3) {
             telemetryClient.connect("*111#");
             retryTimes++;
         }
 
-        if (!telemetryClient.getOnlineStatus()) {
+        if (telemetryClient.isOffline()) {
             throw new Exception("Unable to connect.");
         }
 
