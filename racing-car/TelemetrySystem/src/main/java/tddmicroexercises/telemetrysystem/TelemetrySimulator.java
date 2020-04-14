@@ -18,4 +18,8 @@ public class TelemetrySimulator {
         }
         return message.toString();
     }
+
+    public boolean simulateOnline() {
+        return simulator.nextInt(10) <= 8;
+    }
 }

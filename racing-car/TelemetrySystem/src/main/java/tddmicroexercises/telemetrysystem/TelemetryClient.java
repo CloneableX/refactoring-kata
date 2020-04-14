@@ -1,14 +1,11 @@
 package tddmicroexercises.telemetrysystem;
 
-import java.util.Random;
-
 public class TelemetryClient {
     public static final String DIAGNOSTIC_MESSAGE = "AT#UD";
 
     private boolean onlineStatus;
     private String diagnosticMessageResult = "";
 
-    private final Random connectionEventsSimulator = new Random(42);
     private final TelemetrySimulator telemetrySimulator = new TelemetrySimulator(42);
 
     public boolean isOffline() {
@@ -22,7 +19,7 @@ public class TelemetryClient {
 
         // simulate the operation on a real modem
 
-        onlineStatus = connectionEventsSimulator.nextInt(10) <= 8;
+        onlineStatus = telemetrySimulator.simulateOnline();
     }
 
     public void disconnect() {
