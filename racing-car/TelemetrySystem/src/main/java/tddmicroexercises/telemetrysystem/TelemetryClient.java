@@ -15,7 +15,7 @@ public class TelemetryClient {
     }
 
     public void connect(String telemetryServerConnectionString) {
-        if (telemetryServerConnectionString == null || "".equals(telemetryServerConnectionString)) {
+        if (StringUtils.isEmpty(telemetryServerConnectionString)) {
             throw new IllegalArgumentException();
         }
 
@@ -29,7 +29,7 @@ public class TelemetryClient {
     }
 
     public void send(String message) {
-        if (message == null || "".equals(message)) {
+        if (StringUtils.isEmpty(message)) {
             throw new IllegalArgumentException();
         }
 
@@ -59,7 +59,7 @@ public class TelemetryClient {
     public String receive() {
         StringBuilder message;
 
-        if (diagnosticMessageResult == null || "".equals(diagnosticMessageResult)) {
+        if (StringUtils.isEmpty(diagnosticMessageResult)) {
             // simulate a received message (just for illustration - not needed for this exercise)
             message = new StringBuilder();
             int messageLength = connectionEventsSimulator.nextInt(50) + 60;
