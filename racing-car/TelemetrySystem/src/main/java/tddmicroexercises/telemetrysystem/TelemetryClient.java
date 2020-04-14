@@ -25,6 +25,7 @@ public class TelemetryClient {
     }
 
     public void disconnect() {
+        diagnosticMessageResult = "";
         onlineStatus = false;
     }
 
@@ -58,23 +59,20 @@ public class TelemetryClient {
 
     public String receive() {
         if (StringUtils.isEmpty(diagnosticMessageResult)) {
-            return simulateMessage().toString();
+            return simulateMessage();
         }
 
-        StringBuilder resultMessage = new StringBuilder(diagnosticMessageResult);
-        diagnosticMessageResult = "";
-
-        return resultMessage.toString();
+        return diagnosticMessageResult;
     }
 
-    private StringBuilder simulateMessage() {
+    private String simulateMessage() {
         // simulate a received message (just for illustration - not needed for this exercise)
         StringBuilder message = new StringBuilder();
         int messageLength = connectionEventsSimulator.nextInt(50) + 60;
         for (int i = messageLength; i >= 0; --i) {
             message.append((char) connectionEventsSimulator.nextInt(40) + 86);
         }
-        return message;
+        return message.toString();
     }
 }
 
