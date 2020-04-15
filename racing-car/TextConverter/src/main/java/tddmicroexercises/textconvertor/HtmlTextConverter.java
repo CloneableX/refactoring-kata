@@ -18,14 +18,14 @@ public class HtmlTextConverter
 	    BufferedReader reader = new BufferedReader(new FileReader(fullFilenameWithPath));
 	    
 	    String line = reader.readLine();
-	    String html = "";
+	    StringBuilder html = new StringBuilder();
 	    while (line != null)
 	    {
-	    	html += StringEscapeUtils.escapeHtml(line);
-	        html += "<br />";
+	    	html.append(StringEscapeUtils.escapeHtml(line));
+	        html.append("<br />");
 	        line = reader.readLine();
 	    }
-	    return html;
+	    return html.toString();
 
     }
 

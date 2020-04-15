@@ -10,7 +10,7 @@ import java.util.List;
 public class HtmlPagesConverter {
 
     private String filename;
-    private List<Integer> breaks = new ArrayList<Integer>();
+    private List<Integer> breaks = new ArrayList<>();
     
     public HtmlPagesConverter(String filename) throws IOException {
         this.filename = filename;
@@ -30,8 +30,7 @@ public class HtmlPagesConverter {
         {
             cumulativeCharCount += line.length() + 1; // add one for the newline
             if (line.contains("PAGE_BREAK")) {
-                int page_break_position = cumulativeCharCount;
-                breaks.add(page_break_position);
+                breaks.add(cumulativeCharCount);
             }
             line = reader.readLine();
         }
@@ -41,7 +40,7 @@ public class HtmlPagesConverter {
     public String getHtmlPage(int page) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(this.filename));
         reader.skip(breaks.get(page));
-        StringBuffer htmlPage = new StringBuffer();
+        StringBuilder htmlPage = new StringBuilder();
         String line = reader.readLine();
         while (line != null)
         {
