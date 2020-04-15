@@ -16,9 +16,9 @@ public class HtmlPagesConverterTest {
     public static final String SOURCE_FILE = "text_page.txt";
 
     @Test
-    public void foo() throws IOException {
-        HtmlPagesConverter converter = new HtmlPagesConverter("foo");
-        assertEquals("foo", converter.getFilename());
+    public void test_get_file_name_when_initialize_file_name() throws IOException {
+        HtmlPagesConverter converter = new HtmlPagesConverter(SOURCE_FILE);
+        assertEquals(SOURCE_FILE, converter.getFilename());
     }
 
     @Test
