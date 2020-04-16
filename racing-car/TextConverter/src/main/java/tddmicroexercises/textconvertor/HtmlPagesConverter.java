@@ -1,6 +1,5 @@
 package tddmicroexercises.textconvertor;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 public class HtmlPagesConverter extends HtmlTextConverter {
@@ -13,17 +12,12 @@ public class HtmlPagesConverter extends HtmlTextConverter {
     }
 
     public String getHtmlPage(int page) throws IOException {
-        BufferedReader reader = pageFile.skipPage(page);
-        StringBuilder htmlPage = new StringBuilder();
-        String line = reader.readLine();
-        while (line != null && !PageReader.isBreakLine(line)) {
-            htmlPage.append(StringEscapeUtils.escapeHtml(line));
-            htmlPage.append("<br />");
+        return convertToHtml(pageFile.skipPage(page));
+    }
 
-            line = reader.readLine();
-        }
-        reader.close();
-        return htmlPage.toString();
+    @Override
+    public boolean isFileEnd(String line) {
+        return line != null && !PageReader.isBreakLine(line);
     }
 
 }

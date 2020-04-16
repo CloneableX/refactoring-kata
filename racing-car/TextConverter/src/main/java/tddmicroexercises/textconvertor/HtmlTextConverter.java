@@ -27,7 +27,7 @@ public class HtmlTextConverter {
         return html.toString();
     }
 
-    private boolean isFileEnd(String line) {
+    protected boolean isFileEnd(String line) {
         return line != null;
     }
 
