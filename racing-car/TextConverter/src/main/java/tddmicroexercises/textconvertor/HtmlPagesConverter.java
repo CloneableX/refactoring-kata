@@ -10,7 +10,7 @@ public class HtmlPagesConverter {
 
     private final PageFile pageFile;
     private String filename;
-    private List<Integer> breaks = new ArrayList<>();
+    private List<Integer> breaks;
 
     public HtmlPagesConverter(String filename) throws IOException {
         this.filename = filename;
