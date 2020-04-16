@@ -52,10 +52,7 @@ public class HtmlPagesConverter {
         reader.skip(breaks.get(page));
         StringBuilder htmlPage = new StringBuilder();
         String line = reader.readLine();
-        while (line != null) {
-            if (isBreakLine(line)) {
-                break;
-            }
+        while (line != null && !isBreakLine(line)) {
             htmlPage.append(StringEscapeUtils.escapeHtml(line));
             htmlPage.append("<br />");
 
