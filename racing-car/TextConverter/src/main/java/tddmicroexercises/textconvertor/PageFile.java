@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PageFile {
@@ -18,7 +17,7 @@ public class PageFile {
             System.out.println("Create file " + file.getPath() + " " + isCreate);
         }
 
-        this.breaks = new PageReader(file).markBreakLine();
+        this.breaks = new PageReader(file).getBreakLineCharsNumber();
     }
 
     public static boolean isBreakLine(String line) {

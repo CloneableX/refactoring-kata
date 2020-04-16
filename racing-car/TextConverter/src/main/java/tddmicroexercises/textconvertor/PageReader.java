@@ -11,7 +11,7 @@ public class PageReader {
         this.file = file;
     }
 
-    public List<Integer> markBreakLine() throws IOException {
+    public List<Integer> getBreakLineCharsNumber() throws IOException {
         List<Integer> breaks = new ArrayList<>();
         breaks.add(0);
 
