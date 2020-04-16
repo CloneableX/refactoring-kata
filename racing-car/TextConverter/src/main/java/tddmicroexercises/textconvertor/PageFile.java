@@ -18,30 +18,11 @@ public class PageFile {
             System.out.println("Create file " + file.getPath() + " " + isCreate);
         }
 
-        this.breaks = markBreakLine();
+        this.breaks = new PageReader(file).markBreakLine();
     }
 
     public static boolean isBreakLine(String line) {
         return line.contains("PAGE_BREAK");
-    }
-
-    private List<Integer> markBreakLine() throws IOException {
-        List<Integer> breaks = new ArrayList<>();
-        breaks.add(0);
-
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        int cumulativeCharCount = 0;
-        String line = reader.readLine();
-        while (line != null) {
-            cumulativeCharCount += line.length() + 1; // add one for the newline
-            if (isBreakLine(line)) {
-                breaks.add(cumulativeCharCount);
-            }
-            line = reader.readLine();
-        }
-        reader.close();
-
-        return breaks;
     }
 
     public BufferedReader skipPage(int page) throws IOException {
