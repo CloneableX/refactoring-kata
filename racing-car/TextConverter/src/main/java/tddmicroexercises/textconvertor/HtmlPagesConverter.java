@@ -3,14 +3,13 @@ package tddmicroexercises.textconvertor;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class HtmlPagesConverter {
+public class HtmlPagesConverter extends HtmlTextConverter {
 
     private final PageFile pageFile;
-    private String filename;
 
-    public HtmlPagesConverter(String filename) throws IOException {
-        this.filename = filename;
-        this.pageFile = new PageFile(filename);
+    public HtmlPagesConverter(String fullFilenameWithPath) throws IOException {
+        super(fullFilenameWithPath);
+        this.pageFile = new PageFile(fullFilenameWithPath);
     }
 
     public String getHtmlPage(int page) throws IOException {
@@ -25,10 +24,6 @@ public class HtmlPagesConverter {
         }
         reader.close();
         return htmlPage.toString();
-    }
-
-    public String getFilename() {
-        return this.filename;
     }
 
 }
