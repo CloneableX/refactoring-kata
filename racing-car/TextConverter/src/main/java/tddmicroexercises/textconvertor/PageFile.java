@@ -40,4 +40,11 @@ public class PageFile {
 
         return breaks;
     }
+
+    public BufferedReader skipChars(int skipChars) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        reader.skip(skipChars);
+
+        return reader;
+    }
 }

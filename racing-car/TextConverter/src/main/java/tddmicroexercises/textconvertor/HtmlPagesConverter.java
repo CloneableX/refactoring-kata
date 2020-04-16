@@ -1,7 +1,6 @@
 package tddmicroexercises.textconvertor;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,8 +17,7 @@ public class HtmlPagesConverter {
     }
 
     public String getHtmlPage(int page) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(this.filename));
-        reader.skip(breaks.get(page));
+        BufferedReader reader = pageFile.skipChars(breaks.get(page));
         StringBuilder htmlPage = new StringBuilder();
         String line = reader.readLine();
         while (line != null && !PageFile.isBreakLine(line)) {
