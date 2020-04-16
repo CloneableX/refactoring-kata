@@ -9,6 +9,7 @@ import java.util.List;
 
 public class PageFile {
     private final File file;
+    private final List<Integer> breaks;
 
     public PageFile(String filename) throws IOException {
         file = new File(filename);
@@ -16,13 +17,15 @@ public class PageFile {
             boolean isCreate = file.createNewFile();
             System.out.println("Create file " + file.getPath() + " " + isCreate);
         }
+
+        this.breaks = markBreakLine();
     }
 
     public static boolean isBreakLine(String line) {
         return line.contains("PAGE_BREAK");
     }
 
-    public List<Integer> markBreakLine() throws IOException {
+    private List<Integer> markBreakLine() throws IOException {
         List<Integer> breaks = new ArrayList<>();
         breaks.add(0);
 
@@ -41,9 +44,9 @@ public class PageFile {
         return breaks;
     }
 
-    public BufferedReader skipChars(int skipChars) throws IOException {
+    public BufferedReader skipPage(int page) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
-        reader.skip(skipChars);
+        reader.skip(breaks.get(page));
 
         return reader;
     }
