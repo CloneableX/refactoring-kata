@@ -28,12 +28,16 @@ public class HtmlPagesConverter {
         String line = reader.readLine();
         while (line != null) {
             cumulativeCharCount += line.length() + 1; // add one for the newline
-            if (line.contains("PAGE_BREAK")) {
-                breaks.add(cumulativeCharCount);
-            }
+            markBreakLineChar(cumulativeCharCount, line);
             line = reader.readLine();
         }
         reader.close();
+    }
+
+    private void markBreakLineChar(int cumulativeCharCount, String line) {
+        if (line.contains("PAGE_BREAK")) {
+            breaks.add(cumulativeCharCount);
+        }
     }
 
     public String getHtmlPage(int page) throws IOException {
