@@ -20,10 +20,6 @@ public class PageFile {
         this.breaks = new PageReader(file).getBreakLineCharsNumber();
     }
 
-    public static boolean isBreakLine(String line) {
-        return line.contains("PAGE_BREAK");
-    }
-
     public BufferedReader skipPage(int page) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         reader.skip(breaks.get(page));
