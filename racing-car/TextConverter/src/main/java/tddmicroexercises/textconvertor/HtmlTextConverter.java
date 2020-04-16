@@ -11,7 +11,7 @@ public class HtmlTextConverter {
         this.fullFilenameWithPath = fullFilenameWithPath;
     }
 
-    public String convertToHtml() throws IOException {
+    public String getHtmlText() throws IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader(fullFilenameWithPath));
 
@@ -22,6 +22,7 @@ public class HtmlTextConverter {
             html.append("<br />");
             line = reader.readLine();
         }
+        reader.close();
         return html.toString();
 
     }

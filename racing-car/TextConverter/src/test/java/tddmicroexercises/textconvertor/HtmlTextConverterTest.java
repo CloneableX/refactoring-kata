@@ -28,6 +28,6 @@ public class HtmlTextConverterTest {
         byte[] buff = Files.readAllBytes(Paths.get(PATH_PREFIX + "html_text_convert_result.html"));
         String expectedString = new String(buff, Charset.defaultCharset());
 
-        assertThat(converter.convertToHtml(), is(expectedString));
+        assertThat(converter.getHtmlText(), is(expectedString));
     }
 }
