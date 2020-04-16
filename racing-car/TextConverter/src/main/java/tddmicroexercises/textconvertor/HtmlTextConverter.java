@@ -12,19 +12,23 @@ public class HtmlTextConverter {
     }
 
     public String getHtmlText() throws IOException {
+        return convertToHtml(new BufferedReader(new FileReader(fullFilenameWithPath)));
+    }
 
-        BufferedReader reader = new BufferedReader(new FileReader(fullFilenameWithPath));
-
+    public String convertToHtml(BufferedReader reader) throws IOException {
         String line = reader.readLine();
         StringBuilder html = new StringBuilder();
-        while (line != null) {
+        while (isFileEnd(line)) {
             html.append(StringEscapeUtils.escapeHtml(line));
             html.append("<br />");
             line = reader.readLine();
         }
         reader.close();
         return html.toString();
+    }
 
+    private boolean isFileEnd(String line) {
+        return line != null;
     }
 
     public String getFilename() {
