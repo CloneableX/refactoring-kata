@@ -18,6 +18,10 @@ public class PageFile {
         }
     }
 
+    public static boolean isBreakLine(String line) {
+        return line.contains("PAGE_BREAK");
+    }
+
     public List<Integer> markBreakLine() throws IOException {
         List<Integer> breaks = new ArrayList<>();
         breaks.add(0);
@@ -27,7 +31,7 @@ public class PageFile {
         String line = reader.readLine();
         while (line != null) {
             cumulativeCharCount += line.length() + 1; // add one for the newline
-            if (HtmlPagesConverter.isBreakLine(line)) {
+            if (isBreakLine(line)) {
                 breaks.add(cumulativeCharCount);
             }
             line = reader.readLine();

@@ -3,7 +3,6 @@ package tddmicroexercises.textconvertor;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class HtmlPagesConverter {
@@ -23,7 +22,7 @@ public class HtmlPagesConverter {
         reader.skip(breaks.get(page));
         StringBuilder htmlPage = new StringBuilder();
         String line = reader.readLine();
-        while (line != null && !isBreakLine(line)) {
+        while (line != null && !PageFile.isBreakLine(line)) {
             htmlPage.append(StringEscapeUtils.escapeHtml(line));
             htmlPage.append("<br />");
 
@@ -31,10 +30,6 @@ public class HtmlPagesConverter {
         }
         reader.close();
         return htmlPage.toString();
-    }
-
-    public static boolean isBreakLine(String line) {
-        return line.contains("PAGE_BREAK");
     }
 
     public String getFilename() {
