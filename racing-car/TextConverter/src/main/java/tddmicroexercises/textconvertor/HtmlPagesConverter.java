@@ -1,7 +1,6 @@
 package tddmicroexercises.textconvertor;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,29 +14,8 @@ public class HtmlPagesConverter {
 
     public HtmlPagesConverter(String filename) throws IOException {
         this.filename = filename;
-        this.breaks.add(0);
-
-        pageFile = new PageFile(filename);
-
-        markBreakLine();
-    }
-
-    private void markBreakLine() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(this.filename));
-        int cumulativeCharCount = 0;
-        String line = reader.readLine();
-        while (line != null) {
-            cumulativeCharCount += line.length() + 1; // add one for the newline
-            markBreakLineChar(cumulativeCharCount, line);
-            line = reader.readLine();
-        }
-        reader.close();
-    }
-
-    private void markBreakLineChar(int cumulativeCharCount, String line) {
-        if (isBreakLine(line)) {
-            breaks.add(cumulativeCharCount);
-        }
+        this.pageFile = new PageFile(filename);
+        this.breaks = pageFile.markBreakLine();
     }
 
     public String getHtmlPage(int page) throws IOException {
@@ -55,7 +33,7 @@ public class HtmlPagesConverter {
         return htmlPage.toString();
     }
 
-    private boolean isBreakLine(String line) {
+    public static boolean isBreakLine(String line) {
         return line.contains("PAGE_BREAK");
     }
 
