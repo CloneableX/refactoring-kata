@@ -9,6 +9,7 @@ import java.util.List;
 
 public class HtmlPagesConverter {
 
+    private final PageFile pageFile;
     private String filename;
     private List<Integer> breaks = new ArrayList<>();
 
@@ -16,7 +17,7 @@ public class HtmlPagesConverter {
         this.filename = filename;
         this.breaks.add(0);
 
-        initFile(filename);
+        pageFile = new PageFile(filename);
 
         markBreakLine();
     }
@@ -31,14 +32,6 @@ public class HtmlPagesConverter {
             line = reader.readLine();
         }
         reader.close();
-    }
-
-    private void initFile(String filename) throws IOException {
-        File file = new File(filename);
-        if (!file.exists()) {
-            boolean isCreate = file.createNewFile();
-            System.out.println("Create file " + file.getPath() + " " + isCreate);
-        }
     }
 
     private void markBreakLineChar(int cumulativeCharCount, String line) {
