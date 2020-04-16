@@ -14,15 +14,14 @@ public class HtmlPagesConverter {
 
     public HtmlPagesConverter(String filename) throws IOException {
         this.filename = filename;
-
         this.breaks.add(0);
 
-        File file = new File(filename);
-        if (!file.exists()) {
-            boolean isCreate = file.createNewFile();
-            System.out.println("Create file " + file.getPath() + " " + isCreate);
-        }
+        initFile(filename);
 
+        markBreakLine();
+    }
+
+    private void markBreakLine() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(this.filename));
         int cumulativeCharCount = 0;
         String line = reader.readLine();
@@ -34,8 +33,16 @@ public class HtmlPagesConverter {
         reader.close();
     }
 
+    private void initFile(String filename) throws IOException {
+        File file = new File(filename);
+        if (!file.exists()) {
+            boolean isCreate = file.createNewFile();
+            System.out.println("Create file " + file.getPath() + " " + isCreate);
+        }
+    }
+
     private void markBreakLineChar(int cumulativeCharCount, String line) {
-        if (line.contains("PAGE_BREAK")) {
+        if (isBreakLine(line)) {
             breaks.add(cumulativeCharCount);
         }
     }
@@ -46,7 +53,7 @@ public class HtmlPagesConverter {
         StringBuilder htmlPage = new StringBuilder();
         String line = reader.readLine();
         while (line != null) {
-            if (line.contains("PAGE_BREAK")) {
+            if (isBreakLine(line)) {
                 break;
             }
             htmlPage.append(StringEscapeUtils.escapeHtml(line));
@@ -56,6 +63,10 @@ public class HtmlPagesConverter {
         }
         reader.close();
         return htmlPage.toString();
+    }
+
+    private boolean isBreakLine(String line) {
+        return line.contains("PAGE_BREAK");
     }
 
     public String getFilename() {
