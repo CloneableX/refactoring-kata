@@ -15,9 +15,7 @@ public class TestAlarm {
     @Test
     public void should_alarm_on_when_less_than_low_pressure_threshold() {
         Alarm alarm = new Alarm();
-        SensorMock sensor = new SensorMock();
-        sensor.mockPopNextPressurePsiValue(16d);
-        alarm.sensor = sensor;
+        alarm.sensor = mockSensor(16d);
 
         alarm.check();
         assertTrue(alarm.isAlarmOn());
@@ -26,11 +24,15 @@ public class TestAlarm {
     @Test
     public void should_alarm_on_when_when_greater_than_high_pressure_threshold() {
         Alarm alarm = new Alarm();
-        SensorMock sensor = new SensorMock();
-        sensor.mockPopNextPressurePsiValue(22d);
-        alarm.sensor = sensor;
+        alarm.sensor = mockSensor(22d);
 
         alarm.check();
         assertTrue(alarm.isAlarmOn());
+    }
+
+    private SensorMock mockSensor(double v) {
+        SensorMock sensor = new SensorMock();
+        sensor.mockPopNextPressurePsiValue(v);
+        return sensor;
     }
 }
