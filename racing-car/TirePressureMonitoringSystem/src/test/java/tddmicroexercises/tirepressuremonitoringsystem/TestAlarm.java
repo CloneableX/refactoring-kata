@@ -9,6 +9,6 @@ public class TestAlarm {
     @Test
     public void foo() {
         Alarm alarm = new Alarm();
-        assertEquals(false, alarm.isAlarmOn());
+        assertFalse(alarm.isAlarmOn());
     }
 }
