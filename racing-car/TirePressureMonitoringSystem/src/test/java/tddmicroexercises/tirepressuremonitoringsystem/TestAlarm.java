@@ -22,4 +22,15 @@ public class TestAlarm {
         alarm.check();
         assertTrue(alarm.isAlarmOn());
     }
+
+    @Test
+    public void should_alarm_on_when_when_greater_than_high_pressure_threshold() {
+        Alarm alarm = new Alarm();
+        SensorMock sensor = new SensorMock();
+        sensor.mockPopNextPressurePsiValue(22d);
+        alarm.sensor = sensor;
+
+        alarm.check();
+        assertTrue(alarm.isAlarmOn());
+    }
 }
