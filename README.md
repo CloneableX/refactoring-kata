@@ -6,3 +6,4 @@
 - calishenics
 - parallel-change
 - racing-car
+- sing-a-song
