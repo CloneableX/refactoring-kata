@@ -36,7 +36,7 @@ class Song {
                 "She swallowed the cat to catch the bird,\n" +
                 "She swallowed the bird to catch the spider,\n" +
                 "She swallowed the spider to catch the fly;\n" +
-                "I don't know why she swallowed a fly - perhaps she'll die!\n" +
+                ladyDead() +
                 "\n";
     }
 
@@ -47,7 +47,7 @@ class Song {
                 "She swallowed the cat to catch the bird,\n" +
                 "She swallowed the bird to catch the spider,\n" +
                 "She swallowed the spider to catch the fly;\n" +
-                "I don't know why she swallowed a fly - perhaps she'll die!\n" +
+                ladyDead() +
                 "\n";
     }
 
@@ -57,7 +57,7 @@ class Song {
                 "She swallowed the cat to catch the bird,\n" +
                 "She swallowed the bird to catch the spider,\n" +
                 "She swallowed the spider to catch the fly;\n" +
-                "I don't know why she swallowed a fly - perhaps she'll die!\n" +
+                ladyDead() +
                 "\n";
     }
 
@@ -66,7 +66,7 @@ class Song {
                 "How absurd to swallow a bird.\n" +
                 "She swallowed the bird to catch the spider,\n" +
                 "She swallowed the spider to catch the fly;\n" +
-                "I don't know why she swallowed a fly - perhaps she'll die!\n" +
+                ladyDead() +
                 "\n";
     }
 
@@ -74,17 +74,21 @@ class Song {
         return swallowAnimal("spider") + ";\n" +
                 "That wriggled and wiggled and tickled inside her.\n" +
                 "She swallowed the spider to catch the fly;\n" +
-                "I don't know why she swallowed a fly - perhaps she'll die!\n" +
+                ladyDead() +
                 "\n";
     }
 
     private static String ladySwallowFly() {
         return swallowAnimal("fly") + ".\n" +
-                "I don't know why she swallowed a fly - perhaps she'll die!\n" +
+                ladyDead() +
                 "\n";
     }
 
     private static String swallowAnimal(String animal) {
         return "There was an old lady who swallowed a " + animal;
+    }
+
+    private static String ladyDead() {
+        return "I don't know why she swallowed a fly - perhaps she'll die!\n";
     }
 }
