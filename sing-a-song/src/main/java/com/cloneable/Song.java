@@ -35,7 +35,7 @@ class Song {
                 "She swallowed the dog to catch the cat,\n" +
                 "She swallowed the cat to catch the bird,\n" +
                 "She swallowed the bird to catch the spider,\n" +
-                "She swallowed the spider to catch the fly;\n" +
+                descSwallowFly() +
                 ladyDead() +
                 "\n";
     }
@@ -46,7 +46,7 @@ class Song {
                 "She swallowed the dog to catch the cat,\n" +
                 "She swallowed the cat to catch the bird,\n" +
                 "She swallowed the bird to catch the spider,\n" +
-                "She swallowed the spider to catch the fly;\n" +
+                descSwallowFly() +
                 ladyDead() +
                 "\n";
     }
@@ -56,7 +56,7 @@ class Song {
                 "Fancy that to swallow a cat!\n" +
                 "She swallowed the cat to catch the bird,\n" +
                 "She swallowed the bird to catch the spider,\n" +
-                "She swallowed the spider to catch the fly;\n" +
+                descSwallowFly() +
                 ladyDead() +
                 "\n";
     }
@@ -65,7 +65,7 @@ class Song {
         return swallowAnimal("bird") + ";\n" +
                 "How absurd to swallow a bird.\n" +
                 "She swallowed the bird to catch the spider,\n" +
-                "She swallowed the spider to catch the fly;\n" +
+                descSwallowFly() +
                 ladyDead() +
                 "\n";
     }
@@ -73,9 +73,13 @@ class Song {
     private String ladySwallowSpider() {
         return swallowAnimal("spider") + ";\n" +
                 "That wriggled and wiggled and tickled inside her.\n" +
-                "She swallowed the spider to catch the fly;\n" +
+                descSwallowFly() +
                 ladyDead() +
                 "\n";
+    }
+
+    private String descSwallowFly() {
+        return "She swallowed the spider to catch the fly;\n";
     }
 
     private String ladySwallowFly() {
