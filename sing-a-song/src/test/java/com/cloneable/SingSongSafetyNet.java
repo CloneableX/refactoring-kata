@@ -16,7 +16,7 @@ import static org.junit.Assert.assertThat;
 public class SingSongSafetyNet {
     @Test
     public void safe_net() throws IOException {
-        String result = Song.sing();
+        String result = new Song().sing();
 
         byte[] buff = Files.readAllBytes(Paths.get("src/test/resources/baseline.txt"));
         String baseline = new String(buff, UTF_8);
