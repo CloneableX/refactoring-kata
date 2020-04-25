@@ -17,7 +17,8 @@ public class Animal {
         return name;
     }
 
-    public String getDesc() {
-        return desc;
+    public String swallowed() {
+        return Song.swallowAnimal(name) + ";\n" +
+                desc + "\n";
     }
 }

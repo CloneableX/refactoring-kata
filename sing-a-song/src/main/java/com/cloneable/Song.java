@@ -14,7 +14,7 @@ class Song {
     }
 
     private String ladySwallowAnimal(Animal animal, String[] animals) {
-        return swallowAnimal(animal.getName(), animal.getDesc()) +
+        return animal.swallowed() +
                 descAnimals(animals) +
                 ladyDead() +
                 "\n";
@@ -47,13 +47,8 @@ class Song {
                 "\n";
     }
 
-    private String swallowAnimal(String animal) {
+    public static String swallowAnimal(String animal) {
         return "There was an old lady who swallowed a " + animal;
-    }
-
-    private String swallowAnimal(String animal, String description) {
-        return swallowAnimal(animal) + ";\n" +
-                description + "\n";
     }
 
     private String ladyDead() {
