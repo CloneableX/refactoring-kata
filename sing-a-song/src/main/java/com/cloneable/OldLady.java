@@ -40,18 +40,18 @@ public class OldLady {
         return sb.toString();
     }
 
-    public String ladySwallowAnimal(Animal animal, Animal[] animals) {
+    public String swallowAnimal(Animal animal, Animal[] animals) {
         return animal.swallowed() +
                 descAnimals(animals) +
                 perhapsDead() +
                 "\n";
     }
 
-    public String ladySwallowAnimals() {
+    public String swallowAnimals() {
         StringBuilder sb = new StringBuilder();
         sb.append(swallowFirstAnimal());
         for (int i = 1; i < animals.length - 1; i++) {
-            sb.append(ladySwallowAnimal(animals[i], Arrays.copyOf(animals, i + 1)));
+            sb.append(swallowAnimal(animals[i], Arrays.copyOf(animals, i + 1)));
         }
         sb.append(swallowLastAnimal());
         return sb.toString();

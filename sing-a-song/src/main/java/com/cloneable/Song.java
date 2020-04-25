@@ -9,7 +9,7 @@ class Song {
     }
 
     public String sing() {
-        return oldLady.ladySwallowAnimals();
+        return oldLady.swallowAnimals();
     }
 
 }
