@@ -1,22 +1,16 @@
 package com.cloneable;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
-
-import java.io.PrintStream;
-
 class Song {
 
     public String sing() {
 
-        String song = ladySwallowFly() +
+        return ladySwallowFly() +
                 ladySwallowSpider() +
                 ladySwallowBird() +
                 ladySwallowCat() +
                 ladySwallowDog() +
                 ladySwallowCow() +
                 ladySwallowHorse();
-
-        return song;
     }
 
     private String ladySwallowHorse() {
@@ -27,10 +21,10 @@ class Song {
     private String ladySwallowCow() {
         return swallowAnimal("cow") + ";\n" +
                 "I don't know how she swallowed a cow!\n" +
-                descSwallowDog() +
-                descSwallowCat() +
-                descSwallowBird() +
-                descSwallowSpider() +
+                descSwallowAnimal("dog", "cow") +
+                descSwallowAnimal("cat", "dog") +
+                descSwallowAnimal("bird", "cat") +
+                descSwallowAnimal("spider", "bird") +
                 descSwallowFly() +
                 ladyDead() +
                 "\n";
@@ -39,9 +33,9 @@ class Song {
     private String ladySwallowDog() {
         return swallowAnimal("dog") + ";\n" +
                 "What a hog, to swallow a dog!\n" +
-                descSwallowCat() +
-                descSwallowBird() +
-                descSwallowSpider() +
+                descSwallowAnimal("cat", "dog") +
+                descSwallowAnimal("bird", "cat") +
+                descSwallowAnimal("spider", "bird") +
                 descSwallowFly() +
                 ladyDead() +
                 "\n";
@@ -50,8 +44,8 @@ class Song {
     private String ladySwallowCat() {
         return swallowAnimal("cat") + ";\n" +
                 "Fancy that to swallow a cat!\n" +
-                descSwallowBird() +
-                descSwallowSpider() +
+                descSwallowAnimal("bird", "cat") +
+                descSwallowAnimal("spider", "bird") +
                 descSwallowFly() +
                 ladyDead() +
                 "\n";
@@ -60,7 +54,7 @@ class Song {
     private String ladySwallowBird() {
         return swallowAnimal("bird") + ";\n" +
                 "How absurd to swallow a bird.\n" +
-                descSwallowSpider() +
+                descSwallowAnimal("spider", "bird") +
                 descSwallowFly() +
                 ladyDead() +
                 "\n";
@@ -74,20 +68,8 @@ class Song {
                 "\n";
     }
 
-    private String descSwallowDog() {
-        return "She swallowed the cow to catch the dog,\n";
-    }
-
-    private String descSwallowCat() {
-        return "She swallowed the dog to catch the cat,\n";
-    }
-
-    private String descSwallowBird() {
-        return "She swallowed the cat to catch the bird,\n";
-    }
-
-    private String descSwallowSpider() {
-        return "She swallowed the bird to catch the spider,\n";
+    private String descSwallowAnimal(String previousAnimal, String animal) {
+        return "She swallowed the " + animal + " to catch the " + previousAnimal + ",\n";
     }
 
     private String descSwallowFly() {
