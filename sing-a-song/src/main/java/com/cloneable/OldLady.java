@@ -40,9 +40,9 @@ public class OldLady {
         return sb.toString();
     }
 
-    public String swallowAnimal(Animal animal, Animal[] animals) {
-        return animal.swallowed() +
-                descAnimals(animals) +
+    private String swallowAnimal(int animalIndex) {
+        return animals[animalIndex].swallowed() +
+                descAnimals(Arrays.copyOf(animals, animalIndex + 1)) +
                 perhapsDead() +
                 "\n";
     }
@@ -51,7 +51,7 @@ public class OldLady {
         StringBuilder sb = new StringBuilder();
         sb.append(swallowFirstAnimal());
         for (int i = 1; i < animals.length - 1; i++) {
-            sb.append(swallowAnimal(animals[i], Arrays.copyOf(animals, i + 1)));
+            sb.append(swallowAnimal(i));
         }
         sb.append(swallowLastAnimal());
         return sb.toString();
