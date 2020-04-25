@@ -1,12 +1,14 @@
 package com.cloneable;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 class Song {
 
-    public String sing() {
-        Animal[] animals = {
+    private final Animal[] animals;
+    private final OldLady oldLady;
+
+    public Song() {
+        animals = new Animal[]{
                 new Animal("fly"),
                 new Animal("spider", "That wriggled and wiggled and tickled inside her."),
                 new Animal("bird", "How absurd to swallow a bird."),
@@ -16,6 +18,10 @@ class Song {
                 new Animal("horse")
         };
 
+        oldLady = new OldLady(animals);
+    }
+
+    public String sing() {
         return ladySwallowAnimals(animals);
     }
 
@@ -32,7 +38,7 @@ class Song {
     private String ladySwallowAnimal(Animal animal, Animal[] animals) {
         return animal.swallowed() +
                 descAnimals(animals) +
-                ladyDead() +
+                oldLady.perhapsDead() +
                 "\n";
     }
 
@@ -59,11 +65,8 @@ class Song {
 
     private String ladySwallowFirstAnimal(Animal animal) {
         return animal.swallowed() + ".\n" +
-                ladyDead() +
+                oldLady.perhapsDead() +
                 "\n";
     }
 
-    private String ladyDead() {
-        return "I don't know why she swallowed a fly - perhaps she'll die!\n";
-    }
 }
