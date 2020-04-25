@@ -8,7 +8,11 @@ class Song {
         oldLady = new OldLady(animals);
     }
 
-    public String sing() {
+    public void sing() {
+        System.out.print(buildLyrics());
+    }
+
+    public String buildLyrics() {
         return oldLady.swallowAnimals();
     }
 
