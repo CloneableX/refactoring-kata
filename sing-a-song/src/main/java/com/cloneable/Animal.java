@@ -18,7 +18,12 @@ public class Animal {
     }
 
     public String swallowed() {
-        return Song.swallowAnimal(this) + ";\n" +
+        String swallowDesc = "There was an old lady who swallowed a " + name;
+        if (desc == null) {
+            return swallowDesc;
+        }
+
+        return swallowDesc + ";\n" +
                 desc + "\n";
     }
 }

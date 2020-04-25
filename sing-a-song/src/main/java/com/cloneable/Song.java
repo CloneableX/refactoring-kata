@@ -33,7 +33,7 @@ class Song {
     }
 
     private String ladySwallowLastAnimal(Animal animal) {
-        return swallowAnimal(animal) + "...\n" +
+        return animal.swallowed() + "...\n" +
                 "...She's dead, of course!";
     }
 
@@ -42,13 +42,9 @@ class Song {
     }
 
     private String ladySwallowFirstAnimal(Animal animal) {
-        return swallowAnimal(animal) + ".\n" +
+        return animal.swallowed() + ".\n" +
                 ladyDead() +
                 "\n";
-    }
-
-    public static String swallowAnimal(Animal animal) {
-        return "There was an old lady who swallowed a " + animal.getName();
     }
 
     private String ladyDead() {
