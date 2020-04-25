@@ -38,9 +38,7 @@ class Song {
     private String ladySwallowDog() {
         return swallowAnimal("dog") + ";\n" +
                 "What a hog, to swallow a dog!\n" +
-                descSwallowAnimal("cat", "dog") +
-                descSwallowAnimal("bird", "cat") +
-                descSwallowAnimal("spider", "bird") +
+                descAnimals("spider", "bird", "cat", "dog") +
                 descSwallowFly() +
                 ladyDead() +
                 "\n";
@@ -49,8 +47,7 @@ class Song {
     private String ladySwallowCat() {
         return swallowAnimal("cat") + ";\n" +
                 "Fancy that to swallow a cat!\n" +
-                descSwallowAnimal("bird", "cat") +
-                descSwallowAnimal("spider", "bird") +
+                descAnimals("spider", "bird", "cat") +
                 descSwallowFly() +
                 ladyDead() +
                 "\n";
@@ -59,7 +56,7 @@ class Song {
     private String ladySwallowBird() {
         return swallowAnimal("bird") + ";\n" +
                 "How absurd to swallow a bird.\n" +
-                descSwallowAnimal("spider", "bird") +
+                descAnimals("spider", "bird") +
                 descSwallowFly() +
                 ladyDead() +
                 "\n";
