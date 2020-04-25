@@ -13,10 +13,6 @@ public class Animal {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public String swallowed() {
         String swallowDesc = "There was an old lady who swallowed a " + name;
         if (desc == null) {
