@@ -5,11 +5,11 @@ class Song {
     public String sing() {
 
         return ladySwallowFly() +
-                ladySwallowSpider() +
-                ladySwallowBird() +
-                ladySwallowCat() +
-                ladySwallowDog() +
-                ladySwallowCow() +
+                ladySwallowAnimal("spider", "That wriggled and wiggled and tickled inside her.", new String[]{"fly", "spider"}) +
+                ladySwallowAnimal("bird", "How absurd to swallow a bird.", new String[]{"fly", "spider", "bird"}) +
+                ladySwallowAnimal("cat", "Fancy that to swallow a cat!", new String[]{"fly", "spider", "bird", "cat"}) +
+                ladySwallowAnimal("dog", "What a hog, to swallow a dog!", new String[]{"fly", "spider", "bird", "cat", "dog"}) +
+                ladySwallowAnimal("cow", "I don't know how she swallowed a cow!", new String[]{"fly", "spider", "bird", "cat", "dog", "cow"}) +
                 ladySwallowHorse();
     }
 
@@ -30,37 +30,9 @@ class Song {
                 "...She's dead, of course!";
     }
 
-    private String ladySwallowCow() {
-        return swallowAnimal("cow", "I don't know how she swallowed a cow!") +
-                descAnimals("fly", "spider", "bird", "cat", "dog", "cow") +
-                ladyDead() +
-                "\n";
-    }
-
-    private String ladySwallowDog() {
-        return swallowAnimal("dog", "What a hog, to swallow a dog!") +
-                descAnimals("fly", "spider", "bird", "cat", "dog") +
-                ladyDead() +
-                "\n";
-    }
-
-    private String ladySwallowCat() {
-        return swallowAnimal("cat", "Fancy that to swallow a cat!") +
-                descAnimals("fly", "spider", "bird", "cat") +
-                ladyDead() +
-                "\n";
-    }
-
-    private String ladySwallowBird() {
-        return swallowAnimal("bird", "How absurd to swallow a bird.") +
-                descAnimals("fly", "spider", "bird") +
-                ladyDead() +
-                "\n";
-    }
-
-    private String ladySwallowSpider() {
-        return swallowAnimal("spider", "That wriggled and wiggled and tickled inside her.") +
-                descAnimals("fly", "spider") +
+    private String ladySwallowAnimal(String animal, String desc, String[] swallowedAnimals) {
+        return swallowAnimal(animal, desc) +
+                descAnimals(swallowedAnimals) +
                 ladyDead() +
                 "\n";
     }
