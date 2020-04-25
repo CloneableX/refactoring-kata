@@ -22,7 +22,7 @@ class Song {
         return swallowAnimal("cow") + ";\n" +
                 "I don't know how she swallowed a cow!\n" +
                 descAnimals("spider", "bird", "cat", "dog", "cow") +
-                descSwallowFly() +
+                descAnimalsTemp("fly", "spider") +
                 ladyDead() +
                 "\n";
     }
@@ -30,8 +30,21 @@ class Song {
     private String descAnimals(String... animals) {
         StringBuilder sb = new StringBuilder();
         for (int i = animals.length - 1; i > 0; i--) {
-            sb.append(descSwallowAnimal(animals[i - 1], animals[i]));
+            sb.append(descSwallowAnimal(animals[i - 1], animals[i]))
+                    .append(",\n");
         }
+        return sb.toString();
+    }
+
+    private String descAnimalsTemp(String... animals) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = animals.length - 1; i > 1; i--) {
+            sb.append(descSwallowAnimal(animals[i - 1], animals[i]))
+                    .append(",\n");
+        }
+
+        sb.append(descSwallowAnimal(animals[0], animals[1]))
+                .append(";\n");
         return sb.toString();
     }
 
@@ -39,7 +52,7 @@ class Song {
         return swallowAnimal("dog") + ";\n" +
                 "What a hog, to swallow a dog!\n" +
                 descAnimals("spider", "bird", "cat", "dog") +
-                descSwallowFly() +
+                descAnimalsTemp("fly", "spider") +
                 ladyDead() +
                 "\n";
     }
@@ -48,7 +61,7 @@ class Song {
         return swallowAnimal("cat") + ";\n" +
                 "Fancy that to swallow a cat!\n" +
                 descAnimals("spider", "bird", "cat") +
-                descSwallowFly() +
+                descAnimalsTemp("fly", "spider") +
                 ladyDead() +
                 "\n";
     }
@@ -57,7 +70,7 @@ class Song {
         return swallowAnimal("bird") + ";\n" +
                 "How absurd to swallow a bird.\n" +
                 descAnimals("spider", "bird") +
-                descSwallowFly() +
+                descAnimalsTemp("fly", "spider") +
                 ladyDead() +
                 "\n";
     }
@@ -65,17 +78,13 @@ class Song {
     private String ladySwallowSpider() {
         return swallowAnimal("spider") + ";\n" +
                 "That wriggled and wiggled and tickled inside her.\n" +
-                descSwallowFly() +
+                descAnimalsTemp("fly", "spider") +
                 ladyDead() +
                 "\n";
     }
 
     private String descSwallowAnimal(String previousAnimal, String animal) {
-        return "She swallowed the " + animal + " to catch the " + previousAnimal + ",\n";
-    }
-
-    private String descSwallowFly() {
-        return "She swallowed the spider to catch the fly;\n";
+        return "She swallowed the " + animal + " to catch the " + previousAnimal;
     }
 
     private String ladySwallowFly() {
