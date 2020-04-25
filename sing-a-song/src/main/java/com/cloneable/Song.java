@@ -6,21 +6,27 @@ import java.util.stream.Collectors;
 class Song {
 
     public String sing() {
-        Animal fly = new Animal("fly");
-        Animal spider = new Animal("spider", "That wriggled and wiggled and tickled inside her.");
-        Animal bird = new Animal("bird", "How absurd to swallow a bird.");
-        Animal cat = new Animal("cat", "Fancy that to swallow a cat!");
-        Animal dog = new Animal("dog", "What a hog, to swallow a dog!");
-        Animal cow = new Animal("cow", "I don't know how she swallowed a cow!");
-        Animal horse = new Animal("horse");
+        Animal[] animals = {
+                new Animal("fly"),
+                new Animal("spider", "That wriggled and wiggled and tickled inside her."),
+                new Animal("bird", "How absurd to swallow a bird."),
+                new Animal("cat", "Fancy that to swallow a cat!"),
+                new Animal("dog", "What a hog, to swallow a dog!"),
+                new Animal("cow", "I don't know how she swallowed a cow!"),
+                new Animal("horse")
+        };
 
-        return ladySwallowFirstAnimal(fly) +
-                ladySwallowAnimal(spider, new Animal[]{fly, spider}) +
-                ladySwallowAnimal(bird, new Animal[]{fly, spider, bird}) +
-                ladySwallowAnimal(cat, new Animal[]{fly, spider, bird, cat}) +
-                ladySwallowAnimal(dog, new Animal[]{fly, spider, bird, cat, dog}) +
-                ladySwallowAnimal(cow, new Animal[]{fly, spider, bird, cat, dog, cow}) +
-                ladySwallowLastAnimal(horse);
+        return ladySwallowAnimals(animals);
+    }
+
+    private String ladySwallowAnimals(Animal[] animals) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(ladySwallowFirstAnimal(animals[0]));
+        for (int i = 1; i < animals.length - 1; i++) {
+            sb.append(ladySwallowAnimal(animals[i], Arrays.copyOf(animals, i + 1)));
+        }
+        sb.append(ladySwallowLastAnimal(animals[animals.length - 1]));
+        return sb.toString();
     }
 
     private String ladySwallowAnimal(Animal animal, Animal[] animals) {
