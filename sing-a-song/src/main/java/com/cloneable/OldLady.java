@@ -27,8 +27,7 @@ public class OldLady {
     }
 
     private String swallowAnimal(int animalIndex) {
-        return animals[animalIndex].swallowed() +
-                animalsTemp.catchAnimals(Arrays.copyOf(animals, animalIndex + 1)) +
+        return animalsTemp.catchAnimals(animalIndex) +
                 perhapsDead() +
                 "\n";
     }
