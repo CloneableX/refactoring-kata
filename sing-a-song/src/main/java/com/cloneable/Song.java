@@ -31,7 +31,7 @@ class Song {
         for (int i = 1; i < animals.length - 1; i++) {
             sb.append(ladySwallowAnimal(animals[i], Arrays.copyOf(animals, i + 1)));
         }
-        sb.append(ladySwallowLastAnimal(animals[animals.length - 1]));
+        sb.append(oldLady.swallowLastAnimal());
         return sb.toString();
     }
 
@@ -52,11 +52,6 @@ class Song {
         sb.append(descSwallowAnimal(animals[0].getName(), animals[1].getName()))
                 .append(";\n");
         return sb.toString();
-    }
-
-    private String ladySwallowLastAnimal(Animal animal) {
-        return animal.swallowed() + "...\n" +
-                "...She's dead, of course!";
     }
 
     private String descSwallowAnimal(String previousAnimal, String animal) {

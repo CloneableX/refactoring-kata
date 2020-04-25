@@ -16,4 +16,9 @@ public class OldLady {
                 perhapsDead() +
                 "\n";
     }
+
+    public String swallowLastAnimal() {
+        return animals[animals.length - 1].swallowed() + "...\n" +
+                "...She's dead, of course!";
+    }
 }
