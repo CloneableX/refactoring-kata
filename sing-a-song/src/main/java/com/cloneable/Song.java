@@ -16,11 +16,7 @@ class Song {
                 ladySwallowCow() +
                 ladySwallowHorse();
 
-        ByteOutputStream out = new ByteOutputStream();
-        PrintStream printStream = new PrintStream(out);
-        printStream.println(song);
-
-        return out.toString();
+        return song;
     }
 
     private String ladySwallowHorse() {
