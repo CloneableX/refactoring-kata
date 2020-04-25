@@ -4,13 +4,13 @@ class Song {
 
     public String sing() {
 
-        return ladySwallowFirstAnimal("fly") +
+        return ladySwallowFirstAnimal(new Animal("fly")) +
                 ladySwallowAnimal(new Animal("spider", "That wriggled and wiggled and tickled inside her."), new String[]{"fly", "spider"}) +
                 ladySwallowAnimal(new Animal("bird", "How absurd to swallow a bird."), new String[]{"fly", "spider", "bird"}) +
                 ladySwallowAnimal(new Animal("cat", "Fancy that to swallow a cat!"), new String[]{"fly", "spider", "bird", "cat"}) +
                 ladySwallowAnimal(new Animal("dog", "What a hog, to swallow a dog!"), new String[]{"fly", "spider", "bird", "cat", "dog"}) +
                 ladySwallowAnimal(new Animal("cow", "I don't know how she swallowed a cow!"), new String[]{"fly", "spider", "bird", "cat", "dog", "cow"}) +
-                ladySwallowLastAnimal("horse");
+                ladySwallowLastAnimal(new Animal("horse"));
     }
 
     private String ladySwallowAnimal(Animal animal, String[] animals) {
@@ -32,8 +32,8 @@ class Song {
         return sb.toString();
     }
 
-    private String ladySwallowLastAnimal(String animal) {
-        return swallowAnimal(animal) + "...\n" +
+    private String ladySwallowLastAnimal(Animal animal) {
+        return swallowAnimal(animal.getName()) + "...\n" +
                 "...She's dead, of course!";
     }
 
@@ -41,8 +41,8 @@ class Song {
         return "She swallowed the " + animal + " to catch the " + previousAnimal;
     }
 
-    private String ladySwallowFirstAnimal(String animal) {
-        return swallowAnimal(animal) + ".\n" +
+    private String ladySwallowFirstAnimal(Animal animal) {
+        return swallowAnimal(animal.getName()) + ".\n" +
                 ladyDead() +
                 "\n";
     }

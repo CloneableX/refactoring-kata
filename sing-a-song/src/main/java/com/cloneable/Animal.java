@@ -1,12 +1,16 @@
 package com.cloneable;
 
 public class Animal {
-    private final String name;
-    private final String desc;
+    private String name;
+    private String desc;
 
     public Animal(String name, String desc) {
-        this.name = name;
+        this(name);
         this.desc = desc;
+    }
+
+    public Animal(String name) {
+        this.name = name;
     }
 
     public String getName() {
