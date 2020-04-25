@@ -10,4 +10,10 @@ public class OldLady {
     public String perhapsDead() {
         return "I don't know why she swallowed a " + animals[0].getName() + " - perhaps she'll die!\n";
     }
+
+    public String swallowFirstAnimal() {
+        return animals[0].swallowed() + ".\n" +
+                perhapsDead() +
+                "\n";
+    }
 }

@@ -27,7 +27,7 @@ class Song {
 
     private String ladySwallowAnimals(Animal[] animals) {
         StringBuilder sb = new StringBuilder();
-        sb.append(ladySwallowFirstAnimal(animals[0]));
+        sb.append(oldLady.swallowFirstAnimal());
         for (int i = 1; i < animals.length - 1; i++) {
             sb.append(ladySwallowAnimal(animals[i], Arrays.copyOf(animals, i + 1)));
         }
@@ -61,12 +61,6 @@ class Song {
 
     private String descSwallowAnimal(String previousAnimal, String animal) {
         return "She swallowed the " + animal + " to catch the " + previousAnimal;
-    }
-
-    private String ladySwallowFirstAnimal(Animal animal) {
-        return animal.swallowed() + ".\n" +
-                oldLady.perhapsDead() +
-                "\n";
     }
 
 }
