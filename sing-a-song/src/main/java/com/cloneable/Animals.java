@@ -27,4 +27,16 @@ public class Animals {
                 .append(";\n");
         return sb.toString();
     }
+
+    public Animal first() {
+        return animals[0];
+    }
+
+    public Animal last() {
+        return animals[animals.length - 1];
+    }
+
+    public int animalsSize() {
+        return animals.length;
+    }
 }

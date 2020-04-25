@@ -1,33 +1,29 @@
 package com.cloneable;
 
-import java.util.Arrays;
-
 public class OldLady {
-    private final Animals animalsTemp;
-    private Animal[] animals;
+    private final Animals animals;
 
     public OldLady(Animal[] animals) {
-        this.animals = animals;
-        this.animalsTemp = new Animals(animals);
+        this.animals = new Animals(animals);
     }
 
     public String perhapsDead() {
-        return "I don't know why she swallowed a " + animals[0].getName() + " - perhaps she'll die!\n";
+        return "I don't know why she swallowed a " + animals.first().getName() + " - perhaps she'll die!\n";
     }
 
     public String swallowFirstAnimal() {
-        return animals[0].swallowed() + ".\n" +
+        return animals.first().swallowed() + ".\n" +
                 perhapsDead() +
                 "\n";
     }
 
     public String swallowLastAnimal() {
-        return animals[animals.length - 1].swallowed() + "...\n" +
+        return animals.last().swallowed() + "...\n" +
                 "...She's dead, of course!";
     }
 
     private String swallowAnimal(int animalIndex) {
-        return animalsTemp.catchAnimals(animalIndex) +
+        return animals.catchAnimals(animalIndex) +
                 perhapsDead() +
                 "\n";
     }
@@ -35,10 +31,11 @@ public class OldLady {
     public String swallowAnimals() {
         StringBuilder sb = new StringBuilder();
         sb.append(swallowFirstAnimal());
-        for (int i = 1; i < animals.length - 1; i++) {
+        for (int i = 1; i < animals.animalsSize() - 1; i++) {
             sb.append(swallowAnimal(i));
         }
         sb.append(swallowLastAnimal());
         return sb.toString();
     }
+
 }
