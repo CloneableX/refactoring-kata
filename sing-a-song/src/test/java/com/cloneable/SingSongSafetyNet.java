@@ -2,8 +2,6 @@ package com.cloneable;
 
 import org.junit.Test;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -16,7 +14,16 @@ import static org.junit.Assert.assertThat;
 public class SingSongSafetyNet {
     @Test
     public void safe_net() throws IOException {
-        String result = new Song().sing();
+        Animal[] animals = new Animal[]{
+                new Animal("fly"),
+                new Animal("spider", "That wriggled and wiggled and tickled inside her."),
+                new Animal("bird", "How absurd to swallow a bird."),
+                new Animal("cat", "Fancy that to swallow a cat!"),
+                new Animal("dog", "What a hog, to swallow a dog!"),
+                new Animal("cow", "I don't know how she swallowed a cow!"),
+                new Animal("horse")
+        };
+        String result = new Song(animals).sing();
 
         byte[] buff = Files.readAllBytes(Paths.get("src/test/resources/baseline.txt"));
         String baseline = new String(buff, UTF_8);
