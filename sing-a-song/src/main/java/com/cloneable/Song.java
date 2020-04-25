@@ -30,26 +30,20 @@ class Song {
     }
 
     private String ladySwallowAnimal(Animal animal, Animal[] animals) {
-        String[] animalNames = new String[animals.length];
-        Arrays.stream(animals)
-                .map(Animal::getName)
-                .collect(Collectors.toList())
-                .toArray(animalNames);
-
         return animal.swallowed() +
-                descAnimals(animalNames) +
+                descAnimals(animals) +
                 ladyDead() +
                 "\n";
     }
 
-    private String descAnimals(String... animals) {
+    private String descAnimals(Animal... animals) {
         StringBuilder sb = new StringBuilder();
         for (int i = animals.length - 1; i > 1; i--) {
-            sb.append(descSwallowAnimal(animals[i - 1], animals[i]))
+            sb.append(descSwallowAnimal(animals[i - 1].getName(), animals[i].getName()))
                     .append(",\n");
         }
 
-        sb.append(descSwallowAnimal(animals[0], animals[1]))
+        sb.append(descSwallowAnimal(animals[0].getName(), animals[1].getName()))
                 .append(";\n");
         return sb.toString();
     }
