@@ -3,10 +3,12 @@ package com.cloneable;
 import java.util.Arrays;
 
 public class OldLady {
+    private final Animals animalsTemp;
     private Animal[] animals;
 
     public OldLady(Animal[] animals) {
         this.animals = animals;
+        this.animalsTemp = new Animals(animals);
     }
 
     public String perhapsDead() {
@@ -24,25 +26,9 @@ public class OldLady {
                 "...She's dead, of course!";
     }
 
-    public String descSwallowAnimal(String previousAnimal, String animal) {
-        return "She swallowed the " + animal + " to catch the " + previousAnimal;
-    }
-
-    public String descAnimals(Animal... animals) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = animals.length - 1; i > 1; i--) {
-            sb.append(descSwallowAnimal(animals[i - 1].getName(), animals[i].getName()))
-                    .append(",\n");
-        }
-
-        sb.append(descSwallowAnimal(animals[0].getName(), animals[1].getName()))
-                .append(";\n");
-        return sb.toString();
-    }
-
     private String swallowAnimal(int animalIndex) {
         return animals[animalIndex].swallowed() +
-                descAnimals(Arrays.copyOf(animals, animalIndex + 1)) +
+                animalsTemp.catchAnimals(Arrays.copyOf(animals, animalIndex + 1)) +
                 perhapsDead() +
                 "\n";
     }
