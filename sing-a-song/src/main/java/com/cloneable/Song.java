@@ -80,7 +80,7 @@ class Song {
     }
 
     private String swallowAnimal(String animal, String description) {
-        return "There was an old lady who swallowed a " + animal + ";\n" +
+        return swallowAnimal(animal) + ";\n" +
                 description + "\n";
     }
 
