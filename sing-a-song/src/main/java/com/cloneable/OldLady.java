@@ -8,13 +8,12 @@ public class OldLady {
     }
 
     private String perhapsDead() {
-        return "I don't know why she swallowed a " + animals.first().getName() + " - perhaps she'll die!\n";
+        return "I don't know why she swallowed a " + animals.first().getName() + " - perhaps she'll die!\n\n";
     }
 
     private String swallowFirstAnimal() {
         return animals.first().swallowed() + ".\n" +
-                perhapsDead() +
-                "\n";
+                perhapsDead();
     }
 
     private String swallowLastAnimal() {
@@ -24,8 +23,7 @@ public class OldLady {
 
     private String swallowAnimal(int animalIndex) {
         return animals.catchAnimals(animalIndex) +
-                perhapsDead() +
-                "\n";
+                perhapsDead();
     }
 
     public String swallowAnimals() {
