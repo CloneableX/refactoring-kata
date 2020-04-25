@@ -22,4 +22,8 @@ public class Animal {
         return swallowDesc + ";\n" +
                 desc + "\n";
     }
+
+    public String getName() {
+        return name;
+    }
 }

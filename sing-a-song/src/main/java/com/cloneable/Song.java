@@ -1,21 +1,37 @@
 package com.cloneable;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 class Song {
 
     public String sing() {
+        Animal fly = new Animal("fly");
+        Animal spider = new Animal("spider", "That wriggled and wiggled and tickled inside her.");
+        Animal bird = new Animal("bird", "How absurd to swallow a bird.");
+        Animal cat = new Animal("cat", "Fancy that to swallow a cat!");
+        Animal dog = new Animal("dog", "What a hog, to swallow a dog!");
+        Animal cow = new Animal("cow", "I don't know how she swallowed a cow!");
+        Animal horse = new Animal("horse");
 
-        return ladySwallowFirstAnimal(new Animal("fly")) +
-                ladySwallowAnimal(new Animal("spider", "That wriggled and wiggled and tickled inside her."), new String[]{"fly", "spider"}) +
-                ladySwallowAnimal(new Animal("bird", "How absurd to swallow a bird."), new String[]{"fly", "spider", "bird"}) +
-                ladySwallowAnimal(new Animal("cat", "Fancy that to swallow a cat!"), new String[]{"fly", "spider", "bird", "cat"}) +
-                ladySwallowAnimal(new Animal("dog", "What a hog, to swallow a dog!"), new String[]{"fly", "spider", "bird", "cat", "dog"}) +
-                ladySwallowAnimal(new Animal("cow", "I don't know how she swallowed a cow!"), new String[]{"fly", "spider", "bird", "cat", "dog", "cow"}) +
-                ladySwallowLastAnimal(new Animal("horse"));
+        return ladySwallowFirstAnimal(fly) +
+                ladySwallowAnimal(spider, new Animal[]{fly, spider}) +
+                ladySwallowAnimal(bird, new Animal[]{fly, spider, bird}) +
+                ladySwallowAnimal(cat, new Animal[]{fly, spider, bird, cat}) +
+                ladySwallowAnimal(dog, new Animal[]{fly, spider, bird, cat, dog}) +
+                ladySwallowAnimal(cow, new Animal[]{fly, spider, bird, cat, dog, cow}) +
+                ladySwallowLastAnimal(horse);
     }
 
-    private String ladySwallowAnimal(Animal animal, String[] animals) {
+    private String ladySwallowAnimal(Animal animal, Animal[] animals) {
+        String[] animalNames = new String[animals.length];
+        Arrays.stream(animals)
+                .map(Animal::getName)
+                .collect(Collectors.toList())
+                .toArray(animalNames);
+
         return animal.swallowed() +
-                descAnimals(animals) +
+                descAnimals(animalNames) +
                 ladyDead() +
                 "\n";
     }
