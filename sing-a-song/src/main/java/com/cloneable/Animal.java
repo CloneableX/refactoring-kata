@@ -18,7 +18,7 @@ public class Animal {
     }
 
     public String swallowed() {
-        return Song.swallowAnimal(name) + ";\n" +
+        return Song.swallowAnimal(this) + ";\n" +
                 desc + "\n";
     }
 }
