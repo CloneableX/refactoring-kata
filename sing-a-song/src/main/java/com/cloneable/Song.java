@@ -5,12 +5,19 @@ class Song {
     public String sing() {
 
         return ladySwallowFly() +
-                ladySwallowAnimal("spider", "That wriggled and wiggled and tickled inside her.", new String[]{"fly", "spider"}) +
-                ladySwallowAnimal("bird", "How absurd to swallow a bird.", new String[]{"fly", "spider", "bird"}) +
-                ladySwallowAnimal("cat", "Fancy that to swallow a cat!", new String[]{"fly", "spider", "bird", "cat"}) +
-                ladySwallowAnimal("dog", "What a hog, to swallow a dog!", new String[]{"fly", "spider", "bird", "cat", "dog"}) +
-                ladySwallowAnimal("cow", "I don't know how she swallowed a cow!", new String[]{"fly", "spider", "bird", "cat", "dog", "cow"}) +
+                ladySwallowAnimal(new Animal("spider", "That wriggled and wiggled and tickled inside her."), new String[]{"fly", "spider"}) +
+                ladySwallowAnimal(new Animal("bird", "How absurd to swallow a bird."), new String[]{"fly", "spider", "bird"}) +
+                ladySwallowAnimal(new Animal("cat", "Fancy that to swallow a cat!"), new String[]{"fly", "spider", "bird", "cat"}) +
+                ladySwallowAnimal(new Animal("dog", "What a hog, to swallow a dog!"), new String[]{"fly", "spider", "bird", "cat", "dog"}) +
+                ladySwallowAnimal(new Animal("cow", "I don't know how she swallowed a cow!"), new String[]{"fly", "spider", "bird", "cat", "dog", "cow"}) +
                 ladySwallowHorse();
+    }
+
+    private String ladySwallowAnimal(Animal animal, String[] animals) {
+        return swallowAnimal(animal.getName(), animal.getDesc()) +
+                descAnimals(animals) +
+                ladyDead() +
+                "\n";
     }
 
     private String descAnimals(String... animals) {
@@ -28,13 +35,6 @@ class Song {
     private String ladySwallowHorse() {
         return swallowAnimal("horse") + "...\n" +
                 "...She's dead, of course!";
-    }
-
-    private String ladySwallowAnimal(String animal, String desc, String[] swallowedAnimals) {
-        return swallowAnimal(animal, desc) +
-                descAnimals(swallowedAnimals) +
-                ladyDead() +
-                "\n";
     }
 
     private String descSwallowAnimal(String previousAnimal, String animal) {
