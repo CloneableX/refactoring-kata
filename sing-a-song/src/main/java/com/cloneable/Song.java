@@ -21,22 +21,12 @@ class Song {
     private String ladySwallowCow() {
         return swallowAnimal("cow") + ";\n" +
                 "I don't know how she swallowed a cow!\n" +
-                descAnimals("spider", "bird", "cat", "dog", "cow") +
-                descAnimalsTemp("fly", "spider") +
+                descAnimals("fly", "spider", "bird", "cat", "dog", "cow") +
                 ladyDead() +
                 "\n";
     }
 
     private String descAnimals(String... animals) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = animals.length - 1; i > 0; i--) {
-            sb.append(descSwallowAnimal(animals[i - 1], animals[i]))
-                    .append(",\n");
-        }
-        return sb.toString();
-    }
-
-    private String descAnimalsTemp(String... animals) {
         StringBuilder sb = new StringBuilder();
         for (int i = animals.length - 1; i > 1; i--) {
             sb.append(descSwallowAnimal(animals[i - 1], animals[i]))
@@ -51,8 +41,7 @@ class Song {
     private String ladySwallowDog() {
         return swallowAnimal("dog") + ";\n" +
                 "What a hog, to swallow a dog!\n" +
-                descAnimals("spider", "bird", "cat", "dog") +
-                descAnimalsTemp("fly", "spider") +
+                descAnimals("fly", "spider", "bird", "cat", "dog") +
                 ladyDead() +
                 "\n";
     }
@@ -60,8 +49,7 @@ class Song {
     private String ladySwallowCat() {
         return swallowAnimal("cat") + ";\n" +
                 "Fancy that to swallow a cat!\n" +
-                descAnimals("spider", "bird", "cat") +
-                descAnimalsTemp("fly", "spider") +
+                descAnimals("fly", "spider", "bird", "cat") +
                 ladyDead() +
                 "\n";
     }
@@ -69,8 +57,7 @@ class Song {
     private String ladySwallowBird() {
         return swallowAnimal("bird") + ";\n" +
                 "How absurd to swallow a bird.\n" +
-                descAnimals("spider", "bird") +
-                descAnimalsTemp("fly", "spider") +
+                descAnimals("fly", "spider", "bird") +
                 ladyDead() +
                 "\n";
     }
@@ -78,7 +65,7 @@ class Song {
     private String ladySwallowSpider() {
         return swallowAnimal("spider") + ";\n" +
                 "That wriggled and wiggled and tickled inside her.\n" +
-                descAnimalsTemp("fly", "spider") +
+                descAnimals("fly", "spider") +
                 ladyDead() +
                 "\n";
     }
