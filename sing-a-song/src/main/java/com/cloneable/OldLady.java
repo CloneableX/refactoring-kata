@@ -7,17 +7,17 @@ public class OldLady {
         this.animals = new Animals(animals);
     }
 
-    public String perhapsDead() {
+    private String perhapsDead() {
         return "I don't know why she swallowed a " + animals.first().getName() + " - perhaps she'll die!\n";
     }
 
-    public String swallowFirstAnimal() {
+    private String swallowFirstAnimal() {
         return animals.first().swallowed() + ".\n" +
                 perhapsDead() +
                 "\n";
     }
 
-    public String swallowLastAnimal() {
+    private String swallowLastAnimal() {
         return animals.last().swallowed() + "...\n" +
                 "...She's dead, of course!";
     }
