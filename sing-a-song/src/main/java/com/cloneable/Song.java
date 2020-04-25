@@ -21,15 +21,13 @@ class Song {
     private String ladySwallowCow() {
         return swallowAnimal("cow") + ";\n" +
                 "I don't know how she swallowed a cow!\n" +
-                descAnimalsBeforeCow() +
+                descAnimals("spider", "bird", "cat", "dog", "cow") +
                 descSwallowFly() +
                 ladyDead() +
                 "\n";
     }
 
-    private String descAnimalsBeforeCow() {
-        String[] animals = new String[]{"spider", "bird", "cat", "dog", "cow"};
-
+    private String descAnimals(String... animals) {
         StringBuilder sb = new StringBuilder();
         for (int i = animals.length - 1; i > 0; i--) {
             sb.append(descSwallowAnimal(animals[i - 1], animals[i]));
