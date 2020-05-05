@@ -45,6 +45,7 @@ public final class TaskList implements Runnable {
     }
 
     private void execute(String commandLine) {
+        Command commandTemp = new Command(commandLine, out);
         String[] commandRest = commandLine.split(" ", 2);
         String command = commandRest[0];
         switch (command) {
@@ -61,7 +62,7 @@ public final class TaskList implements Runnable {
                 tasks.uncheckTask(commandRest[1]);
                 break;
             case "help":
-                help();
+                commandTemp.execute();
                 break;
             default:
                 error(command);
@@ -90,16 +91,6 @@ public final class TaskList implements Runnable {
         Task task = new Task(description, out);
         project.addTask(task);
         tasks.addTask(task);
-    }
-
-    private void help() {
-        out.println("Commands:");
-        out.println("  show");
-        out.println("  add project <project name>");
-        out.println("  add task <project name> <task description>");
-        out.println("  check <task ID>");
-        out.println("  uncheck <task ID>");
-        out.println();
     }
 
     private void error(String command) {
