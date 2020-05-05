@@ -37,7 +37,7 @@ public final class ApplicationTest {
     }
 
     @After public void
-    kill_the_application() throws IOException, InterruptedException {
+    kill_the_application() throws InterruptedException {
         if (!stillRunning()) {
             return;
         }
