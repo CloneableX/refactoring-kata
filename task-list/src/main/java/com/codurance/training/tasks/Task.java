@@ -1,14 +1,12 @@
 package com.codurance.training.tasks;
 
 public final class Task {
-    private final long id;
+    private final long id = IdGenerator.generateId();
     private final String description;
-    private boolean done;
+    private boolean done = false;
 
-    public Task(long id, String description, boolean done) {
-        this.id = id;
+    public Task(String description) {
         this.description = description;
-        this.done = done;
     }
 
     public long getId() {

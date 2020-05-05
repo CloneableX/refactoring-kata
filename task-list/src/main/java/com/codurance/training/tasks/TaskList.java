@@ -12,7 +12,6 @@ public final class TaskList implements Runnable {
     private final PrintWriter out;
 
     private final Projects projects;
-    private final IdGenerator idGenerator = new IdGenerator();
 
     public static void main(String[] args) {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -86,7 +85,7 @@ public final class TaskList implements Runnable {
             out.println();
             return;
         }
-        project.addTask(new Task(idGenerator.generateId(), description, false));
+        project.addTask(new Task(description));
     }
 
     private void check(String idString) {
