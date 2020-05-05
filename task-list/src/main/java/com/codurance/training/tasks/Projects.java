@@ -18,7 +18,7 @@ public class Projects {
 
     public Project findProject(String projectName) {
         return projects.stream()
-                .filter(project -> project.checkSameName(projectName))
+                .filter(project -> project.sameName(projectName))
                 .findFirst()
                 .orElse(null);
 
@@ -34,16 +34,4 @@ public class Projects {
         }
     }
 
-    public void setDone(int taskId, boolean done) {
-        for (Project project : projects) {
-            for (Task task : project.getTasks()) {
-                if (task.getId() == taskId) {
-                    task.setDone(done);
-                    return;
-                }
-            }
-        }
-        out.printf("Could not find a task with an ID of %d.", taskId);
-        out.println();
-    }
 }

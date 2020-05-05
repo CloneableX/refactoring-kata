@@ -11,7 +11,7 @@ public class Project {
         this.name = name;
     }
 
-    public boolean checkSameName(String name) {
+    public boolean sameName(String name) {
         return this.name.equals(name);
     }
 

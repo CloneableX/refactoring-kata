@@ -12,6 +12,7 @@ public final class TaskList implements Runnable {
     private final PrintWriter out;
 
     private final Projects projects;
+    private Tasks tasks;
 
     public static void main(String[] args) {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -23,6 +24,7 @@ public final class TaskList implements Runnable {
         this.in = reader;
         this.out = writer;
         projects = new Projects(out);
+        tasks = new Tasks(out);
     }
 
     public void run() {
@@ -53,10 +55,10 @@ public final class TaskList implements Runnable {
                 add(commandRest[1]);
                 break;
             case "check":
-                check(commandRest[1]);
+                tasks.checkTask(commandRest[1]);
                 break;
             case "uncheck":
-                uncheck(commandRest[1]);
+                tasks.uncheckTask(commandRest[1]);
                 break;
             case "help":
                 help();
@@ -85,15 +87,9 @@ public final class TaskList implements Runnable {
             out.println();
             return;
         }
-        project.addTask(new Task(description));
-    }
-
-    private void check(String idString) {
-        projects.setDone(Integer.parseInt(idString), true);
-    }
-
-    private void uncheck(String idString) {
-        projects.setDone(Integer.parseInt(idString), false);
+        Task task = new Task(description);
+        project.addTask(task);
+        tasks.addTask(task);
     }
 
     private void help() {

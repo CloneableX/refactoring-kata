@@ -24,4 +24,8 @@ public final class Task {
     public void setDone(boolean done) {
         this.done = done;
     }
+
+    public boolean sameId(int taskId) {
+        return this.id == taskId;
+    }
 }
