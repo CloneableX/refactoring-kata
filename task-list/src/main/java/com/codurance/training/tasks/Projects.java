@@ -13,7 +13,7 @@ public class Projects {
     }
 
     public void addProject(String projectName) {
-        projects.add(new Project(projectName));
+        projects.add(new Project(projectName, out));
     }
 
     public Project findProject(String projectName) {
@@ -25,13 +25,7 @@ public class Projects {
     }
 
     public void showAll() {
-        for (Project project : projects) {
-            out.println(project.getName());
-            for (Task task : project.getTasks()) {
-                out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
-            }
-            out.println();
-        }
+        projects.forEach(Project::formatPrint);
     }
 
 }

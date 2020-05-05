@@ -87,7 +87,7 @@ public final class TaskList implements Runnable {
             out.println();
             return;
         }
-        Task task = new Task(description);
+        Task task = new Task(description, out);
         project.addTask(task);
         tasks.addTask(task);
     }

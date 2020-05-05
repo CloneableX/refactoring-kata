@@ -1,14 +1,16 @@
 package com.codurance.training.tasks;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.PrintWriter;
 
 public class Project {
+    private final Tasks tasks;
+    private PrintWriter out;
     private String name;
-    private List<Task> tasks = new ArrayList<>();
 
-    public Project(String name) {
+    public Project(String name, PrintWriter out) {
         this.name = name;
+        tasks = new Tasks(out);
+        this.out = out;
     }
 
     public boolean sameName(String name) {
@@ -16,14 +18,16 @@ public class Project {
     }
 
     public void addTask(Task task) {
-        tasks.add(task);
+        tasks.addTask(task);
     }
 
-    public String getName() {
-        return this.name;
+    public void showAllTasks() {
+        tasks.showAll();
     }
 
-    public List<Task> getTasks() {
-        return this.tasks;
+    public void formatPrint() {
+        out.println(this.name);
+        showAllTasks();
+        out.println();
     }
 }

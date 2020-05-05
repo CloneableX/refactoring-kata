@@ -37,4 +37,8 @@ public class Tasks {
     public void uncheckTask(String taskId) {
         setDone(Integer.parseInt(taskId), false);
     }
+
+    public void showAll() {
+        tasks.forEach(Task::formatPrint);
+    }
 }
