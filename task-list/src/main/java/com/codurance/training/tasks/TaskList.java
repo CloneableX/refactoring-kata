@@ -18,6 +18,8 @@ public final class TaskList implements Runnable {
 
     private long lastId = 0;
 
+    private final List<Project> projects = new ArrayList<>();
+
     public static void main(String[] args) {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         PrintWriter out = new PrintWriter(System.out);
@@ -93,13 +95,18 @@ public final class TaskList implements Runnable {
     }
 
     private void addProject(String name) {
-        tasks.put(name, new ArrayList<Task>());
+        tasks.put(name, new ArrayList<>());
+        projects.add(new Project(name));
     }
 
-    private void addTask(String project, String description) {
-        List<Task> projectTasks = tasks.get(project);
-        if (projectTasks == null) {
-            out.printf("Could not find a project with the name \"%s\".", project);
+    private void addTask(String projectName, String description) {
+        List<Task> projectTasks = tasks.get(projectName);
+        Project project = projects.stream()
+                .filter(projectItem -> projectItem.checkSameName(projectName))
+                .findFirst()
+                .orElse(null);
+        if (project == null) {
+            out.printf("Could not find a project with the name \"%s\".", projectName);
             out.println();
             return;
         }
