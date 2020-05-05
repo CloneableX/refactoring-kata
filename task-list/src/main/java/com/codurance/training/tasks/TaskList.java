@@ -12,7 +12,6 @@ import java.util.Map;
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
 
-    private final Map<String, List<Task>> tasks = new LinkedHashMap<>();
     private final BufferedReader in;
     private final PrintWriter out;
 
@@ -74,9 +73,9 @@ public final class TaskList implements Runnable {
     }
 
     private void show() {
-        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
-            out.println(project.getKey());
-            for (Task task : project.getValue()) {
+        for (Project project : projects) {
+            out.println(project.getName());
+            for (Task task : project.getTasks()) {
                 out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
             }
             out.println();
@@ -95,12 +94,10 @@ public final class TaskList implements Runnable {
     }
 
     private void addProject(String name) {
-        tasks.put(name, new ArrayList<>());
         projects.add(new Project(name));
     }
 
     private void addTask(String projectName, String description) {
-        List<Task> projectTasks = tasks.get(projectName);
         Project project = projects.stream()
                 .filter(projectItem -> projectItem.checkSameName(projectName))
                 .findFirst()
@@ -110,7 +107,8 @@ public final class TaskList implements Runnable {
             out.println();
             return;
         }
-        projectTasks.add(new Task(nextId(), description, false));
+        Task task = new Task(nextId(), description, false);
+        project.addTask(task);
     }
 
     private void check(String idString) {
@@ -123,8 +121,8 @@ public final class TaskList implements Runnable {
 
     private void setDone(String idString, boolean done) {
         int id = Integer.parseInt(idString);
-        for (Map.Entry<String, List<Task>> project : tasks.entrySet()) {
-            for (Task task : project.getValue()) {
+        for (Project project : projects) {
+            for (Task task : project.getTasks()) {
                 if (task.getId() == id) {
                     task.setDone(done);
                     return;
