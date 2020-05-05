@@ -4,10 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 public final class TaskList implements Runnable {
     private static final String QUIT = "quit";
@@ -17,7 +13,7 @@ public final class TaskList implements Runnable {
 
     private long lastId = 0;
 
-    private final List<Project> projects = new ArrayList<>();
+    private final Projects projects;
 
     public static void main(String[] args) {
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
@@ -28,6 +24,7 @@ public final class TaskList implements Runnable {
     public TaskList(BufferedReader reader, PrintWriter writer) {
         this.in = reader;
         this.out = writer;
+        projects = new Projects(out);
     }
 
     public void run() {
@@ -52,7 +49,7 @@ public final class TaskList implements Runnable {
         String command = commandRest[0];
         switch (command) {
             case "show":
-                show();
+                projects.showAll();
                 break;
             case "add":
                 add(commandRest[1]);
@@ -72,16 +69,6 @@ public final class TaskList implements Runnable {
         }
     }
 
-    private void show() {
-        for (Project project : projects) {
-            out.println(project.getName());
-            for (Task task : project.getTasks()) {
-                out.printf("    [%c] %d: %s%n", (task.isDone() ? 'x' : ' '), task.getId(), task.getDescription());
-            }
-            out.println();
-        }
-    }
-
     private void add(String commandLine) {
         String[] subcommandRest = commandLine.split(" ", 2);
         String subcommand = subcommandRest[0];
@@ -94,43 +81,25 @@ public final class TaskList implements Runnable {
     }
 
     private void addProject(String name) {
-        projects.add(new Project(name));
+        projects.addProject(name);
     }
 
     private void addTask(String projectName, String description) {
-        Project project = projects.stream()
-                .filter(projectItem -> projectItem.checkSameName(projectName))
-                .findFirst()
-                .orElse(null);
+        Project project = projects.findProject(projectName);
         if (project == null) {
             out.printf("Could not find a project with the name \"%s\".", projectName);
             out.println();
             return;
         }
-        Task task = new Task(nextId(), description, false);
-        project.addTask(task);
+        project.addTask(new Task(nextId(), description, false));
     }
 
     private void check(String idString) {
-        setDone(idString, true);
+        projects.setDone(Integer.parseInt(idString), true);
     }
 
     private void uncheck(String idString) {
-        setDone(idString, false);
-    }
-
-    private void setDone(String idString, boolean done) {
-        int id = Integer.parseInt(idString);
-        for (Project project : projects) {
-            for (Task task : project.getTasks()) {
-                if (task.getId() == id) {
-                    task.setDone(done);
-                    return;
-                }
-            }
-        }
-        out.printf("Could not find a task with an ID of %d.", id);
-        out.println();
+        projects.setDone(Integer.parseInt(idString), false);
     }
 
     private void help() {
